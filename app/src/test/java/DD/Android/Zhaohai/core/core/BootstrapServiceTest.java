@@ -9,7 +9,7 @@ import static org.mockito.Mockito.doReturn;
 import DD.Android.Zhaohai.core.BootstrapService;
 import DD.Android.Zhaohai.core.CheckIn;
 import DD.Android.Zhaohai.core.News;
-import DD.Android.Zhaohai.core.User;
+import DD.Android.Zhaohai.core.ABUser;
 import DD.Android.Zhaohai.core.UserAgentProvider;
 import com.github.kevinsawicki.http.HttpRequest;
 
@@ -71,9 +71,9 @@ public class BootstrapServiceTest {
     @Test
     public void getUsersEmptyResponse() throws IOException {
         doReturn(createReader("")).when(request).bufferedReader();
-        List<User> users = service.getUsers();
-        assertNotNull(users);
-        assertTrue(users.isEmpty());
+        List<ABUser> ABUsers = service.getUsers();
+        assertNotNull(ABUsers);
+        assertTrue(ABUsers.isEmpty());
     }
 
     /**

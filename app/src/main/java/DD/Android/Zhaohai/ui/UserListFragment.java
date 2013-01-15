@@ -1,7 +1,8 @@
 package DD.Android.Zhaohai.ui;
 
-import static DD.Android.Zhaohai.core.Constants.Extra.NEWS_ITEM;
-import static DD.Android.Zhaohai.core.Constants.Extra.USER;
+import static DD.Android.Zhaohai.core.Constants.Extra.ABUSER;
+
+import DD.Android.Zhaohai.core.ABUser;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.content.Intent;
@@ -13,15 +14,13 @@ import android.widget.ListView;
 import DD.Android.Zhaohai.BootstrapServiceProvider;
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.core.AvatarLoader;
-import DD.Android.Zhaohai.core.News;
-import DD.Android.Zhaohai.core.User;
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.google.inject.Inject;
 
 import java.util.Collections;
 import java.util.List;
 
-public class UserListFragment  extends ItemListFragment<User> {
+public class UserListFragment  extends ItemListFragment<ABUser> {
 
     @Inject private BootstrapServiceProvider serviceProvider;
     @Inject private AvatarLoader avatars;
@@ -41,20 +40,20 @@ public class UserListFragment  extends ItemListFragment<User> {
         listView.setDividerHeight(0);
 
         getListAdapter().addHeader(activity.getLayoutInflater()
-                        .inflate(R.layout.user_list_item_labels, null));
+                .inflate(R.layout.user_list_item_labels, null));
     }
 
 
 
     @Override
-    public Loader<List<User>> onCreateLoader(int id, Bundle args) {
-        final List<User> initialItems = items;
-        return new ThrowableLoader<List<User>>(getActivity(), items) {
+    public Loader<List<ABUser>> onCreateLoader(int id, Bundle args) {
+        final List<ABUser> initialItems = items;
+        return new ThrowableLoader<List<ABUser>>(getActivity(), items) {
             @Override
-            public List<User> loadData() throws Exception {
+            public List<ABUser> loadData() throws Exception {
 
                 try {
-                    List<User> latest = serviceProvider.getService().getUsers();
+                    List<ABUser> latest = serviceProvider.getService().getUsers();
                     if (latest != null)
                         return latest;
                     else
@@ -71,13 +70,13 @@ public class UserListFragment  extends ItemListFragment<User> {
     }
 
     public void onListItemClick(ListView l, View v, int position, long id) {
-        User user = ((User) l.getItemAtPosition(position));
+        ABUser ABUser = ((ABUser) l.getItemAtPosition(position));
 
-        startActivity(new Intent(getActivity(), UserActivity.class).putExtra(USER, user));
+        startActivity(new Intent(getActivity(), UserActivity.class).putExtra(ABUSER, ABUser));
     }
 
     @Override
-    public void onLoadFinished(Loader<List<User>> loader, List<User> items) {
+    public void onLoadFinished(Loader<List<ABUser>> loader, List<ABUser> items) {
         super.onLoadFinished(loader, items);
 
     }
@@ -88,7 +87,7 @@ public class UserListFragment  extends ItemListFragment<User> {
     }
 
     @Override
-    protected SingleTypeAdapter<User> createAdapter(List<User> items) {
+    protected SingleTypeAdapter<ABUser> createAdapter(List<ABUser> items) {
         return new UserListAdapter(getActivity().getLayoutInflater(), items, avatars);
     }
 }

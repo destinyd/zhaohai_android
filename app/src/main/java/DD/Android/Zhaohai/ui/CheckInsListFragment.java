@@ -72,7 +72,7 @@ public class CheckInsListFragment extends ItemListFragment<CheckIn> {
                 checkIn.getLocation().getLongitude(),
                 checkIn.getName());
 
-        // Show a chooser that allows the user to decide how to display this data, in this case, map data.
+        // Show a chooser that allows the ABUser to decide how to display this data, in this case, map data.
         startActivity(Intent.createChooser(new Intent(Intent.ACTION_VIEW, Uri.parse(uri)), getString(R.string.choose)));
     }
 

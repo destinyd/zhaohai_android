@@ -176,8 +176,8 @@ public abstract class ItemListFragment<E> extends RoboSherlockFragment
         logoutService.logout(new Runnable() {
             @Override
             public void run() {
-                // Calling a refresh will force the service to look for a logged in user
-                // and when it finds none the user will be requested to log in again.
+                // Calling a refresh will force the service to look for a logged in ABUser
+                // and when it finds none the ABUser will be requested to log in again.
                 forceRefresh();
             }
         });

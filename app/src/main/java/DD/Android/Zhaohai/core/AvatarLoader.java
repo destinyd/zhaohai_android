@@ -101,13 +101,13 @@ public class AvatarLoader {
     }
 
     /**
-     * Get image for user
+     * Get image for ABUser
      *
-     * @param user
+     * @param ABUser
      * @return image
      */
-    protected BitmapDrawable getImage(final User user) {
-        File avatarFile = new File(avatarDir, user.getObjectId());
+    protected BitmapDrawable getImage(final ABUser ABUser) {
+        File avatarFile = new File(avatarDir, ABUser.getObjectId());
 
         if (!avatarFile.exists() || avatarFile.length() == 0)
             return null;
@@ -122,13 +122,13 @@ public class AvatarLoader {
     }
 
 //    /**
-//     * Get image for user
+//     * Get image for ABUser
 //     *
-//     * @param user
+//     * @param ABUser
 //     * @return image
 //     */
-//    protected BitmapDrawable getImage(final CommitUser user) {
-//        File avatarFile = new File(avatarDir, user.getEmail());
+//    protected BitmapDrawable getImage(final CommitUser ABUser) {
+//        File avatarFile = new File(avatarDir, ABUser.getEmail());
 //
 //        if (!avatarFile.exists() || avatarFile.length() == 0)
 //            return null;
@@ -203,37 +203,37 @@ public class AvatarLoader {
     }
 
     /**
-     * Sets the logo on the {@link com.actionbarsherlock.app.ActionBar} to the user's avatar.
+     * Sets the logo on the {@link com.actionbarsherlock.app.ActionBar} to the ABUser's avatar.
      *
      * @param actionBar
-     * @param user
+     * @param ABUser
      * @return this helper
      */
-    public AvatarLoader bind(final ActionBar actionBar, final User user) {
-        return bind(actionBar, new AtomicReference<User>(user));
+    public AvatarLoader bind(final ActionBar actionBar, final ABUser ABUser) {
+        return bind(actionBar, new AtomicReference<ABUser>(ABUser));
     }
 
     /**
-     * Sets the logo on the {@link ActionBar} to the user's avatar.
+     * Sets the logo on the {@link ActionBar} to the ABUser's avatar.
      *
      * @param actionBar
      * @param userReference
      * @return this helper
      */
     public AvatarLoader bind(final ActionBar actionBar,
-                             final AtomicReference<User> userReference) {
+                             final AtomicReference<ABUser> userReference) {
         if (userReference == null)
             return this;
 
-        final User user = userReference.get();
-        if (user == null)
+        final ABUser ABUser = userReference.get();
+        if (ABUser == null)
             return this;
 
-        final String avatarUrl = user.getAvatarUrl();
+        final String avatarUrl = ABUser.getAvatarUrl();
         if (TextUtils.isEmpty(avatarUrl))
             return this;
 
-        final String userId = user.getObjectId();
+        final String userId = ABUser.getObjectId();
 
         BitmapDrawable loadedImage = loaded.get(userId);
         if (loadedImage != null) {
@@ -245,7 +245,7 @@ public class AvatarLoader {
 
             @Override
             public BitmapDrawable call() throws Exception {
-                final BitmapDrawable image = getImage(user);
+                final BitmapDrawable image = getImage(ABUser);
                 if (image != null)
                     return image;
                 else
@@ -254,7 +254,7 @@ public class AvatarLoader {
 
             @Override
             protected void onSuccess(BitmapDrawable image) throws Exception {
-                final User current = userReference.get();
+                final ABUser current = userReference.get();
                 if (current != null && userId.equals(current.getObjectId()))
                     actionBar.setLogo(image);
             }
@@ -282,38 +282,38 @@ public class AvatarLoader {
             return null;
     }
 
-    private String getAvatarUrl(User user) {
-        String avatarUrl = user.getAvatarUrl();
+    private String getAvatarUrl(ABUser ABUser) {
+        String avatarUrl = ABUser.getAvatarUrl();
         if (TextUtils.isEmpty(avatarUrl)) {
-            String gravatarId = user.getGravatarId();
+            String gravatarId = ABUser.getGravatarId();
             if (TextUtils.isEmpty(gravatarId))
-                gravatarId = GravatarUtils.getHash(user.getUsername());
+                gravatarId = GravatarUtils.getHash(ABUser.getUsername());
             avatarUrl = getAvatarUrl(gravatarId);
         }
         return avatarUrl;
     }
 
-//    private String getAvatarUrl(CommitUser user) {
-//        return getAvatarUrl(GravatarUtils.getHash(user.getEmail()));
+//    private String getAvatarUrl(CommitUser ABUser) {
+//        return getAvatarUrl(GravatarUtils.getHash(ABUser.getEmail()));
 //    }
 
     /**
      * Bind view to image at URL
      *
      * @param view
-     * @param user
+     * @param ABUser
      * @return this helper
      */
-    public AvatarLoader bind(final ImageView view, final User user) {
-        if (user == null)
+    public AvatarLoader bind(final ImageView view, final ABUser ABUser) {
+        if (ABUser == null)
             return setImage(loadingAvatar, view);
 
-        String avatarUrl = getAvatarUrl(user);
+        String avatarUrl = getAvatarUrl(ABUser);
 
         if (TextUtils.isEmpty(avatarUrl))
             return setImage(loadingAvatar, view);
 
-        final String userId = user.getObjectId();
+        final String userId = ABUser.getObjectId();
 
         BitmapDrawable loadedImage = loaded.get(userId);
         if (loadedImage != null)
@@ -329,7 +329,7 @@ public class AvatarLoader {
                 if (!userId.equals(view.getTag(R.id.iv_avatar)))
                     return null;
 
-                final BitmapDrawable image = getImage(user);
+                final BitmapDrawable image = getImage(ABUser);
                 if (image != null)
                     return image;
                 else
@@ -355,19 +355,19 @@ public class AvatarLoader {
 //     * Bind view to image at URL
 //     *
 //     * @param view
-//     * @param user
+//     * @param ABUser
 //     * @return this helper
 //     */
-//    public AvatarLoader bind(final ImageView view, final CommitUser user) {
-//        if (user == null)
+//    public AvatarLoader bind(final ImageView view, final CommitUser ABUser) {
+//        if (ABUser == null)
 //            return setImage(loadingAvatar, view);
 //
-//        String avatarUrl = getAvatarUrl(user);
+//        String avatarUrl = getAvatarUrl(ABUser);
 //
 //        if (TextUtils.isEmpty(avatarUrl))
 //            return setImage(loadingAvatar, view);
 //
-//        final String userId = user.getEmail();
+//        final String userId = ABUser.getEmail();
 //
 //        BitmapDrawable loadedImage = loaded.get(userId);
 //        if (loadedImage != null)
@@ -383,7 +383,7 @@ public class AvatarLoader {
 //                if (!userId.equals(view.getTag(id.iv_avatar)))
 //                    return null;
 //
-//                final BitmapDrawable image = getImage(user);
+//                final BitmapDrawable image = getImage(ABUser);
 //                if (image != null)
 //                    return image;
 //                else

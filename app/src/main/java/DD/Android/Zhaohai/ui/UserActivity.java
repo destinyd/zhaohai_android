@@ -1,13 +1,14 @@
 package DD.Android.Zhaohai.ui;
 
-import static DD.Android.Zhaohai.core.Constants.Extra.USER;
+import static DD.Android.Zhaohai.core.Constants.Extra.ABUSER;
+
+import DD.Android.Zhaohai.core.ABUser;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.core.AvatarLoader;
-import DD.Android.Zhaohai.core.User;
 import com.google.inject.Inject;
 
 import roboguice.inject.InjectExtra;
@@ -18,7 +19,7 @@ public class UserActivity extends BootstrapActivity {
     @InjectView(R.id.iv_avatar) protected ImageView avatar;
     @InjectView(R.id.tv_name) protected TextView name;
 
-    @InjectExtra(USER) protected User user;
+    @InjectExtra(ABUSER) protected ABUser ABUser;
 
     @Inject protected AvatarLoader avatarLoader;
 
@@ -31,8 +32,8 @@ public class UserActivity extends BootstrapActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        avatarLoader.bind(avatar, user);
-        name.setText(String.format("%s %s", user.getFirstName(), user.getLastName()));
+        avatarLoader.bind(avatar, ABUser);
+        name.setText(String.format("%s %s", ABUser.getFirstName(), ABUser.getLastName()));
 
     }
 

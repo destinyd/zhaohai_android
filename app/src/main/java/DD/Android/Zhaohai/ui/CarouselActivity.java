@@ -2,19 +2,13 @@
 
 package DD.Android.Zhaohai.ui;
 
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
-import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.Window;
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.R.id;
+import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import com.actionbarsherlock.view.Window;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockFragmentActivity;
 import com.viewpagerindicator.TitlePageIndicator;
-
 import roboguice.inject.InjectView;
 
 /**
@@ -33,7 +27,8 @@ public class CarouselActivity extends RoboSherlockFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.carousel_view);
 
-        pager.setAdapter(new BootstrapPagerAdapter(getResources(), getSupportFragmentManager()));
+//        pager.setAdapter(new BootstrapPagerAdapter(getResources(), getSupportFragmentManager()));
+        pager.setAdapter(new ZhaohaiPagerAdapter(getResources(), getSupportFragmentManager()));
 
         indicator.setViewPager(pager);
         pager.setCurrentItem(1);

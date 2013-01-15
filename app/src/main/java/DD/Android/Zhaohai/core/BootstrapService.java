@@ -50,7 +50,7 @@ public class BootstrapService {
 
     private static class UsersWrapper {
 
-        private List<User> results;
+        private List<ABUser> results;
     }
 
     private static class NewsWrapper {
@@ -152,7 +152,7 @@ public class BootstrapService {
           */
 
         /**
-         * Add the user name and password to the request here if your service needs username or password for each
+         * Add the ABUser name and password to the request here if your service needs username or password for each
          * request. You can do this like this:
          * request.basic("myusername", "mypassword");
          */
@@ -181,7 +181,7 @@ public class BootstrapService {
      * @return non-null but possibly empty list of bootstrap
      * @throws IOException
      */
-    public List<User> getUsers() throws IOException {
+    public List<ABUser> getUsers() throws IOException {
         try {
             HttpRequest request = execute(HttpRequest.get(URL_USERS));
             UsersWrapper response = fromJson(request, UsersWrapper.class);

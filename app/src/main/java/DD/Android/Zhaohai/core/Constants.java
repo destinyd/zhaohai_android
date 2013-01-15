@@ -39,21 +39,59 @@ public class Constants {
         private Http() {}
 
 
+        public static final String URL_BASE = "http://192.168.1.4:3002";
+//        public static final String URL_BASE = "http://zhaohai.com";
 
-        /**
-         * Base URL for all requests
-         */
-        public static final String URL_BASE = "https://api.parse.com";
-
+        public static final String API_BASE = URL_BASE + "/api/v1";
         /**
          * Authentication URL
          */
-        public static final String URL_AUTH = URL_BASE + "/1/login";
+        public static final String URL_AUTH = URL_BASE + "/oauth/token";
 
         /**
          * List Users URL
          */
-        public static final String URL_USERS = URL_BASE + "/1/users";
+        public static final String URL_USERS = API_BASE + "/users.json";
+
+        /**
+         * List Friend URL
+         */
+        public static final String URL_FRIEND = API_BASE + "/friend.json";
+
+        /**
+         * List Checkin's URL
+         */
+        public static final String URL_ACTIVITIES = API_BASE + "/activities.json";
+
+        public static final String PARSE_APP_ID = "78e00ce282ab3e3357af2e40c38050ef4e3fa85a8584790950efcfdb717786e3";
+        public static final String PARSE_REST_API_KEY = "976d0d4ab74708ae5c3b8ef0f5723a5fc72df5692c5f452c20d87c5673c1b6e4";
+        public static final String HEADER_PARSE_REST_API_KEY = "client_secret";
+        public static final String HEADER_PARSE_APP_ID = "client_id";
+        public static final String CONTENT_TYPE_JSON = "application/json";
+        public static final String USERNAME = "username";
+        public static final String PASSWORD = "password";
+        public static final String SESSION_TOKEN = "sessionToken";
+
+        public static final String HEADER_PARSE_GRANT_TYPE = "grant_type";
+        public static final String GRANT_TYPE = "password";
+        public static final String HEADER_PARSE_ACCESS_TOKEN = "access_token";
+
+
+
+        /**
+         * Base URL for all requests
+         */
+//        public static final String URL_BASE = "https://api.parse.com";
+
+        /**
+         * Authentication URL
+         */
+//        public static final String URL_AUTH = URL_BASE + "/1/login";
+
+        /**
+         * List Users URL
+         */
+//        public static final String URL_USERS = URL_BASE + "/1/users";
 
         /**
          * List News URL
@@ -64,17 +102,6 @@ public class Constants {
          * List Checkin's URL
          */
         public static final String URL_CHECKINS = URL_BASE + "/1/classes/Locations";
-
-        public static final String PARSE_APP_ID = "zHb2bVia6kgilYRWWdmTiEJooYA17NnkBSUVsr4H";
-        public static final String PARSE_REST_API_KEY = "N2kCY1T3t3Jfhf9zpJ5MCURn3b25UpACILhnf5u9";
-        public static final String HEADER_PARSE_REST_API_KEY = "X-Parse-REST-API-Key";
-        public static final String HEADER_PARSE_APP_ID = "X-Parse-Application-Id";
-        public static final String CONTENT_TYPE_JSON = "application/json";
-        public static final String USERNAME = "username";
-        public static final String PASSWORD = "password";
-        public static final String SESSION_TOKEN = "sessionToken";
-
-
     }
 
 
@@ -83,7 +110,11 @@ public class Constants {
 
         public static final String NEWS_ITEM = "news_item";
 
-        public static final String USER = "user";
+        public static final String ABUSER = "ABUser";
+
+        public static final String USER = "User";
+
+        public static final String FRIEND = "friend";
 
     }
 

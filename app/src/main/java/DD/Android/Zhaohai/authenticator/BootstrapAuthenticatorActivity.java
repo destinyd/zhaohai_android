@@ -16,6 +16,8 @@ import static DD.Android.Zhaohai.core.Constants.Http.PARSE_REST_API_KEY;
 import static DD.Android.Zhaohai.core.Constants.Http.URL_AUTH;
 import static com.github.kevinsawicki.http.HttpRequest.get;
 import static com.github.kevinsawicki.http.HttpRequest.post;
+
+import DD.Android.Zhaohai.core.ABUser;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Dialog;
@@ -39,7 +41,6 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 import DD.Android.Zhaohai.core.Constants;
-import DD.Android.Zhaohai.core.User;
 import com.github.kevinsawicki.http.HttpRequest;
 import com.github.kevinsawicki.wishlist.Toaster;
 import DD.Android.Zhaohai.R.id;
@@ -49,7 +50,6 @@ import DD.Android.Zhaohai.ui.TextWatcherAdapter;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockAccountAuthenticatorActivity;
 import com.google.gson.Gson;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,11 +58,8 @@ import roboguice.util.Ln;
 import roboguice.util.RoboAsyncTask;
 import roboguice.util.Strings;
 
-import static DD.Android.Zhaohai.core.Constants.Http.USERNAME;
-import static DD.Android.Zhaohai.core.Constants.Http.PASSWORD;
-
 /**
- * Activity to authenticate the user against an API (example API on Parse.com)
+ * Activity to authenticate the ABUser against an API (example API on Parse.com)
  */
 public class BootstrapAuthenticatorActivity extends
         RoboSherlockAccountAuthenticatorActivity {
@@ -106,8 +103,8 @@ public class BootstrapAuthenticatorActivity extends
     private String authTokenType;
 
     /**
-     * If set we are just checking that the user knows their credentials; this
-     * doesn't cause the user's password to be changed on the device.
+     * If set we are just checking that the ABUser knows their credentials; this
+     * doesn't cause the ABUser's password to be changed on the device.
      */
     private Boolean confirmCredentials = false;
 
@@ -254,7 +251,7 @@ public class BootstrapAuthenticatorActivity extends
                 Log.d("Auth", "response=" + request.code());
 
                 if(request.ok()) {
-                    final User model = new Gson().fromJson(Strings.toString(request.buffer()), User.class);
+                    final ABUser model = new Gson().fromJson(Strings.toString(request.buffer()), ABUser.class);
                     token = model.getSessionToken();
                 }
 

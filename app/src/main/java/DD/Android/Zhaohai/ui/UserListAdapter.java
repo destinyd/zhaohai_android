@@ -1,11 +1,11 @@
 package DD.Android.Zhaohai.ui;
 
+import DD.Android.Zhaohai.core.ABUser;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.core.AvatarLoader;
-import DD.Android.Zhaohai.core.User;
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 
 import java.text.SimpleDateFormat;
@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Adapter to display a list of traffic items
  */
-public class UserListAdapter extends SingleTypeAdapter<User> {
+public class UserListAdapter extends SingleTypeAdapter<ABUser> {
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMMM dd");
     private final AvatarLoader avatars;
@@ -23,7 +23,7 @@ public class UserListAdapter extends SingleTypeAdapter<User> {
      * @param inflater
      * @param items
      */
-    public UserListAdapter(LayoutInflater inflater, List<User> items, AvatarLoader avatars) {
+    public UserListAdapter(LayoutInflater inflater, List<ABUser> items, AvatarLoader avatars) {
         super(inflater, R.layout.user_list_item);
 
         this.avatars = avatars;
@@ -51,11 +51,11 @@ public class UserListAdapter extends SingleTypeAdapter<User> {
     }
 
     @Override
-    protected void update(int position, User user) {
+    protected void update(int position, ABUser ABUser) {
 
-        avatars.bind(imageView(R.id.iv_avatar), user);
+        avatars.bind(imageView(R.id.iv_avatar), ABUser);
 
-        setText(R.id.tv_name, String.format("%1$s %2$s", user.getFirstName(), user.getLastName()));
+        setText(R.id.tv_name, String.format("%1$s %2$s", ABUser.getFirstName(), ABUser.getLastName()));
 
     }
 

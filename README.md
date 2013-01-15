@@ -15,7 +15,7 @@ to report any bugs or feature requests and to see the list of known issues.
 ## Authentication
 Log into this demo app with the following credentials:
 
-user: demo@androidbootstrap.com
+ABUser: demo@androidbootstrap.com
 
 password: android
 
