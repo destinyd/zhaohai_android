@@ -26,6 +26,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import static android.graphics.Bitmap.CompressFormat.PNG;
 import static android.graphics.Bitmap.Config.ARGB_8888;
 import static android.view.View.VISIBLE;
+import static DD.Android.Zhaohai.core.Constants.Http.*;
 
 /**
  * Avatar utilities
@@ -106,7 +107,7 @@ public class UserAvatarLoader {
      * @return image
      */
     protected BitmapDrawable getImage(final User User) {
-        File avatarFile = new File(avatarDir, User.get_id());
+        File avatarFile = new File(avatarDir, User._id);
 
         if (!avatarFile.exists() || avatarFile.length() == 0)
             return null;
@@ -232,7 +233,7 @@ public class UserAvatarLoader {
         if (TextUtils.isEmpty(avatarUrl))
             return this;
 
-        final String userId = User.get_id();
+        final String userId = User._id;
 
         BitmapDrawable loadedImage = loaded.get(userId);
         if (loadedImage != null) {
@@ -254,7 +255,7 @@ public class UserAvatarLoader {
             @Override
             protected void onSuccess(BitmapDrawable image) throws Exception {
                 final User current = userReference.get();
-                if (current != null && userId.equals(current.get_id()))
+                if (current != null && userId.equals(current._id))
                     actionBar.setLogo(image);
             }
         }.execute();
@@ -274,15 +275,8 @@ public class UserAvatarLoader {
         return this;
     }
 
-    private String getAvatarUrl(String id) {
-        if (!TextUtils.isEmpty(id))
-            return "https://secure.gravatar.com/avatar/" + id + "?d=404";
-        else
-            return null;
-    }
-
     private String getAvatarUrl(User user) {
-        String avatarUrl = user.getIconUrl();
+        String avatarUrl = URL_BASE + user.getIconUrl();
         return avatarUrl;
     }
 
@@ -294,19 +288,21 @@ public class UserAvatarLoader {
      * Bind view to image at URL
      *
      * @param view
-     * @param User
+     * @param user
      * @return this helper
      */
-    public UserAvatarLoader bind(final ImageView view, final User User) {
-        if (User == null)
+    public UserAvatarLoader bind(final ImageView view, final User user) {
+        if (user == null)
             return setImage(loadingAvatar, view);
 
-        String avatarUrl = getAvatarUrl(User);
-
-        if (TextUtils.isEmpty(avatarUrl))
+        String avatarUrl = getAvatarUrl(user);
+        if(avatarUrl.equals("http://192.168.1.4:3002/assets/noface_icon.gif") || TextUtils.isEmpty(avatarUrl))
+        {
+//            if (TextUtils.isEmpty(avatarUrl))
             return setImage(loadingAvatar, view);
+        }
 
-        final String userId = User.get_id();
+        final String userId = user._id;
 
         BitmapDrawable loadedImage = loaded.get(userId);
         if (loadedImage != null)
@@ -322,7 +318,7 @@ public class UserAvatarLoader {
                 if (!userId.equals(view.getTag(R.id.iv_avatar)))
                     return null;
 
-                final BitmapDrawable image = getImage(User);
+                final BitmapDrawable image = getImage(user);
                 if (image != null)
                     return image;
                 else

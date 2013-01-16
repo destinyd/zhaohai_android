@@ -23,7 +23,7 @@ import static DD.Android.Zhaohai.core.Constants.Extra.USER;
 
 public class UsersFragment extends ItemListFragment<User> {
 
-    @Inject private ZhaohaiServiceProvider serviceProvider;
+    @Inject protected ZhaohaiServiceProvider serviceProvider;
     @Inject private UserAvatarLoader avatars;
 
     @Override

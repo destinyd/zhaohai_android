@@ -40,7 +40,7 @@ public class UsersAdapter extends SingleTypeAdapter<User> {
 
     @Override
     public long getItemId(final int position) {
-        final String id = getItem(position).get_id();
+        final String id = getItem(position)._id;
         return !TextUtils.isEmpty(id) ? id.hashCode() : super
                 .getItemId(position);
     }
@@ -55,7 +55,7 @@ public class UsersAdapter extends SingleTypeAdapter<User> {
 
         avatars.bind(imageView(R.id.iv_avatar), user);
 
-        setText(R.id.tv_name, user.getName());
+        setText(R.id.tv_name, user.name);
 
     }
 

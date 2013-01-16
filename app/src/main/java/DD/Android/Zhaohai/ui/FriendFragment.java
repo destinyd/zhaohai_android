@@ -3,6 +3,7 @@ package DD.Android.Zhaohai.ui;
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.ZhaohaiServiceProvider;
 import DD.Android.Zhaohai.core.User;
+import DD.Android.Zhaohai.core.UserAvatarLoader;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.content.Intent;
@@ -13,13 +14,16 @@ import android.widget.ListView;
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.google.inject.Inject;
 
+import java.util.Collections;
 import java.util.List;
 
 import static DD.Android.Zhaohai.core.Constants.Extra.FRIEND;
+import static DD.Android.Zhaohai.core.Constants.Extra.USER;
 
 public class FriendFragment extends ItemListFragment<User> {
 
     @Inject protected ZhaohaiServiceProvider serviceProvider;
+    @Inject private UserAvatarLoader avatars;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -39,23 +43,27 @@ public class FriendFragment extends ItemListFragment<User> {
                 .addHeader(activity.getLayoutInflater()
                         .inflate(R.layout.friend_list_item_labels, null));
     }
-
-    @Override
-    public void onDestroyView() {
-        setListAdapter(null);
-
-        super.onDestroyView();
-    }
+//
+//    @Override
+//    public void onDestroyView() {
+//        setListAdapter(null);
+//
+//        super.onDestroyView();
+//    }
 
     @Override
     public Loader<List<User>> onCreateLoader(int id, Bundle args) {
         final List<User> initialItems = items;
         return new ThrowableLoader<List<User>>(getActivity(), items) {
-
             @Override
             public List<User> loadData() throws Exception {
+
                 try {
-                    return serviceProvider.getService().getFriend();
+                    List<User> latest = serviceProvider.getService().getFriend();
+                    if (latest != null)
+                        return latest;
+                    else
+                        return Collections.emptyList();
                 } catch (OperationCanceledException e) {
                     Activity activity = getActivity();
                     if (activity != null)
@@ -64,21 +72,28 @@ public class FriendFragment extends ItemListFragment<User> {
                 }
             }
         };
-    }
 
-    @Override
-    protected SingleTypeAdapter<User> createAdapter(List<User> items) {
-        return new FriendAdapter(getActivity().getLayoutInflater(), items);
     }
 
     public void onListItemClick(ListView l, View v, int position, long id) {
-        User users = ((User) l.getItemAtPosition(position));
+        User user = ((User) l.getItemAtPosition(position));
 
-        startActivity(new Intent(getActivity(), FriendActivity.class).putExtra(FRIEND, users));
+        startActivity(new Intent(getActivity(), UsersActivity.class).putExtra(FRIEND, user));
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<User>> loader, List<User> items) {
+        super.onLoadFinished(loader, items);
+
     }
 
     @Override
     protected int getErrorMessage(Exception exception) {
         return R.string.error_loading_friends;
+    }
+
+    @Override
+    protected SingleTypeAdapter<User> createAdapter(List<User> items) {
+        return new UsersAdapter(getActivity().getLayoutInflater(), items, avatars);
     }
 }

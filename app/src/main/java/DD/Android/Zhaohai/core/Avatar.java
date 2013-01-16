@@ -8,9 +8,32 @@ package DD.Android.Zhaohai.core;
  * To change this template use File | Settings | File Templates.
  */
 public class Avatar {
-    private String url;
-    private Thumb thumb;
-    private Icon icon;
+    public class Thumb {
+        public String url;
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+    }
+
+    public class Icon {
+        public String url;
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+    }
+    public String url;
+    public Thumb thumb;
+    public Icon icon;
 
     public String getUrl() {
         return url;
@@ -34,29 +57,5 @@ public class Avatar {
 
     public void setIcon(Icon icon) {
         this.icon = icon;
-    }
-
-    class Thumb{
-        private String url;
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
-    }
-
-    class Icon{
-        private String url;
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
     }
 }

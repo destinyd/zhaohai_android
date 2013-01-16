@@ -25,15 +25,15 @@ public class FriendActivity extends ZhaohaiActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.user_view);
+        setContentView(R.layout.friend_view);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        setTitle(friend.getName());
+        setTitle(friend.name);
 
         avatarLoader.bind(avatar, friend);
-        name.setText(friend.getName());
+        name.setText(friend.name);
 
     }
 

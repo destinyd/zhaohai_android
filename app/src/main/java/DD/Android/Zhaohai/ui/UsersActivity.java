@@ -3,6 +3,8 @@ package DD.Android.Zhaohai.ui;
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.core.ABUser;
 import DD.Android.Zhaohai.core.AvatarLoader;
+import DD.Android.Zhaohai.core.User;
+import DD.Android.Zhaohai.core.UserAvatarLoader;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,27 +13,28 @@ import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
 import static DD.Android.Zhaohai.core.Constants.Extra.ABUSER;
+import static DD.Android.Zhaohai.core.Constants.Extra.USER;
 
 public class UsersActivity extends ZhaohaiActivity {
 
     @InjectView(R.id.iv_avatar) protected ImageView avatar;
     @InjectView(R.id.tv_name) protected TextView name;
 
-    @InjectExtra(ABUSER) protected ABUser ABUser;
+    @InjectExtra(USER) protected User user;
 
-    @Inject protected AvatarLoader avatarLoader;
+    @Inject protected UserAvatarLoader avatarLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.user_view);
+        setContentView(R.layout.users_view);
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        avatarLoader.bind(avatar, ABUser);
-        name.setText(String.format("%s %s", ABUser.getFirstName(), ABUser.getLastName()));
+        avatarLoader.bind(avatar, user);
+        name.setText(user.name);
 
     }
 

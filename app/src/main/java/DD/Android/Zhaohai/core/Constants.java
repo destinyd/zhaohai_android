@@ -56,7 +56,7 @@ public class Constants {
         /**
          * List Friend URL
          */
-        public static final String URL_FRIEND = API_BASE + "/friend.json";
+        public static final String URL_FRIEND = API_BASE + "/users/friend.json";
 
         /**
          * List Checkin's URL
@@ -66,7 +66,7 @@ public class Constants {
         public static final String PARSE_APP_ID = "78e00ce282ab3e3357af2e40c38050ef4e3fa85a8584790950efcfdb717786e3";
         public static final String PARSE_REST_API_KEY = "976d0d4ab74708ae5c3b8ef0f5723a5fc72df5692c5f452c20d87c5673c1b6e4";
         public static final String HEADER_PARSE_REST_API_KEY = "client_secret";
-        public static final String HEADER_PARSE_APP_ID = "client_id";
+            public static final String HEADER_PARSE_APP_ID = "client_id";
         public static final String CONTENT_TYPE_JSON = "application/json";
         public static final String USERNAME = "username";
         public static final String PASSWORD = "password";

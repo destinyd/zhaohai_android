@@ -5,7 +5,7 @@ import DD.Android.Zhaohai.R.id;
 import DD.Android.Zhaohai.R.layout;
 import DD.Android.Zhaohai.R.string;
 import DD.Android.Zhaohai.core.Constants;
-import DD.Android.Zhaohai.core.ABUser;
+import DD.Android.Zhaohai.core.User;
 import DD.Android.Zhaohai.ui.TextWatcherAdapter;
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -42,7 +42,7 @@ import static android.accounts.AccountManager.*;
 import static android.view.KeyEvent.ACTION_DOWN;
 import static android.view.KeyEvent.KEYCODE_ENTER;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
-import static com.github.kevinsawicki.http.HttpRequest.get;
+import static com.github.kevinsawicki.http.HttpRequest.post;
 
 /**
  * Activity to authenticate the ABUser against an API (example API on Parse.com)
@@ -227,18 +227,23 @@ public class ZhaohaiAuthenticatorActivity extends
         authenticationTask = new RoboAsyncTask<Boolean>(this) {
             public Boolean call() throws Exception {
 
-                final String query = String.format("%s=%s&%s=%s", PARAM_USERNAME, email, PARAM_PASSWORD, password);
-
-                HttpRequest request = get(URL_AUTH + "?" + query)
-                        .header(HEADER_PARSE_APP_ID, PARSE_APP_ID)
-                        .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY);
+//                final String query = String.format("%s=%s&%s=%s", PARAM_USERNAME, email, PARAM_PASSWORD, password);
+                final String query = String.format("?%s=%s", HEADER_PARSE_GRANT_TYPE, GRANT_TYPE);
+                HttpRequest request = post(URL_AUTH + query)
+                        .part(HEADER_PARSE_APP_ID, PARSE_APP_ID)
+                        .part(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
+                        .part(PARAM_USERNAME, email)
+                        .part(PARAM_PASSWORD, password)
+                        ;
 
 
                 Log.d("Auth", "response=" + request.code());
 
                 if(request.ok()) {
-                    final ABUser model = new Gson().fromJson(Strings.toString(request.buffer()), ABUser.class);
-                    token = model.getSessionToken();
+                    final AccessToken model = new Gson().fromJson(Strings.toString(request.buffer()), AccessToken.class);
+                    token = model.getAccess_token();
+//                    final User model = new Gson().fromJson(Strings.toString(request.buffer()), User.class);
+//                    token = model.getSessionToken();
                 }
 
                 return request.ok();

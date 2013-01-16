@@ -35,27 +35,39 @@
         </activity>
 
 
+        <!--<service-->
+            <!--android:name=".authenticator.AccountAuthenticatorService"-->
+            <!--android:process=":auth" >-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.accounts.AccountAuthenticator" />-->
+            <!--</intent-filter>-->
+
+            <!--<meta-data-->
+                <!--android:name="android.accounts.AccountAuthenticator"-->
+                <!--android:resource="@xml/authenticator" />-->
+        <!--</service>-->
+
         <service
-            android:name=".authenticator.AccountAuthenticatorService"
-            android:process=":auth" >
+                android:name=".authenticator.UserAuthenticatorService"
+                android:process=":auth" >
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>
 
             <meta-data
-                android:name="android.accounts.AccountAuthenticator"
-                android:resource="@xml/authenticator" />
+                    android:name="android.accounts.AccountAuthenticator"
+                    android:resource="@xml/authenticator" />
         </service>
 
-        <activity
-            android:name=".authenticator.BootstrapAuthenticatorActivity"
-            android:excludeFromRecents="true" >
+        <!--<activity-->
+            <!--android:name=".authenticator.BootstrapAuthenticatorActivity"-->
+            <!--android:excludeFromRecents="true" >-->
 
-            <!--
-                No intent-filter here! This activity is only ever launched by
-                someone who explicitly knows the class name
-            -->
-        </activity>
+            <!--&lt;!&ndash;-->
+                <!--No intent-filter here! This activity is only ever launched by-->
+                <!--someone who explicitly knows the class name-->
+            <!--&ndash;&gt;-->
+        <!--</activity>-->
 
         <activity
                 android:name=".authenticator.ZhaohaiAuthenticatorActivity"

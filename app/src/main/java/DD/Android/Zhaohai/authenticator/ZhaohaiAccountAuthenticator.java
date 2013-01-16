@@ -8,12 +8,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import static DD.Android.Zhaohai.authenticator.BootstrapAuthenticatorActivity.PARAM_AUTHTOKEN_TYPE;
+import static DD.Android.Zhaohai.authenticator.ZhaohaiAuthenticatorActivity.PARAM_AUTHTOKEN_TYPE;
 import static android.accounts.AccountManager.*;
 
 class ZhaohaiAccountAuthenticator extends AbstractAccountAuthenticator {
 
-    private static final String DESCRIPTION_CLIENT = "Bootstrap for Android";
+    private static final String DESCRIPTION_CLIENT = "Zhaohai on Android";
 
     private final Context context;
 
@@ -31,7 +31,7 @@ class ZhaohaiAccountAuthenticator extends AbstractAccountAuthenticator {
     @Override
     public Bundle addAccount(AccountAuthenticatorResponse response, String accountType, String authTokenType,
             String[] requiredFeatures, Bundle options) throws NetworkErrorException {
-        final Intent intent = new Intent(context, BootstrapAuthenticatorActivity.class);
+        final Intent intent = new Intent(context, ZhaohaiAuthenticatorActivity.class);
         intent.putExtra(PARAM_AUTHTOKEN_TYPE, authTokenType);
         intent.putExtra(KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
         final Bundle bundle = new Bundle();
