@@ -9,11 +9,8 @@ import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
-import java.io.Reader;
 import java.lang.reflect.Type;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import static DD.Android.Zhaohai.core.Constants.Http.*;
@@ -158,20 +155,25 @@ public class ZhaohaiService {
         return request;
     }
 
-    private <V> List<V> fromJson(HttpRequest request, Class<V> target) throws IOException {
-        Type collectionType = new TypeToken<List<V>>(){}.getType();
-        Reader reader = request.bufferedReader();
-        try {
-            return GSON.fromJson(reader, collectionType);
-        } catch (JsonParseException e) {
-            throw new JsonException(e);
-        } finally {
-            try {
-                reader.close();
-            } catch (IOException ignored) {
-                // Ignored
-            }
-        }
+//    private <V> List<V> fromJson(HttpRequest request, Class<V> target) throws IOException {
+//        Type collectionType = new TypeToken<List<V>>(){}.getType();
+//        Reader reader = request.bufferedReader();
+//        try {
+//            return GSON.fromJson(reader, collectionType);
+//        } catch (JsonParseException e) {
+//            throw new JsonException(e);
+//        } finally {
+//            try {
+//                reader.close();
+//            } catch (IOException ignored) {
+//                // Ignored
+//            }
+//        }
+//    }
+    private HttpRequest getUrl(String url) {
+        return get(url+ "?" + HEADER_PARSE_ACCESS_TOKEN + "=" + apiKey)
+                .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
+                .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
     }
 
     /**
@@ -248,7 +250,9 @@ public class ZhaohaiService {
             HttpRequest request = get(URL_ACTIVITIES+ "?" + HEADER_PARSE_ACCESS_TOKEN + "=" + apiKey)
                     .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY )
                     .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
-            List<Activity> response = fromJson(request, Activity.class);
+            Type collectionType = new TypeToken<List<Activity>>(){}.getType();
+            List<Activity> response = GSON.fromJson(request.bufferedReader(), collectionType);
+//            List<Activity> response = fromJson(request, Activity.class);
 //            if (response != null && response.size() > 0)
 //            {
                 return response;

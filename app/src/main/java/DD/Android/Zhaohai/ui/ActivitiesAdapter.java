@@ -35,6 +35,6 @@ public class ActivitiesAdapter extends AlternatingColorListAdapter<Activity> {
     protected void update(int position, Activity item) {
         super.update(position, item);
 
-        setText(R.id.tv_name, item.getName());
+        setText(R.id.tv_name, item.getTitle());
     }
 }

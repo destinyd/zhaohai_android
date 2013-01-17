@@ -64,12 +64,15 @@ public class ActivitiesFragment extends ItemListFragment<DD.Android.Zhaohai.core
     }
 
     public void onListItemClick(ListView l, View v, int position, long id) {
-        DD.Android.Zhaohai.core.Activity checkIn = ((DD.Android.Zhaohai.core.Activity) l.getItemAtPosition(position));
+        DD.Android.Zhaohai.core.Activity activity = ((DD.Android.Zhaohai.core.Activity) l.getItemAtPosition(position));
+
+//        GeoPoint p = new GeoPoint(x, y);
+//        GeoPoint p2 = CoordinateConvert.bundleDecode(CoordinateConvert.fromWgs84ToBaidu(p));
 
         String uri = String.format("geo:%s,%s?q=%s",
-                checkIn.getLocation().getLatitude(),
-                checkIn.getLocation().getLongitude(),
-                checkIn.getName());
+                activity.getLat(),
+                activity.getLng(),
+                activity.getAddress());
 
         // Show a chooser that allows the ABUser to decide how to display this data, in this case, map data.
         startActivity(Intent.createChooser(new Intent(Intent.ACTION_VIEW, Uri.parse(uri)), getString(R.string.choose)));
