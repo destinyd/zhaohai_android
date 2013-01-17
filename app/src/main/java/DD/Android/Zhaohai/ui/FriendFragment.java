@@ -78,7 +78,7 @@ public class FriendFragment extends ItemListFragment<User> {
     public void onListItemClick(ListView l, View v, int position, long id) {
         User user = ((User) l.getItemAtPosition(position));
 
-        startActivity(new Intent(getActivity(), UsersActivity.class).putExtra(FRIEND, user));
+        startActivity(new Intent(getActivity(), FriendActivity.class).putExtra(FRIEND, user));
     }
 
     @Override

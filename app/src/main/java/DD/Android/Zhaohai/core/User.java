@@ -6,9 +6,14 @@ import java.util.List;
 
 public class User implements Serializable {
 
-
+    private static final long serialVersionUID = 2851521909011520611L;
     public String _id,name,email;
-    public List<String> follower_ids,following_ids,in_activity_ids,interested_activity_ids,invited_activity_ids,role_ids;
+    public List<String> follower_ids;
+    public List<String> following_ids;
+    public List<String> in_activity_ids;
+    public List<String> interested_activity_ids;
+    public List<String> invited_activity_ids;
+    public List<String> role_ids;
     public Date created_at, updated_at;
     public Avatar avatar;
 

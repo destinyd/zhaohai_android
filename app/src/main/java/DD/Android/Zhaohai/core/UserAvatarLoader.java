@@ -229,7 +229,7 @@ public class UserAvatarLoader {
         if (User == null)
             return this;
 
-        final String avatarUrl = User.getAvatarUrl();
+        final String avatarUrl = User.getIconUrl();
         if (TextUtils.isEmpty(avatarUrl))
             return this;
 

@@ -1,5 +1,7 @@
 package DD.Android.Zhaohai.core;
 
+import java.io.Serializable;
+
 /**
  * Created with IntelliJ IDEA.
  * User: dd
@@ -7,8 +9,12 @@ package DD.Android.Zhaohai.core;
  * Time: 下午12:53
  * To change this template use File | Settings | File Templates.
  */
-public class Avatar {
-    public class Thumb {
+public class Avatar implements Serializable {
+
+    private static final long serialVersionUID = -7021300822736333813L;
+
+    public class Thumb implements Serializable {
+        private static final long serialVersionUID = -4455210258042968460L;
         public String url;
 
         public String getUrl() {
@@ -20,7 +26,8 @@ public class Avatar {
         }
     }
 
-    public class Icon {
+    public class Icon implements Serializable {
+        private static final long serialVersionUID = -2085974644325139582L;
         public String url;
 
         public String getUrl() {
