@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         textColor="@color/text_light"
         android:background="@drawable/stripe_repeat"
-        app:clipPadding="10dp"
+        app:clipPadding="80dp"
         app:footerColor="@color/pager_footer"
         app:footerIndicatorHeight="5dp"
         app:footerIndicatorStyle="triangle"

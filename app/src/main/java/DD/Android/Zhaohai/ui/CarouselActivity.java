@@ -31,7 +31,7 @@ public class CarouselActivity extends RoboSherlockFragmentActivity {
         pager.setAdapter(new ZhaohaiPagerAdapter(getResources(), getSupportFragmentManager()));
 
         indicator.setViewPager(pager);
-        pager.setCurrentItem(1);
+        pager.setCurrentItem(2);
     }
 
 
