@@ -116,6 +116,8 @@ public class Constants {
 
         public static final String FRIEND = "friend";
 
+        public static final String Activity = "activity";
+
     }
 
     public static class Intent {

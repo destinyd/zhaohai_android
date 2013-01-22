@@ -49,9 +49,9 @@ public class ZhaohaiPagerAdapter extends FragmentPagerAdapter {
             activitiesFragment.setArguments(bundle);
             return activitiesFragment;
         case 3:
-            ActivitiesFragment activitiesFragment1 = new ActivitiesFragment();
-            activitiesFragment1.setArguments(bundle);
-            return activitiesFragment1;
+            NewActivityFragment newActivity = new NewActivityFragment();
+            newActivity.setArguments(bundle);
+            return newActivity;
         case 4:
             ActivitiesFragment activitiesFragment2 = new ActivitiesFragment();
             activitiesFragment2.setArguments(bundle);

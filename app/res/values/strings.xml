@@ -33,5 +33,7 @@
     <string name="message_auth_failed">Please enter a valid password</string>
     <string name="message_auth_failed_new_account">Please enter a valid email address &amp; password</string>
 
+    <!--Form-->
+    <string name="require_field_warning">Please populate require field</string>
 
 </resources>

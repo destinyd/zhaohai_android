@@ -10,7 +10,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,25 +26,24 @@ import java.util.List;
 
 import static DD.Android.Zhaohai.core.Constants.Extra.ABUSER;
 
-public class NewActivityFragment extends ZhaohaiActivity {
+public class NewActivityFragment extends SimpleFragment {
 
     @Inject protected ZhaohaiServiceProvider serviceProvider;
 
     @InjectView(R.id.iv_avatar) protected ImageView avatar;
-    @InjectView(R.id.tv_name) protected TextView name;
+    @InjectView(R.id.tv_name) protected EditText name;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-        setContentView(R.layout.new_activity);
+//        setEmptyText(R.string.no_users);
+    }
 
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        avatarLoader.bind(avatar, ABUser);
-        name.setText(String.format("%s %s", ABUser.getFirstName(), ABUser.getLastName()));
-
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.new_activity, null);
     }
 
 }

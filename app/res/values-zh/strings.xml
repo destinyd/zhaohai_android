@@ -33,5 +33,6 @@
     <string name="message_auth_failed">请输入正确密码</string>
     <string name="message_auth_failed_new_account">请输入正确的Email地址和密码</string>
 
-
+    <!--Form-->
+    <string name="require_field_warning">请填写必填项</string>
 </resources>
