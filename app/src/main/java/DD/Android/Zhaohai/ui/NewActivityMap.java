@@ -11,8 +11,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import com.github.kevinsawicki.wishlist.Toaster;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 

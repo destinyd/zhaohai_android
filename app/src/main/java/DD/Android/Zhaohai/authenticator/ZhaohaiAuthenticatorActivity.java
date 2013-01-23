@@ -119,6 +119,7 @@ public class ZhaohaiAuthenticatorActivity extends
         final Intent intent = getIntent();
         email = intent.getStringExtra(PARAM_USERNAME);
         authTokenType = intent.getStringExtra(PARAM_AUTHTOKEN_TYPE);
+        authToken = intent.getStringExtra(KEY_AUTHTOKEN);
         requestNewAccount = email == null;
         confirmCredentials = intent.getBooleanExtra(PARAM_CONFIRMCREDENTIALS,
                 false);
@@ -240,7 +241,9 @@ public class ZhaohaiAuthenticatorActivity extends
                 Log.d("Auth", "response=" + request.code());
 
                 if(request.ok()) {
-                    final AccessToken model = new Gson().fromJson(Strings.toString(request.buffer()), AccessToken.class);
+                    String tmp = Strings.toString(request.buffer());
+                    Log.d("response body:",tmp);
+                    final AccessToken model = new Gson().fromJson(tmp, AccessToken.class);
                     token = model.getAccess_token();
 //                    final User model = new Gson().fromJson(Strings.toString(request.buffer()), User.class);
 //                    token = model.getSessionToken();
@@ -317,7 +320,10 @@ public class ZhaohaiAuthenticatorActivity extends
         intent.putExtra(KEY_ACCOUNT_TYPE, Constants.Auth.BOOTSTRAP_ACCOUNT_TYPE);
         if (authTokenType != null
                 && authTokenType.equals(Constants.Auth.AUTHTOKEN_TYPE))
+        {
             intent.putExtra(KEY_AUTHTOKEN, authToken);
+            accountManager.setAuthToken(account,authTokenType,authToken);
+        }
         setAccountAuthenticatorResult(intent.getExtras());
         setResult(RESULT_OK, intent);
         finish();
