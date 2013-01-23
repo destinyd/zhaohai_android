@@ -35,4 +35,5 @@
 
     <!--Form-->
     <string name="require_field_warning">请填写必填项</string>
+    <string name="set_started_at">请选择活动开始时间</string>
 </resources>

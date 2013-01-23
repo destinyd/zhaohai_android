@@ -1,83 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                      android:layout_width="fill_parent"
-                      android:layout_height="fill_parent">
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent">
 
-    <TableLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" android:layout_gravity="left|center_vertical"
+    >
+    <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" android:layout_gravity="left|center_vertical">
-        <TableRow
+            android:layout_height="wrap_content" android:gravity="center_vertical">
+        <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
+                      android:layout_height="match_parent" android:id="@+id/linearLayout">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="活动类型"
+                      android:id="@+id/textView1"/>
+            <EditText android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=""
+                      android:id="@+id/et_types" android:hint="例如：桌游 鸡尾酒"/>
+        </LinearLayout>
+    </TableRow>
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" android:gravity="center_vertical">
+        <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-            <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
-                          android:layout_height="match_parent" android:id="@+id/linearLayout">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="活动类型"
-                          android:id="@+id/textView1"/>
-                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=""
-                          android:id="@+id/et_types" android:hint="例如：桌游 鸡尾酒"/>
-            </LinearLayout>
-        </TableRow>
-        <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="活动标题*"
-                        android:id="@+id/textView"/>
-                <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:id="@+id/et_title"/>
-            </LinearLayout>
-        </TableRow>
-        <TableRow android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/tableRow">
-            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
-                          android:layout_height="fill_parent" android:id="@+id/linearLayout1">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="活动描述"
-                          android:id="@+id/textView2"/>
-                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=""
-                          android:id="@+id/et_desc"/>
-            </LinearLayout>
-        </TableRow>
-        <TableRow android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/tableRow1">
-            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
-                          android:layout_height="fill_parent" android:id="@+id/linearLayout2">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="开始时间*"
-                          android:id="@+id/textView3"/>
-                <DatePicker
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/dp_started_at"/>
-            </LinearLayout>
-        </TableRow>
-        <TableRow android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/tableRow3">
-            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
-                          android:layout_height="fill_parent" android:id="@+id/linearLayout6">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                          android:id="@+id/textView7"/>
-                <TimePicker android:layout_width="wrap_content" android:layout_height="wrap_content"
-                            android:id="@+id/tp_started_at"/>
-            </LinearLayout>
-        </TableRow>
-        <TableRow android:layout_width="fill_parent" android:layout_height="wrap_content"
-                >
-            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
-                          android:layout_height="fill_parent" android:id="@+id/linearLayout3">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                          android:id="@+id/textView4"/>
-                <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="选择活动地点"
-                        android:id="@+id/btn_to_map"/>
-            </LinearLayout>
-        </TableRow>
-    </TableLayout>
-</HorizontalScrollView>
+                android:layout_height="fill_parent">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="活动标题*"
+                    android:id="@+id/textView"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/et_title"/>
+        </LinearLayout>
+    </TableRow>
+    <TableRow android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/tableRow">
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
+                      android:layout_height="fill_parent" android:id="@+id/linearLayout1"
+                      android:gravity="center_vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="活动描述"
+                      android:id="@+id/textView2"/>
+            <EditText android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=""
+                      android:id="@+id/et_desc"/>
+        </LinearLayout>
+    </TableRow>
+    <TableRow android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/tableRow1">
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
+                      android:layout_height="fill_parent" android:id="@+id/linearLayout2"
+                      android:gravity="center_vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="开始时间"
+                      android:id="@+id/textView3"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=""
+                      android:id="@+id/tv_started_at"/>
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="修改"
+                    android:id="@+id/btn_edit_started_at" android:layout_gravity="center"/>
+        </LinearLayout>
+    </TableRow>
+    <TableRow android:layout_width="fill_parent" android:layout_height="wrap_content"
+            >
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
+                      android:layout_height="fill_parent" android:id="@+id/linearLayout3">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:id="@+id/textView4"/>
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选择活动地点"
+                    android:id="@+id/btn_to_map"/>
+        </LinearLayout>
+    </TableRow>
+</TableLayout>
