@@ -36,4 +36,5 @@
     <!--Form-->
     <string name="require_field_warning">请填写必填项</string>
     <string name="set_started_at">请选择活动开始时间</string>
+    <string name="no_google_map">对不起！您未安装谷歌地图，所以不能正常使用。</string>
 </resources>

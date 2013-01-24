@@ -52,8 +52,18 @@ public class NewActivity extends ZhaohaiActivity {
                     Calendar c = Calendar.getInstance();
 //                    c.set(dp_started_at.getYear(),dp_started_at.getMonth(),dp_started_at.getDayOfMonth(),tp_started_at.getCurrentHour(),tp_started_at.getCurrentMinute());
                     activity.setStarted_at(c.getTime());
+                    try {
+                        Class.forName("com.google.android.maps.MapActivity");
+                        startActivity(new Intent(NewActivity.this, NewActivityMap.class).putExtra(Activity, activity));
+                    }
+                    catch (Exception e) {
+                        Toast
+                                .makeText(NewActivity.this,
+                                        getResources().getString(R.string.no_google_map),
+                                        Toast.LENGTH_LONG)
+                                .show();
+                    }
 
-                    startActivity(new Intent(NewActivity.this, NewActivityMap.class).putExtra(Activity, activity));
                 }
                 else {
                     Toaster.showLong(NewActivity.this, R.string.require_field_warning);

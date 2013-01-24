@@ -36,5 +36,6 @@
     <!--Form-->
     <string name="require_field_warning">Please populate require field</string>
     <string name="set_started_at">Please select activity start time</string>
+    <string name="no_google_map">Google Maps are not available -- sorry!</string>
 
 </resources>
