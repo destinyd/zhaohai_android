@@ -102,6 +102,8 @@
                 android:name="com.google.android.maps.v2.API_KEY"
                 android:value="AIzaSyCmnh6DTy2xm7KKnpEKMdLN6hlCvZvqtWY"/>
 
+        <uses-library android:name="com.google.android.maps" />
+
     </application>
     <uses-feature
             android:glEsVersion="0x00020000"

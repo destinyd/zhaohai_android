@@ -1,31 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-    <RelativeLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:layout_alignParentRight="true"
-                android:id="@+id/btn_search"/>
-        <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:hint="地点名称或地址"
-                android:layout_alignParentLeft="true"
-                android:id="@+id/et_address"
-                android:layout_toLeftOf="@+id/btn_search"/>
-    </RelativeLayout>
-    <fragment
-        android:id="@+id/map"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        class="com.google.android.gms.maps.MapFragment"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+    <com.google.android.maps.MapView android:layout_height="fill_parent"
+                                     android:layout_width="fill_parent"
+                                     android:apiKey="0_i8MsmqaQexpjtgacm_rTSK0eynaSXsOv-qovw"
+                                     android:enabled="true"
+                                     android:id="@+id/map"
+                                     android:clickable="true"
+            />
 </RelativeLayout>
+
+<!--<com.google.android.maps.MapView-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:id="@+id/map"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:clickable="true"-->
+        <!--android:apiKey="0_i8MsmqaQexpjtgacm_rTSK0eynaSXsOv-qovw"-->
+        <!--/>-->
+
+<!--com.google.android.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:apiKey="0_i8MsmqaQexpjtgacm_rTSK0eynaSXsOv-qovw"
+        android:clickable="true" /-->
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+                <!--android:orientation="vertical"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="fill_parent">-->
+    <!--<RelativeLayout-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="fill_parent">-->
+        <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="New Button"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:id="@+id/btn_search"/>-->
+        <!--<EditText-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text=""-->
+                <!--android:hint="地点名称或地址"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:id="@+id/et_address"-->
+                <!--android:layout_toLeftOf="@+id/btn_search"/>-->
+    <!--</RelativeLayout>-->
+    <!--&lt;!&ndash;<fragment&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/map"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;class="com.google.android.gms.maps.MapFragment"/>&ndash;&gt;-->
+    <!--<com.google.android.maps.MapView-->
+            <!--android:id="@+id/map"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:apiKey="0_i8MsmqaQexpjtgacm_rTSK0eynaSXsOv-qovw"-->
+            <!--android:clickable="true" />-->
+<!--</RelativeLayout>-->

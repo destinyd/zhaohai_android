@@ -2,11 +2,9 @@ package DD.Android.Zhaohai.ui;
 
 import DD.Android.Zhaohai.R;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.test.AndroidTestCase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +15,6 @@ import roboguice.inject.InjectView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.TimeZone;
 
 import static DD.Android.Zhaohai.core.Constants.Extra.Activity;
 
