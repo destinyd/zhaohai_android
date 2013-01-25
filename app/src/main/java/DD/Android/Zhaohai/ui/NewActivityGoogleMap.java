@@ -28,6 +28,7 @@ import java.util.List;
 
 public class NewActivityGoogleMap extends MapActivity implements LocationListener
 {
+    String TAG = "NewActivityGoogleMap";
     private LocationManager locationManager;
 
     private MapView mapView;
@@ -270,6 +271,7 @@ public class NewActivityGoogleMap extends MapActivity implements LocationListene
 //    String
             GeoPoint
     getLocation(double lat,double lng) throws Exception {
+        Log.e(TAG,String.format("lat,lng: %s,%s",lat,lng));
         String resultString = "";
 
         /** 这里采用get方法，直接将参数加到URL上 abcdefg */
