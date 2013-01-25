@@ -8,10 +8,7 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 import com.baidu.mapapi.BMapManager;
-import com.baidu.mapapi.map.MKMapViewListener;
-import com.baidu.mapapi.map.MapPoi;
-import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.MapController;
+import com.baidu.mapapi.map.*;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
 
 public class NewActivityBaiduMap extends ZhaohaiActivity {
@@ -58,11 +55,17 @@ public class NewActivityBaiduMap extends ZhaohaiActivity {
                 if (mapPoiInfo != null){
                     title = mapPoiInfo.strText;
                     Toast.makeText(NewActivityBaiduMap.this, title, Toast.LENGTH_SHORT).show();
+
                     mMapController.animateTo(mapPoiInfo.geoPt);
                 }
             }
         };
         mMapView.regMapViewListener(ZhaohaiApplication.getInstance().mBMapManager, mMapListener);
+
+        MyLocationOverlay mylocTest = new MyLocationOverlay(mMapView);
+        mylocTest.enableCompass();    // 启用指南针
+        mMapView.getOverlays().add(mylocTest);
+        mMapView.refresh();
     }
 
     private void initMapView() {
