@@ -3,9 +3,8 @@ package DD.Android.Zhaohai.ui;
 import DD.Android.Zhaohai.R;
 import android.os.Bundle;
 import com.google.android.maps.MapActivity;
-import com.google.android.maps.MapView;
 
-public class NewActivityMap extends MapActivity {
+public class NewActivityGoogleMap extends MapActivity {
 //        extends ZhaohaiActivity {
 //    @InjectExtra(Activity) protected DD.Android.Zhaohai.core.Activity activity;
 //    @InjectView(R.id.map) protected Fragment map;
@@ -14,7 +13,7 @@ public class NewActivityMap extends MapActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.new_activity_map);
+        setContentView(R.layout.new_activity_google_map);
 //
 //        MapView mapView = (MapView)findViewById(R.id.map);
 //        mapView.setBuiltInZoomControls(true);
