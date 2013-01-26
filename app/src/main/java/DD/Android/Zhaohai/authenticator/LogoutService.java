@@ -40,7 +40,7 @@ public class LogoutService {
         @Override
         public Boolean call() throws Exception {
 
-            final Account[] accounts = AccountManager.get(context).getAccountsByType(Constants.Auth.BOOTSTRAP_ACCOUNT_TYPE);
+            final Account[] accounts = AccountManager.get(context).getAccountsByType(Constants.Auth.ZHAOHAI_ACCOUNT_TYPE);
             if(accounts.length > 0) {
                 AccountManagerFuture<Boolean> removeAccountFuture = AccountManager.get(context).removeAccount
                         (accounts[0], null, null);

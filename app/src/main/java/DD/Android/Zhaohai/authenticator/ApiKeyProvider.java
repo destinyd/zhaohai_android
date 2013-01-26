@@ -26,12 +26,12 @@ public class ApiKeyProvider {
     /**
      * This call blocks, so shouldn't be called on the UI thread
      *
-     * @return API key to be used for authorization with a {@link DD.Android.Zhaohai.core.BootstrapService} instance
+     * @return API key to be used for authorization with a {@link DD.Android.Zhaohai.core.ZhaohaiService} instance
      * @throws AccountsException
      * @throws IOException
      */
     public String getAuthKey() throws AccountsException, IOException {
-        AccountManagerFuture<Bundle> accountManagerFuture = accountManager.getAuthTokenByFeatures(Constants.Auth.BOOTSTRAP_ACCOUNT_TYPE,
+        AccountManagerFuture<Bundle> accountManagerFuture = accountManager.getAuthTokenByFeatures(Constants.Auth.ZHAOHAI_ACCOUNT_TYPE,
                 Constants.Auth.AUTHTOKEN_TYPE, new String[0], activity, null, null, null, null);
 
         return accountManagerFuture.getResult().getString(KEY_AUTHTOKEN);

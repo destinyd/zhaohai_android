@@ -2,16 +2,16 @@
 
 package DD.Android.Zhaohai.core.core;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.doReturn;
-
-import DD.Android.Zhaohai.core.BootstrapService;
-import DD.Android.Zhaohai.core.CheckIn;
-import DD.Android.Zhaohai.core.News;
-import DD.Android.Zhaohai.core.ABUser;
+import DD.Android.Zhaohai.core.Activity;
+import DD.Android.Zhaohai.core.User;
 import DD.Android.Zhaohai.core.UserAgentProvider;
+import DD.Android.Zhaohai.core.ZhaohaiService;
 import com.github.kevinsawicki.http.HttpRequest;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -19,24 +19,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.doReturn;
 
 /**
- * Unit tests of {@link DD.Android.Zhaohai.core.BootstrapService}
+ * Unit tests of {@link DD.Android.Zhaohai.core.ZhaohaiService}
  */
 @RunWith(MockitoJUnitRunner.class)
-public class BootstrapServiceTest {
+public class ZhaohaiServiceTest {
 
     /**
      * Create reader for string
      *
      * @param value
      * @return input stream reader
-     * @throws IOException
+     * @throws java.io.IOException
      */
     private static BufferedReader createReader(String value) throws IOException {
         return new BufferedReader(new InputStreamReader(new ByteArrayInputStream(
@@ -46,18 +44,18 @@ public class BootstrapServiceTest {
     @Mock
     private HttpRequest request;
 
-    private BootstrapService service;
+    private ZhaohaiService service;
 
     /**
      * Set up default mocks
      *
-     * @throws IOException
+     * @throws java.io.IOException
      */
     @Before
     public void before() throws IOException {
-        service = new BootstrapService("foo", new UserAgentProvider()) {
+        service = new ZhaohaiService("foo", new UserAgentProvider()) {
             protected HttpRequest execute(HttpRequest request) throws IOException {
-                return BootstrapServiceTest.this.request;
+                return ZhaohaiServiceTest.this.request;
             }
         };
         doReturn(true).when(request).ok();
@@ -66,25 +64,25 @@ public class BootstrapServiceTest {
     /**
      * Verify getting users with an empty response
      *
-     * @throws IOException
+     * @throws java.io.IOException
      */
     @Test
     public void getUsersEmptyResponse() throws IOException {
         doReturn(createReader("")).when(request).bufferedReader();
-        List<ABUser> ABUsers = service.getUsers();
-        assertNotNull(ABUsers);
-        assertTrue(ABUsers.isEmpty());
+        List<User> users = service.getUsers();
+        assertNotNull(users);
+        assertTrue(users.isEmpty());
     }
 
     /**
      * Verify getting news with an empty response
      *
-     * @throws IOException
+     * @throws java.io.IOException
      */
     @Test
     public void getContentEmptyResponse() throws IOException {
         doReturn(createReader("")).when(request).bufferedReader();
-        List<News> content = service.getNews();
+        List<User> content = service.getFriend();
         assertNotNull(content);
         assertTrue(content.isEmpty());
     }
@@ -92,12 +90,12 @@ public class BootstrapServiceTest {
     /**
      * Verify getting checkins with an empty response
      *
-     * @throws IOException
+     * @throws java.io.IOException
      */
     @Test
     public void getReferrersEmptyResponse() throws IOException {
         doReturn(createReader("")).when(request).bufferedReader();
-        List<CheckIn> referrers = service.getCheckIns();
+        List<Activity> referrers = service.getActivities();
         assertNotNull(referrers);
         assertTrue(referrers.isEmpty());
     }

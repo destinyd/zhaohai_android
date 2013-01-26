@@ -10,25 +10,42 @@ public class Constants {
     public static class Auth {
         private Auth() {}
 
-        /**
-         * Account type id
-         */
-        public static final String BOOTSTRAP_ACCOUNT_TYPE = "DD.Android.Zhaohai";
+//        /**
+//         * Account type id
+//         */
+//        public static final String BOOTSTRAP_ACCOUNT_TYPE = "DD.Android.Zhaohai";
+//
+//        /**
+//         * Account name
+//         */
+//        public static final String BOOTSTRAP_ACCOUNT_NAME = "Zhaohai";
+//
+//        /**
+//         * Provider id
+//         */
+//        public static final String BOOTSTRAP_PROVIDER_AUTHORITY = "DD.Android.Zhaohai.sync";
+//
+//        /**
+//         * Auth token type
+//         */
+//        public static final String AUTHTOKEN_TYPE = BOOTSTRAP_ACCOUNT_TYPE;
+
+        public static final String ZHAOHAI_ACCOUNT_TYPE = "DD.Android.Zhaohai";
 
         /**
          * Account name
          */
-        public static final String BOOTSTRAP_ACCOUNT_NAME = "Zhaohai";
+        public static final String ZHAOHAI_ACCOUNT_NAME = "Zhaohai";
 
         /**
          * Provider id
          */
-        public static final String BOOTSTRAP_PROVIDER_AUTHORITY = "DD.Android.Zhaohai.sync";
+        public static final String ZHAOHAI_PROVIDER_AUTHORITY = "DD.Android.Zhaohai.sync";
 
         /**
          * Auth token type
          */
-        public static final String AUTHTOKEN_TYPE = BOOTSTRAP_ACCOUNT_TYPE;
+        public static final String AUTHTOKEN_TYPE = ZHAOHAI_ACCOUNT_TYPE;
     }
 
     /**
@@ -92,25 +109,25 @@ public class Constants {
          * List Users URL
          */
 //        public static final String URL_USERS = URL_BASE + "/1/users";
-
-        /**
-         * List News URL
-         */
-        public static final String URL_NEWS = URL_BASE + "/1/classes/News";
-
-        /**
-         * List Checkin's URL
-         */
-        public static final String URL_CHECKINS = URL_BASE + "/1/classes/Locations";
+//
+//        /**
+//         * List News URL
+//         */
+//        public static final String URL_NEWS = URL_BASE + "/1/classes/News";
+//
+//        /**
+//         * List Checkin's URL
+//         */
+//        public static final String URL_CHECKINS = URL_BASE + "/1/classes/Locations";
     }
 
 
     public static class Extra {
         private Extra() {}
 
-        public static final String NEWS_ITEM = "news_item";
+//        public static final String NEWS_ITEM = "news_item";
 
-        public static final String ABUSER = "ABUser";
+//        public static final String ABUSER = "ABUser";
 
         public static final String USER = "User";
 

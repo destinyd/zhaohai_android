@@ -2,38 +2,38 @@
 
 package DD.Android.Zhaohai.test;
 
-import static DD.Android.Zhaohai.core.Constants.Extra.NEWS_ITEM;
+import DD.Android.Zhaohai.core.User;
+import DD.Android.Zhaohai.ui.CarouselActivity;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 
-import DD.Android.Zhaohai.core.News;
-import DD.Android.Zhaohai.ui.CarouselActivity;
+import static DD.Android.Zhaohai.core.Constants.Extra.USER;
 
 
 /**
- * Tests for displaying a specific {@link News} item
+ * Tests for displaying a specific {@link User} item
  */
-public class NewsViewTest extends ActivityInstrumentationTestCase2<CarouselActivity> {
+public class FriendViewTest extends ActivityInstrumentationTestCase2<CarouselActivity> {
 
     /**
      * Create test for {@link DD.Android.Zhaohai.ui.CarouselActivity}
      */
-    public NewsViewTest() {
+    public FriendViewTest() {
         super(CarouselActivity.class);
     }
 
     /**
-     * Configure intent used to display a {@link News}
+     * Configure intent used to display a {@link User}
      */
     @Override
     protected void setUp() throws Exception {
         super.setUp();
         Intent intent = new Intent();
         // TODO: BUILD News item for testing.
-        News news = new News();
-        news.setTitle("Foo");
-        news.setObjectId("Bar");
-        intent.putExtra(NEWS_ITEM, news);
+        User user = new User();
+        user.setName("Foo");
+        user.set_id("Bar");
+        intent.putExtra(USER, user);
         setActivityIntent(intent);
     }
 

@@ -2,24 +2,23 @@
 
 package DD.Android.Zhaohai.test;
 
+import DD.Android.Zhaohai.R;
+import DD.Android.Zhaohai.authenticator.ZhaohaiAuthenticatorActivity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.Button;
-
-import DD.Android.Zhaohai.authenticator.BootstrapAuthenticatorActivity;
-import DD.Android.Zhaohai.R;
 
 
 /**
  * Tests of displaying the authenticator activity
  */
-public class BootstrapAuthenticatorTest extends ActivityInstrumentationTestCase2<BootstrapAuthenticatorActivity> {
+public class ZhaohaiAuthenticatorTest extends ActivityInstrumentationTestCase2<ZhaohaiAuthenticatorActivity> {
 
     /**
-     * Create test for {@link DD.Android.Zhaohai.authenticator.BootstrapAuthenticatorActivity}
+     * Create test for {@link DD.Android.Zhaohai.authenticator.ZhaohaiAuthenticatorActivity}
      */
-    public BootstrapAuthenticatorTest() {
-        super(BootstrapAuthenticatorActivity.class);
+    public ZhaohaiAuthenticatorTest() {
+        super(ZhaohaiAuthenticatorActivity.class);
     }
 
     /**

@@ -290,7 +290,7 @@ public class ZhaohaiAuthenticatorActivity extends
      * @param result
      */
     protected void finishConfirmCredentials(boolean result) {
-        final Account account = new Account(email, Constants.Auth.BOOTSTRAP_ACCOUNT_TYPE);
+        final Account account = new Account(email, Constants.Auth.ZHAOHAI_ACCOUNT_TYPE);
         accountManager.setPassword(account, password);
 
         final Intent intent = new Intent();
@@ -308,7 +308,7 @@ public class ZhaohaiAuthenticatorActivity extends
      */
 
     protected void finishLogin() {
-        final Account account = new Account(email, Constants.Auth.BOOTSTRAP_ACCOUNT_TYPE);
+        final Account account = new Account(email, Constants.Auth.ZHAOHAI_ACCOUNT_TYPE);
 
         if (requestNewAccount)
             accountManager.addAccountExplicitly(account, password, null);
@@ -317,7 +317,7 @@ public class ZhaohaiAuthenticatorActivity extends
         final Intent intent = new Intent();
         authToken = token;
         intent.putExtra(KEY_ACCOUNT_NAME, email);
-        intent.putExtra(KEY_ACCOUNT_TYPE, Constants.Auth.BOOTSTRAP_ACCOUNT_TYPE);
+        intent.putExtra(KEY_ACCOUNT_TYPE, Constants.Auth.ZHAOHAI_ACCOUNT_TYPE);
         if (authTokenType != null
                 && authTokenType.equals(Constants.Auth.AUTHTOKEN_TYPE))
         {
