@@ -107,12 +107,12 @@ public class NewActivityGoogleMap extends MapActivity implements LocationListene
                 try {
 //                    GeoPoint p = mylayer.getMyLocation();
                     point = getLocation(mylayer.getMyLocation());
+                    mapController.animateTo(point);
                 } catch (Exception e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                    return;
+//                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//                    return;
                 }
 //                Geo geo = JSON.parseObject(point, Geo.class);
-                mapController.animateTo(point);
             }
         });
         overlays.add(mylayer);
@@ -161,13 +161,12 @@ public class NewActivityGoogleMap extends MapActivity implements LocationListene
         GeoPoint point = null;
         try {
             point = getLocation(location);
+            mapController.animateTo(point);
         } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            return;
+//            return;
         }
 //        Geo geo = JSON.parseObject(point, Geo.class);
-        mapController.animateTo(point);
-        Log.v("map", "geo".toString());
 
     }
 
@@ -260,6 +259,7 @@ public class NewActivityGoogleMap extends MapActivity implements LocationListene
 
     private GeoPoint getLocation(Location itude) throws Exception {
         /** 这里采用get方法，直接将参数加到URL上 */
+        Log.e(TAG,"getProvider type:"+itude.getProvider());
         return getLocation(itude.getLatitude(), itude.getLongitude());
     }
 
@@ -271,7 +271,7 @@ public class NewActivityGoogleMap extends MapActivity implements LocationListene
 //    String
             GeoPoint
     getLocation(double lat,double lng) throws Exception {
-        Log.e(TAG,String.format("lat,lng: %s,%s",lat,lng));
+//        Log.e(TAG,String.format("lat,lng: %s,%s",lat,lng));
         String resultString = "";
 
         /** 这里采用get方法，直接将参数加到URL上 abcdefg */
@@ -305,7 +305,8 @@ public class NewActivityGoogleMap extends MapActivity implements LocationListene
 //                    resultString = jsonArray.getJSONObject(i).getString("address");
                     JSONArray jo = new JSONArray(jsonArray.getJSONObject(0).get("Point").toString());
 //                }
-                return new GeoPoint((int)((Double)arr_point.get(0)*1E6),(int)((Double)(arr_point.get(1))*1E6));
+                Log.e(TAG,String.format("lat,lng: %s,%s => %s,%s",lat,lng,arr_point.get(1),arr_point.get(0)));
+                return new GeoPoint((int)((Double)arr_point.get(1)*1E6),(int)((Double)(arr_point.get(0))*1E6));
             }
         } catch (Exception e) {
             throw new Exception("获取物理位置出现错误:" + e.getMessage());
