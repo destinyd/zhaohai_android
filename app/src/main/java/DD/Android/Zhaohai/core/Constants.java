@@ -2,6 +2,9 @@
 
 package DD.Android.Zhaohai.core;
 
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+
 /**
  * Bootstrap constants
  */
@@ -133,7 +136,7 @@ public class Constants {
 
         public static final String FRIEND = "friend";
 
-        public static final String Activity = "activity";
+        public static final String ACTIVITY = "activity";
 
     }
 
@@ -145,6 +148,14 @@ public class Constants {
          */
         public static final String INTENT_PREFIX = "DD.Android.Zhaohai.";
 
+    }
+
+    public static class Other{
+        private Other(){}
+
+        public static final SimpleDateFormat POST_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        public static final TimeZone CHINA_TIME_ZONE = TimeZone.getTimeZone("Asia/Shanghai");
+        public static final TimeZone UTC_TIME_ZONE = TimeZone.getTimeZone("UTC");
     }
 
 }

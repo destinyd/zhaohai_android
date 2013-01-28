@@ -2,7 +2,6 @@
 package DD.Android.Zhaohai;
 
 import DD.Android.Zhaohai.authenticator.ApiKeyProvider;
-import DD.Android.Zhaohai.core.BootstrapService;
 import DD.Android.Zhaohai.core.UserAgentProvider;
 import DD.Android.Zhaohai.core.ZhaohaiService;
 import android.accounts.AccountsException;
@@ -11,7 +10,7 @@ import com.google.inject.Inject;
 import java.io.IOException;
 
 /**
- * Provider for a {@link DD.Android.Zhaohai.core.BootstrapService} instance
+ * Provider for a {@link DD.Android.Zhaohai.core.ZhaohaiService} instance
  */
 public class ZhaohaiServiceProvider {
 

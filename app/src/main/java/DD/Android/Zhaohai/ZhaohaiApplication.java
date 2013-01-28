@@ -2,19 +2,15 @@
 
 package DD.Android.Zhaohai;
 
-import DD.Android.Zhaohai.ui.NewActivityBaiduMap;
-import DD.Android.Zhaohai.ui.NewActivityGoogleMap;
 import android.app.Application;
 import android.app.Instrumentation;
 import android.content.Context;
-import android.content.Intent;
 import android.widget.Toast;
 import com.baidu.mapapi.BMapManager;
 import com.baidu.mapapi.MKGeneralListener;
 import com.baidu.mapapi.map.MKEvent;
 import com.github.kevinsawicki.http.HttpRequest;
 
-import static DD.Android.Zhaohai.core.Constants.Extra.Activity;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.FROYO;
 
@@ -66,14 +62,14 @@ public class ZhaohaiApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        try {
-            Class.forName("com.google.android.maps.MapActivity");
-        }
-        catch (Exception e) {
+//        try {
+//            Class.forName("com.google.android.maps.MapActivity");
+//        }
+//        catch (Exception e) {
             //无google地图，初始化baidu地图
             mInstance = this;
             initEngineManager(this);
-        }
+//        }
     }
 
     @Override

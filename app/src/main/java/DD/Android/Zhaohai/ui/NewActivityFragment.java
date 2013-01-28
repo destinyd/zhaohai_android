@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import static DD.Android.Zhaohai.core.Constants.Extra.Activity;
+import static DD.Android.Zhaohai.core.Constants.Extra.ACTIVITY;
 
 public class NewActivityFragment extends SimpleFragment {
 
@@ -113,18 +113,18 @@ public class NewActivityFragment extends SimpleFragment {
 //                    c.set(dp_started_at.getYear(),dp_started_at.getMonth(),dp_started_at.getDayOfMonth(),tp_started_at.getCurrentHour(),tp_started_at.getCurrentMinute());
                     activity.setStarted_at(calendar_started_at.getTime());
 
-                    try {
-                        Class.forName("com.google.android.maps.MapActivity");
-                        startActivity(new Intent(getActivity(), NewActivityGoogleMap.class).putExtra(Activity, activity));
-                    }
-                    catch (Exception e) {
-                        Toast
-                                .makeText(getActivity(),
-                                        getResources().getString(R.string.no_google_map),
-                                        Toast.LENGTH_LONG)
-                                .show();
-                        startActivity(new Intent(getActivity(), NewActivityBaiduMap.class).putExtra(Activity, activity));
-                    }
+//                    try {
+//                        Class.forName("com.google.android.maps.MapActivity");
+//                        startActivity(new Intent(getActivity(), NewActivityGoogleMap.class).putExtra(Activity, activity));
+//                    }
+//                    catch (Exception e) {
+//                        Toast
+//                                .makeText(getActivity(),
+//                                        getResources().getString(R.string.no_google_map),
+//                                        Toast.LENGTH_LONG)
+//                                .show();
+                        startActivity(new Intent(getActivity(), NewActivityBaiduMap.class).putExtra(ACTIVITY, activity));
+//                    }
                 }
                 else {
                     Toaster.showLong(getActivity(), R.string.require_field_warning);

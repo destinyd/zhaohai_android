@@ -14,7 +14,9 @@ import java.util.Collections;
 import java.util.List;
 
 import static DD.Android.Zhaohai.core.Constants.Http.*;
+import static DD.Android.Zhaohai.core.Constants.Other.*;
 import static com.github.kevinsawicki.http.HttpRequest.get;
+import static com.github.kevinsawicki.http.HttpRequest.post;
 
 /**
  * Bootstrap API service
@@ -258,6 +260,36 @@ public class ZhaohaiService {
                 return response;
 //            }
 //            return Collections.emptyList();
+        } catch (HttpRequestException e) {
+            throw e.getCause();
+        }
+    }
+
+    public Activity createActivity(Activity activity) throws IOException {
+        try {
+            if(apiKey == null)
+                return null;
+            POST_DATE_FORMAT.setTimeZone(UTC_TIME_ZONE);
+            HttpRequest request = post(URL_ACTIVITIES+ "?" + HEADER_PARSE_ACCESS_TOKEN + "=" + apiKey)
+                    .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY )
+                    .header(HEADER_PARSE_APP_ID, PARSE_APP_ID)
+                    .part("activity[title]",activity.getTitle())
+                    .part("activity[desc]",activity.getDesc())
+                    .part("activity[started_at]",POST_DATE_FORMAT.format(activity.getStarted_at()))
+                    .part("activity[address]",activity.getAddress())
+                    .part("activity[lat]",activity.getLat())
+                    .part("activity[lng]",activity.getLng())
+                    ;
+            if(request.ok()){
+//                String tmp = request.body();
+                return GSON.fromJson(request.bufferedReader(),Activity.class);
+//                GSON.fromJson(request.body(),GSON);
+//                return tmp;
+            }
+            else
+            {
+                return null;
+            }
         } catch (HttpRequestException e) {
             throw e.getCause();
         }

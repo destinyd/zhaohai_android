@@ -37,5 +37,8 @@
     <string name="require_field_warning">Please populate require field</string>
     <string name="set_started_at">Please select activity start time</string>
     <string name="no_google_map">Google Maps are not available -- sorry!</string>
+    <string name="alter_activity_point">are you sure hold activity in this place？</string>
+    <string name="format_alter_message" formatted="false">Place name：%s\nAddress：%s</string>
+    <string name="select_point_name">It\'s "%s",click it again to select it for activity.</string>
 
 </resources>

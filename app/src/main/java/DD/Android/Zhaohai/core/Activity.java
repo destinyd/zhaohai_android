@@ -1,5 +1,7 @@
 package DD.Android.Zhaohai.core;
 
+import com.baidu.platform.comapi.basestruct.GeoPoint;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +24,7 @@ public class Activity implements Serializable {
     protected Date finished_at;
     protected Date started_at;
     protected Date updated_at;
-    protected float lat,lng;
+    protected double lat,lng;
 
 
     public String getAddress() {
@@ -33,7 +35,7 @@ public class Activity implements Serializable {
         this.address = address;
     }
 
-    public float getLat() {
+    public double getLat() {
         return lat;
     }
 
@@ -41,7 +43,7 @@ public class Activity implements Serializable {
         this.lat = lat;
     }
 
-    public float getLng() {
+    public double getLng() {
         return lng;
     }
 
@@ -151,5 +153,10 @@ public class Activity implements Serializable {
 
     public void setUpdated_at(Date updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public void setPt(GeoPoint pt){
+        this.lat = pt.getLatitudeE6() / 100000.0;
+        this.lng = pt.getLongitudeE6() / 100000.0;
     }
 }

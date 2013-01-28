@@ -2,8 +2,6 @@ package DD.Android.Zhaohai.ui;
 
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.ZhaohaiServiceProvider;
-import DD.Android.Zhaohai.core.ABUser;
-import DD.Android.Zhaohai.core.AvatarLoader;
 import DD.Android.Zhaohai.core.User;
 import DD.Android.Zhaohai.core.UserAvatarLoader;
 import android.accounts.OperationCanceledException;

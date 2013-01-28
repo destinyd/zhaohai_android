@@ -2,7 +2,6 @@ package DD.Android.Zhaohai.ui;
 
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.core.Activity;
-import DD.Android.Zhaohai.core.CheckIn;
 import android.view.LayoutInflater;
 
 import java.util.List;
