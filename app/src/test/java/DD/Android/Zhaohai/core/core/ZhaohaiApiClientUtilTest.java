@@ -16,7 +16,7 @@ import org.junit.Test;
 /**
  * Unit tests of client API
  */
-public class BootstrapApiClientUtilTest {
+public class ZhaohaiApiClientUtilTest {
 
     @Test
     @Ignore("Requires the API to use basic authentication. Parse.com api does not. See BootstrapService for more info.")
