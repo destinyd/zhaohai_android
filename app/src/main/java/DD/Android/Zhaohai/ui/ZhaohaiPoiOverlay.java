@@ -27,7 +27,7 @@ public class ZhaohaiPoiOverlay extends PoiOverlay {
 
     @Override
     protected boolean onTap(int i) {
-        super.onTap(i);
+//        super.onTap(i);
         MKPoiInfo info = getPoi(i);
         if(info.equals(last_info)){
             String str_format_alter_message = NewActivityBaiduMap.factory.getResources().getString(R.string.format_alter_message);
@@ -54,6 +54,7 @@ public class ZhaohaiPoiOverlay extends PoiOverlay {
 //        }
         return true;
     }
+
 
     //
     DialogInterface.OnClickListener OkClick = new DialogInterface.OnClickListener() {

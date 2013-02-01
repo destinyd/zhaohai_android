@@ -41,4 +41,12 @@
     <string name="format_alter_message" formatted="false">Place name：%s\nAddress：%s</string>
     <string name="select_point_name">It\'s "%s",click it again to select it for activity.</string>
 
+    <string name="label_activity_desc">Description</string>
+    <string name="label_activity_address">Address</string>
+    <string name="label_activity_started_at">Start At</string>
+    <string name="label_activity_finished_at">Finish At</string>
+    <string name="label_activity_user">Holder</string>
+    <string name="label_activity_users">Users</string>
+    <string name="label_activity_interested_users">Interested Users</string>
+
 </resources>

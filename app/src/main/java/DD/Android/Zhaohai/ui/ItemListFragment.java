@@ -1,7 +1,6 @@
 
 package DD.Android.Zhaohai.ui;
 
-import android.accounts.AccountManager;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -27,15 +26,11 @@ import com.github.kevinsawicki.wishlist.Toaster;
 import com.github.kevinsawicki.wishlist.ViewUtils;
 import DD.Android.Zhaohai.R.id;
 import DD.Android.Zhaohai.R.layout;
-import DD.Android.Zhaohai.R.menu;
 import com.github.rtyley.android.sherlock.roboguice.fragment.RoboSherlockFragment;
 import com.google.inject.Inject;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.Callable;
-
-import roboguice.util.RoboAsyncTask;
 
 /**
  * Base fragment for displaying a list of items that loads with a progress bar
@@ -153,7 +148,7 @@ public abstract class ItemListFragment<E> extends RoboSherlockFragment
 
     @Override
     public void onCreateOptionsMenu(Menu optionsMenu, MenuInflater inflater) {
-        inflater.inflate(R.menu.bootstrap, optionsMenu);
+        inflater.inflate(R.menu.zhaohai, optionsMenu);
     }
 
     @Override

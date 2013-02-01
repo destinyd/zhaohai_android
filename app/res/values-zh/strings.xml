@@ -40,4 +40,12 @@
     <string name="alter_activity_point">您确定选择此地点作为活动地点吗？</string>
     <string name="format_alter_message" formatted="false">地点名称：%s\n地址：%s</string>
     <string name="select_point_name">您点击的是“%s”,再次点击选择此地作为活动地点。</string>
+
+    <string name="label_activity_desc">描述</string>
+    <string name="label_activity_address">地址</string>
+    <string name="label_activity_started_at">开始时间</string>
+    <string name="label_activity_finished_at">结束时间</string>
+    <string name="label_activity_user">发起人</string>
+    <string name="label_activity_users">参与者</string>
+    <string name="label_activity_interested_users">感兴趣者</string>
 </resources>

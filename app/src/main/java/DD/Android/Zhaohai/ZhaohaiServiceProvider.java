@@ -22,7 +22,7 @@ public class ZhaohaiServiceProvider {
      * <p>
      * This method gets an auth key and so it blocks and shouldn't be called on the main thread.
      *
-     * @return bootstrap service
+     * @return zhaohai service
      * @throws java.io.IOException
      * @throws android.accounts.AccountsException
      */

@@ -164,6 +164,12 @@ public class NewActivityBaiduMap extends ZhaohaiActivity {
 //                mSearch.poiSearchInCity("柳州",full_address);
 //                mSearch.poiDetailSearch(mk_si.key);
 //                mSearch.poiSearchInCity("柳州", "餐厅");
+                actv_q.setText(mk_si.city + mk_si.key);
+//                Log.e("actv_q"," onItemSelected");
+//                MKPoiInfo mpi = (MKPoiInfo)adapterView.getAdapter().getItem(i);
+//                actv_q.setText(mpi.city + mpi.address);
+                actv_q.requestFocus();
+                actv_q.setSelection(actv_q.getText().length());
                 mSearch.poiSearchInCity(mk_si.city,mk_si.city + mk_si.key);
             }
         };
@@ -193,7 +199,7 @@ public class NewActivityBaiduMap extends ZhaohaiActivity {
                         strInfo += ",";
                     }
                     strInfo += "找到结果";
-                    Toast.makeText(NewActivityBaiduMap.this, strInfo, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(NewActivityBaiduMap.this, strInfo, Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -282,7 +288,7 @@ public class NewActivityBaiduMap extends ZhaohaiActivity {
                         SuggestionSearchButtonProcess(actv_q);//每次需要执行的代码放到这里面。
                     }
                 };
-                timer.schedule(task,3000);
+                timer.schedule(task,1500);
 //                task = new TimerTask() {
 //                    public void run() {
 //                        SuggestionSearchButtonProcess(actv_q);//每次需要执行的代码放到这里面。
@@ -292,6 +298,7 @@ public class NewActivityBaiduMap extends ZhaohaiActivity {
                 return false;  //To change body of implemented methods use File | Settings | File Templates.
             }
         });
+
 
 //        testUpdateClick();
 
@@ -337,10 +344,10 @@ public class NewActivityBaiduMap extends ZhaohaiActivity {
         super.onRestoreInstanceState(savedInstanceState);
         mMapView.onRestoreInstanceState(savedInstanceState);
     }
-//
-    public void testUpdateClick() {
-        mLocClient.requestLocation();
-    }
+////
+//    public void testUpdateClick() {
+//        mLocClient.requestLocation();
+//    }
 
     private void initMapView() {
         mMapView.setLongClickable(true);
@@ -351,7 +358,7 @@ public class NewActivityBaiduMap extends ZhaohaiActivity {
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.bootstrap, menu);
+//        getMenuInflater().inflate(R.menu.zhaohai, menu);
 //        return true;
 //    }
 
@@ -461,9 +468,9 @@ public class NewActivityBaiduMap extends ZhaohaiActivity {
         protected void onPostExecute(Void result/*参数3*/) {
 //            printInfo("onPostExecute");
             if(activity.get_id() != null){
-                startActivity(new Intent(NewActivityBaiduMap.this, UsersActivity.class).putExtra(ACTIVITY, activity));
+                startActivity(new Intent(NewActivityBaiduMap.this, ActivityActivity.class).putExtra(ACTIVITY, activity));
             }
-            Toast.makeText(NewActivityBaiduMap.this, "Done!", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(NewActivityBaiduMap.this, "Done!", Toast.LENGTH_SHORT).show();
 //            NewActivityBaiduMap.this
         }
     }

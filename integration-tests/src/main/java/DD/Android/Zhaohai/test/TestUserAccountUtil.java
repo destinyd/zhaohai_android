@@ -21,10 +21,10 @@ public class TestUserAccountUtil {
     /**
      * Checks the device has a valid Bootstrap (on parse.com via the example API),
      * account, if not, adds one using the test credentials found in system
-     * property 'bootstrap.test.api.key'.
+     * property 'zhaohai.test.api.key'.
      *
      * The credentials can be passed on the command line like this: mvn
-     * -bootstrap.test.api.key=0123456789abcdef0123456789abcdef install
+     * -zhaohai.test.api.key=0123456789abcdef0123456789abcdef install
      *
      * @param instrumentation
      *            taken from the test context
@@ -45,7 +45,7 @@ public class TestUserAccountUtil {
         String truncatedApiKey = testApiKey.substring(0, 4) + "…";
 
         if (!testApiKey.matches("\\p{XDigit}{32}")) {
-            Ln.w("No valid test account credentials in bootstrap.test.api.key : " + truncatedApiKey);
+            Ln.w("No valid test account credentials in zhaohai.test.api.key : " + truncatedApiKey);
             return false;
         }
 

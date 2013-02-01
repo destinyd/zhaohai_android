@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+    <style name="EditText">
+        <item name="android:capitalize">none</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textColor">@color/table_text</item>
+        <item name="android:textCursorDrawable">@drawable/edit_text_cursor</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">@drawable/edit_text_background</item>
+    </style>
 
     <style name="SignInEditText">
         <item name="android:layout_width">match_parent</item>

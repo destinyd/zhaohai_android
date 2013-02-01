@@ -53,7 +53,7 @@ public class Constants {
 
     /**
      * All HTTP is done through a REST style API built for demonstration purposes on Parse.com
-     * Thanks to the nice people at Parse for creating such a nice system for us to use for bootstrap!
+     * Thanks to the nice people at Parse for creating such a nice system for us to use for zhaohai!
      */
     public static class Http {
         private Http() {}

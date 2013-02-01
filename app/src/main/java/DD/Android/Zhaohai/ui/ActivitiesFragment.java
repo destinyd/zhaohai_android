@@ -15,6 +15,8 @@ import com.google.inject.Inject;
 
 import java.util.List;
 
+import static DD.Android.Zhaohai.core.Constants.Extra.ACTIVITY;
+
 public class ActivitiesFragment extends ItemListFragment<DD.Android.Zhaohai.core.Activity> {
 
     @Inject protected ZhaohaiServiceProvider serviceProvider;
@@ -68,13 +70,14 @@ public class ActivitiesFragment extends ItemListFragment<DD.Android.Zhaohai.core
 //        GeoPoint p = new GeoPoint(x, y);
 //        GeoPoint p2 = CoordinateConvert.bundleDecode(CoordinateConvert.fromWgs84ToBaidu(p));
 
-        String uri = String.format("geo:%s,%s?q=%s",
-                activity.getLat(),
-                activity.getLng(),
-                activity.getAddress());
+//        String uri = String.format("geo:%s,%s?q=%s",
+//                activity.getLat(),
+//                activity.getLng(),
+//                activity.getAddress());
 
         // Show a chooser that allows the ABUser to decide how to display this data, in this case, map data.
-        startActivity(Intent.createChooser(new Intent(Intent.ACTION_VIEW, Uri.parse(uri)), getString(R.string.choose)));
+//        startActivity(Intent.createChooser(new Intent(Intent.ACTION_VIEW, Uri.parse(uri)), getString(R.string.choose)));
+        startActivity(new Intent(getActivity(), ActivityActivity.class).putExtra(ACTIVITY, activity));
     }
 
     @Override

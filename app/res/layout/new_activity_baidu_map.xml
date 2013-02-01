@@ -20,6 +20,7 @@
         <AutoCompleteTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/SignInEditText"
                 android:text=""
                 android:id="@+id/actv_q" android:layout_toLeftOf="@+id/btn_search" android:layout_alignParentLeft="true"/>
     </RelativeLayout>

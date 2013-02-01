@@ -1,24 +1,14 @@
 package DD.Android.Zhaohai.ui;
 
 import DD.Android.Zhaohai.R;
-import DD.Android.Zhaohai.core.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.*;
-import com.github.kevinsawicki.wishlist.Toaster;
-import roboguice.inject.InjectView;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-
-import static DD.Android.Zhaohai.core.Constants.Extra.Activity;
 
 public class SelectTimeDialog extends AlertDialog {
 
@@ -147,7 +137,7 @@ public class SelectTimeDialog extends AlertDialog {
                 new DatePicker.OnDateChangedListener(){
                     @Override
                     public void onDateChanged(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
-                        // Notify the user.
+                        // Notify the activity.
                     }
                 }
         );

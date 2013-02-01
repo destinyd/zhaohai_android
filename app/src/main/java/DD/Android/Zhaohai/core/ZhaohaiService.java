@@ -78,7 +78,7 @@ public class ZhaohaiService {
     private final String password;
 
     /**
-     * Create bootstrap service
+     * Create zhaohai service
      *
      * @param username
      * @param password
@@ -91,7 +91,7 @@ public class ZhaohaiService {
     }
 
     /**
-     * Create bootstrap service
+     * Create zhaohai service
      *
      * @param userAgentProvider
      * @param apiKey
@@ -143,7 +143,7 @@ public class ZhaohaiService {
 
         /**
          * NOTE: This may be where you want to add a header for the api token that was saved when you
-         * logged in. In the bootstrap sample this is where we are saving the session id as the token.
+         * logged in. In the zhaohai sample this is where we are saving the session id as the token.
          * If you actually had received a token you'd take the "apiKey" (aka: token) and add it to the
          * header or form values before you make your requests.
           */
@@ -179,9 +179,9 @@ public class ZhaohaiService {
     }
 
     /**
-     * Get all bootstrap Friend that exists on Parse.com
+     * Get all zhaohai Friend that exists on Parse.com
      *
-     * @return non-null but possibly empty list of bootstrap
+     * @return non-null but possibly empty list of zhaohai
      * @throws IOException
      */
     public List<User> getFriend() throws IOException {
@@ -205,9 +205,9 @@ public class ZhaohaiService {
     }
 
     /**
-     * Get all bootstrap Users that exist on Parse.com
+     * Get all zhaohai Users that exist on Parse.com
      *
-     * @return non-null but possibly empty list of bootstrap
+     * @return non-null but possibly empty list of zhaohai
      * @throws java.io.IOException
      */
     public List<User> getUsers() throws IOException {
@@ -240,9 +240,9 @@ public class ZhaohaiService {
     }
 
     /**
-     * Get all bootstrap Checkins that exists on Parse.com
+     * Get all zhaohai Checkins that exists on Parse.com
      *
-     * @return non-null but possibly empty list of bootstrap
+     * @return non-null but possibly empty list of zhaohai
      * @throws java.io.IOException
      */
     public List<Activity> getActivities() throws IOException {
@@ -269,7 +269,7 @@ public class ZhaohaiService {
         try {
             if(apiKey == null)
                 return null;
-            POST_DATE_FORMAT.setTimeZone(UTC_TIME_ZONE);
+            POST_DATE_FORMAT.setTimeZone(CHINA_TIME_ZONE);
             HttpRequest request = post(URL_ACTIVITIES+ "?" + HEADER_PARSE_ACCESS_TOKEN + "=" + apiKey)
                     .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY )
                     .header(HEADER_PARSE_APP_ID, PARSE_APP_ID)

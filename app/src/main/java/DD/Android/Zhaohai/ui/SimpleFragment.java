@@ -5,27 +5,15 @@ import DD.Android.Zhaohai.R.id;
 import DD.Android.Zhaohai.R.layout;
 import DD.Android.Zhaohai.R.menu;
 import DD.Android.Zhaohai.authenticator.LogoutService;
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.widget.*;
-import android.widget.AdapterView.OnItemClickListener;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
-import com.github.kevinsawicki.wishlist.Toaster;
-import com.github.kevinsawicki.wishlist.ViewUtils;
 import com.github.rtyley.android.sherlock.roboguice.fragment.RoboSherlockFragment;
 import com.google.inject.Inject;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Base fragment for displaying a list of items that loads with a progress bar
@@ -136,7 +124,7 @@ public abstract class SimpleFragment extends RoboSherlockFragment{
 
     @Override
     public void onCreateOptionsMenu(Menu optionsMenu, MenuInflater inflater) {
-        inflater.inflate(menu.bootstrap, optionsMenu);
+        inflater.inflate(menu.zhaohai, optionsMenu);
     }
 
     @Override
