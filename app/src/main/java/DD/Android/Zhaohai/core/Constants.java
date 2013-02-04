@@ -83,6 +83,9 @@ public class Constants {
          */
         public static final String URL_ACTIVITIES = API_BASE + "/activities.json";
 
+        public static final String FORMAT_URL_ACTIVITY_REQUEST = API_BASE + "/activities/%s/activity_requests.json";
+        public static final String FORMAT_ACCESS_TOKEN = "%s=%s";
+
         public static final String PARSE_APP_ID = "78e00ce282ab3e3357af2e40c38050ef4e3fa85a8584790950efcfdb717786e3";
         public static final String PARSE_REST_API_KEY = "976d0d4ab74708ae5c3b8ef0f5723a5fc72df5692c5f452c20d87c5673c1b6e4";
         public static final String HEADER_PARSE_REST_API_KEY = "client_secret";
@@ -156,6 +159,15 @@ public class Constants {
         public static final SimpleDateFormat POST_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         public static final TimeZone CHINA_TIME_ZONE = TimeZone.getTimeZone("Asia/Shanghai");
         public static final TimeZone UTC_TIME_ZONE = TimeZone.getTimeZone("UTC");
+
+        public static class ActivityTaskStatus {
+            private ActivityTaskStatus(){}
+
+            public static final int JOIN = 0;
+            public static final int LEAVE = 1;
+            public static final int INVITE = 2;
+            public static final int CLOSE = 3;
+        }
     }
 
 }
