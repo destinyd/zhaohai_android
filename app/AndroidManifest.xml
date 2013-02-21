@@ -118,6 +118,7 @@
         <!--<activity android:name=".ui.NewActivityGoogleMap" />-->
         <activity android:name=".ui.NewActivityBaiduMap" />
         <activity android:name=".ui.ActivityActivity" />
+        <activity android:name=".ui.ActivityInviteFriend" />
 
         <meta-data
                 android:name="com.google.android.maps.v2.API_KEY"

@@ -156,7 +156,7 @@ public class Activity implements Serializable {
     }
 
     public void setPt(GeoPoint pt){
-        this.lat = pt.getLatitudeE6() / 100000.0;
-        this.lng = pt.getLongitudeE6() / 100000.0;
+        this.lat = pt.getLatitudeE6() / 1E6;
+        this.lng = pt.getLongitudeE6() / 1E6;
     }
 }

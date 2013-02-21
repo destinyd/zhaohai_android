@@ -5,10 +5,12 @@ import DD.Android.Zhaohai.ZhaohaiServiceProvider;
 import DD.Android.Zhaohai.core.Activity;
 import android.accounts.AccountsException;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -49,13 +51,15 @@ public class ActivityActivity extends ZhaohaiActivity {
     @Inject
     protected ZhaohaiServiceProvider serviceProvider;
 
-    AlertDialog adialog = null;
+    Dialog adialog = null;
     View v_alert_message = null;
 
 
     @InjectExtra(ACTIVITY)
     protected Activity activity;
     private OnClickListener join_acitivity;
+    private OnClickListener quit_acitivity;
+    private OnClickListener close_acitivity;
     private int action = -1;
 
     private String message;
@@ -86,22 +90,44 @@ public class ActivityActivity extends ZhaohaiActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 EditText et_message = (EditText)v_alert_message.findViewById(R.id.et_message);
                 message = et_message.getText().toString();
-                destroy_alert_dialog();
+                destroy_dialog();
                 try {
                     action = JOIN;
                     new ActivityTask().execute();
-//                    join(activity.get_id(), et_message.getText().toString());
                 } catch (Exception e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
-//                finally {
-//                    destroy_alert_dialog();
-//                }
             }
 
         };
 
-//        setHasOptionsMenu(true);
+        quit_acitivity = new OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                destroy_dialog();
+                try {
+                    action = QUIT;
+                    new ActivityTask().execute();
+                } catch (Exception e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+
+        };
+
+        close_acitivity = new OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                destroy_dialog();
+                try {
+                    action = CLOSE;
+                    new ActivityTask().execute();
+                } catch (Exception e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+
+        };
     }
 
     @Override
@@ -120,33 +146,47 @@ public class ActivityActivity extends ZhaohaiActivity {
                 show_join_dialog();
                 return true;
             case R.id.menu_leave:
-                leave();
+                show_quit_dialog();
                 return true;
             case R.id.menu_invite:
-                invite();
+                to_invite_friend();
                 return true;
             case R.id.menu_close:
-                close();
+                show_close_dialog();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void close() {
-        //To change body of created methods use File | Settings | File Templates.
+    private void show_close_dialog() {
+        destroy_dialog();
+
+        adialog = new AlertDialog.Builder(this)
+                .setTitle(getResources().getString(R.string.dialog_sure))
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setNegativeButton(getResources().getString(android.R.string.cancel), null)
+                .setPositiveButton(getResources().getString(android.R.string.ok), close_acitivity)
+                .show();
     }
 
-    private void invite() {
-        //To change body of created methods use File | Settings | File Templates.
+    private void to_invite_friend() {
+        startActivity(new Intent(this, ActivityInviteFriend.class).putExtra(ACTIVITY, activity));
     }
 
-    private void leave() {
-        //To change body of created methods use File | Settings | File Templates.
+    private void show_quit_dialog() {
+        destroy_dialog();
+
+        adialog = new AlertDialog.Builder(this)
+                .setTitle(getResources().getString(R.string.dialog_sure))
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setNegativeButton(getResources().getString(android.R.string.cancel), null)
+                .setPositiveButton(getResources().getString(android.R.string.ok), quit_acitivity)
+                .show();
     }
 
     private void show_join_dialog() {
-        destroy_alert_dialog();
+        destroy_dialog();
 
         LayoutInflater inflater = LayoutInflater.from(this);
 
@@ -161,7 +201,7 @@ public class ActivityActivity extends ZhaohaiActivity {
                 .show();
     }
 
-    private void destroy_alert_dialog() {
+    private void destroy_dialog() {
         if(adialog != null){
             adialog.dismiss();
             adialog = null;
@@ -181,8 +221,17 @@ public class ActivityActivity extends ZhaohaiActivity {
             try {
                 switch (action){
                     case JOIN:
-                        serviceProvider.getService().joinActivity(activity.get_id(),message);
+                        serviceProvider.getService().joinActivity(activity.get_id(), message);
                         break;
+                    case QUIT:
+                        serviceProvider.getService().quitActivity(activity.get_id());
+                        break;
+                    case CLOSE:
+                        serviceProvider.getService().closeActivity(activity.get_id());
+                        break;
+//                    case INVITE:
+//                        Log.e("INVITE", "doInBackground");
+//                        break;
                     default:
                         break;
                 }
@@ -196,9 +245,11 @@ public class ActivityActivity extends ZhaohaiActivity {
 
         //步骤4：定义后台进程执行完后的处理，本例，采用Toast
         protected void onPostExecute(Void result/*参数3*/) {
-//            printInfo("onPostExecute");
-//            if(activity.get_id() != null){
-//                startActivity(new Intent(NewActivityBaiduMap.this, ActivityActivity.class).putExtra(ACTIVITY, activity));
+//            switch (action){
+//                case INVITE:
+//                    Log.e("INVITE", "onPostExecute");
+//                    startActivity(new Intent(ActivityActivity.this, ActivityInviteFriend.class).putExtra(ACTIVITY, activity));
+//                    break;
 //            }
         }
     }

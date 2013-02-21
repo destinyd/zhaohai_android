@@ -319,6 +319,49 @@ public class ZhaohaiService {
         }
     }
 
+    public boolean quitActivity(String activity_id) throws IOException {
+        try {
+            if(apiKey == null)
+                return false;
+            String url = String.format(FORMAT_URL_QUIT_ACTIVITY,activity_id) + "?" + getTokenParam();
+            HttpRequest request = post(url)
+                    .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
+                    .header(HEADER_PARSE_APP_ID, PARSE_APP_ID)
+                    ;
+            if(request.ok()){
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        } catch (HttpRequestException e) {
+            throw e.getCause();
+        }
+    }
+
+    public boolean closeActivity(String activity_id) throws IOException {
+        try {
+            if(apiKey == null)
+                return false;
+            String url = String.format(FORMAT_URL_CLOSE_ACTIVITY,activity_id) + "?" + getTokenParam();
+            HttpRequest request = post(url)
+                    .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
+                    .header(HEADER_PARSE_APP_ID, PARSE_APP_ID)
+                    ;
+            if(request.ok()){
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        } catch (HttpRequestException e) {
+            throw e.getCause();
+        }
+    }
+
+
     private String getTokenParam() {
         return String.format(FORMAT_ACCESS_TOKEN,HEADER_PARSE_ACCESS_TOKEN,apiKey);
     }

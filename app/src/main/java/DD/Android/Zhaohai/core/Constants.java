@@ -84,6 +84,8 @@ public class Constants {
         public static final String URL_ACTIVITIES = API_BASE + "/activities.json";
 
         public static final String FORMAT_URL_ACTIVITY_REQUEST = API_BASE + "/activities/%s/activity_requests.json";
+        public static final String FORMAT_URL_QUIT_ACTIVITY = API_BASE + "/activities/%s/quit.json";
+        public static final String FORMAT_URL_CLOSE_ACTIVITY = API_BASE + "/activities/%s/close.json";
         public static final String FORMAT_ACCESS_TOKEN = "%s=%s";
 
         public static final String PARSE_APP_ID = "78e00ce282ab3e3357af2e40c38050ef4e3fa85a8584790950efcfdb717786e3";
@@ -164,7 +166,7 @@ public class Constants {
             private ActivityTaskStatus(){}
 
             public static final int JOIN = 0;
-            public static final int LEAVE = 1;
+            public static final int QUIT = 1;
             public static final int INVITE = 2;
             public static final int CLOSE = 3;
         }

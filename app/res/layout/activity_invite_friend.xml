@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+    <LinearLayout
+            android:id="@+id/section_title_layout"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="28dip" android:weightSum="10">
+        <TextView
+                android:id="@+id/dispatch_section_user_name"
+                android:layout_marginLeft="10dip"
+                android:text="friend name"
+                android:layout_weight="2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:clickable="false" android:enabled="false" android:gravity="center_vertical"
+                >
+        </TextView>
+        <LinearLayout
+                android:id="@+id/dispatch_lineLayout02"
+                android:background="#6d6d6e"
+                android:layout_width="1dip"
+                android:layout_height="fill_parent"
+                ></LinearLayout>
+        <TextView
+                android:id="@+id/dispatch_section_select"
+                android:text="select"
+                android:layout_weight="8"
+                android:gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:clickable="false" android:enabled="false">
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/section_title_layout">
+        <ListView
+                android:id="@+id/lv_friend"
+                android:layout_height="wrap_content"
+                android:cacheColorHint="#00000000"
+                android:layout_width="fill_parent"></ListView>
+    </LinearLayout>
+</LinearLayout>
