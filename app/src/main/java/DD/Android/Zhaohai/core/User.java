@@ -16,6 +16,7 @@ public class User implements Serializable {
 //    public List<String> role_ids;
     public Date created_at, updated_at;
     public Avatar avatar;
+    private boolean checked;    //保存复选框的状态
 
     public String get_id() {
         return _id;
@@ -71,5 +72,13 @@ public class User implements Serializable {
 
     public String getIconUrl() {
         return avatar.icon.url;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }
