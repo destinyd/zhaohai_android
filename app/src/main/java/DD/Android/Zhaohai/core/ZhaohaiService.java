@@ -1,6 +1,7 @@
 
 package DD.Android.Zhaohai.core;
 
+import android.text.TextUtils;
 import com.github.kevinsawicki.http.HttpRequest;
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException;
 import com.google.gson.Gson;
@@ -44,7 +45,6 @@ public class ZhaohaiService {
      * Read and connect timeout in milliseconds
      */
     private static final int TIMEOUT = 30 * 1000;
-
 
 
 //    private static class UsersWrapper {
@@ -323,7 +323,7 @@ public class ZhaohaiService {
         try {
             if(apiKey == null)
                 return false;
-            String url = String.format(FORMAT_URL_QUIT_ACTIVITY,activity_id) + "?" + getTokenParam();
+            String url = String.format(FORMAT_URL_ACTIVITY_QUIT,activity_id) + "?" + getTokenParam();
             HttpRequest request = post(url)
                     .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
                     .header(HEADER_PARSE_APP_ID, PARSE_APP_ID)
@@ -344,7 +344,7 @@ public class ZhaohaiService {
         try {
             if(apiKey == null)
                 return false;
-            String url = String.format(FORMAT_URL_CLOSE_ACTIVITY,activity_id) + "?" + getTokenParam();
+            String url = String.format(FORMAT_URL_ACTIVITY_CLOSE,activity_id) + "?" + getTokenParam();
             HttpRequest request = post(url)
                     .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
                     .header(HEADER_PARSE_APP_ID, PARSE_APP_ID)
@@ -360,6 +360,30 @@ public class ZhaohaiService {
             throw e.getCause();
         }
     }
+
+
+    public boolean inviteFriend(List<String> ids)  throws IOException {
+        try {
+            if(apiKey == null)
+                return false;
+            String friend_ids = TextUtils.join(",",ids);
+            String url = String.format(FORMAT_URL_ACTIVITY_INVITE_FRIEND,friend_ids) + "?" + getTokenParam();
+            HttpRequest request = post(url)
+                    .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
+                    .header(HEADER_PARSE_APP_ID, PARSE_APP_ID)
+                    ;
+            if(request.ok()){
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        } catch (HttpRequestException e) {
+            throw e.getCause();
+        }
+    }
+
 
 
     private String getTokenParam() {

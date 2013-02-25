@@ -17,6 +17,7 @@ import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static DD.Android.Zhaohai.core.Constants.Extra.ACTIVITY;
@@ -105,6 +106,36 @@ public class ActivityInviteFriend extends ZhaohaiActivity {
         }
 
             //步骤4：定义后台进程执行完后的处理，本例，采用Toast
+
+        protected void onPostExecute(Void result/*参数3*/) {
+            if(friend != null)
+                initListData(friend);
+            setSupportProgressBarIndeterminateVisibility(true);
+        }
+    }
+
+    private class InviteFriendTask extends AsyncTask<Void, String, Void> {
+
+        //步骤2：实现抽象方法doInBackground()，代码将在后台线程中执行，由execute()触发，由于这个例子并不需要传递参数，使用Void...，具体书写方式为范式书写
+        protected Void/*参数3*/ doInBackground(Void... params/*参数1*/) {
+            try {
+                List<String> ids = new ArrayList<String>();
+                for(User user : friend){
+                    if(user.isChecked())
+                        ids.add(user.get_id());
+                }
+                serviceProvider.getService().inviteFriend(ids);
+                return null;
+            } catch (IOException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            } catch (AccountsException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+            return null;
+
+        }
+
+        //步骤4：定义后台进程执行完后的处理，本例，采用Toast
 
         protected void onPostExecute(Void result/*参数3*/) {
             if(friend != null)
