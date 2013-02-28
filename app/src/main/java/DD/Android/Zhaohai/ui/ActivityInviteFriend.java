@@ -70,6 +70,7 @@ public class ActivityInviteFriend extends ZhaohaiActivity {
     }
 
     private void invite_friend() {
+        new InviteFriendTask().execute();
     }
 
     public ListView getListView() {
@@ -110,7 +111,7 @@ public class ActivityInviteFriend extends ZhaohaiActivity {
         protected void onPostExecute(Void result/*参数3*/) {
             if(friend != null)
                 initListData(friend);
-            setSupportProgressBarIndeterminateVisibility(true);
+            setSupportProgressBarIndeterminateVisibility(false);
         }
     }
 
@@ -124,7 +125,7 @@ public class ActivityInviteFriend extends ZhaohaiActivity {
                     if(user.isChecked())
                         ids.add(user.get_id());
                 }
-                serviceProvider.getService().inviteFriend(ids);
+                serviceProvider.getService().inviteFriend(activity.get_id(),ids);
                 return null;
             } catch (IOException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -138,9 +139,9 @@ public class ActivityInviteFriend extends ZhaohaiActivity {
         //步骤4：定义后台进程执行完后的处理，本例，采用Toast
 
         protected void onPostExecute(Void result/*参数3*/) {
-            if(friend != null)
-                initListData(friend);
-            setSupportProgressBarIndeterminateVisibility(true);
+//            if(friend != null)
+//                initListData(friend);
+            setSupportProgressBarIndeterminateVisibility(false);
         }
     }
 

@@ -362,15 +362,16 @@ public class ZhaohaiService {
     }
 
 
-    public boolean inviteFriend(List<String> ids)  throws IOException {
+    public boolean inviteFriend(String activity_id,List<String> ids)  throws IOException {
         try {
             if(apiKey == null)
                 return false;
             String friend_ids = TextUtils.join(",",ids);
-            String url = String.format(FORMAT_URL_ACTIVITY_INVITE_FRIEND,friend_ids) + "?" + getTokenParam();
+            String url = String.format(FORMAT_URL_ACTIVITY_INVITE_FRIEND,activity_id) + "?" + getTokenParam();
             HttpRequest request = post(url)
                     .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
                     .header(HEADER_PARSE_APP_ID, PARSE_APP_ID)
+                    .part("ids",friend_ids)
                     ;
             if(request.ok()){
                 return true;
