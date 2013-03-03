@@ -55,4 +55,5 @@
     <string name="menu_activity_invite">邀请好友</string>
     <string name="menu_activity_close">关闭活动</string>
     <string name="dialog_sure">你确定？</string>
+    <string name="page_new_activity">组织活动</string>
 </resources>

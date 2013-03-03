@@ -29,7 +29,7 @@ public class ZhaohaiPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 5;
+        return 4;
     }
 
     @Override
@@ -52,10 +52,6 @@ public class ZhaohaiPagerAdapter extends FragmentPagerAdapter {
             NewActivityFragment newActivity = new NewActivityFragment();
             newActivity.setArguments(bundle);
             return newActivity;
-        case 4:
-            ActivitiesFragment activitiesFragment2 = new ActivitiesFragment();
-            activitiesFragment2.setArguments(bundle);
-            return activitiesFragment2;
         default:
             return null;
         }
@@ -71,9 +67,7 @@ public class ZhaohaiPagerAdapter extends FragmentPagerAdapter {
         case 2:
             return resources.getString(R.string.page_activities);
         case 3:
-            return resources.getString(R.string.page_activities);
-        case 4:
-            return resources.getString(R.string.page_activities);
+            return resources.getString(R.string.page_new_activity);
         default:
             return null;
         }

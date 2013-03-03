@@ -15,9 +15,14 @@ public class Activity implements Serializable {
     protected String user_id;
 
     protected String address;
-    protected List<String> interested_user_ids;
-    protected List<String> invited_user_ids;
-    protected List<String> user_ids;
+    protected String status;
+    protected User user;
+    protected List<User> users;
+    protected List<User> interested_users;
+    protected List<User> invited_users;
+//    protected List<String> interested_user_ids;
+//    protected List<String> invited_user_ids;
+//    protected List<String> user_ids;
     protected List<String> types;
     protected Date closed_at;
     protected Date created_at;
@@ -83,36 +88,12 @@ public class Activity implements Serializable {
         this.user_id = user_id;
     }
 
-    public List<String> getInterested_user_ids() {
-        return interested_user_ids;
-    }
-
-    public void setInterested_user_ids(List<String> interested_user_ids) {
-        this.interested_user_ids = interested_user_ids;
-    }
-
-    public List<String> getInvited_user_ids() {
-        return invited_user_ids;
-    }
-
-    public void setInvited_user_ids(List<String> invited_user_ids) {
-        this.invited_user_ids = invited_user_ids;
-    }
-
     public List<String> getTypes() {
         return types;
     }
 
     public void setTypes(List<String> types) {
         this.types = types;
-    }
-
-    public List<String> getUser_ids() {
-        return user_ids;
-    }
-
-    public void setUser_ids(List<String> user_ids) {
-        this.user_ids = user_ids;
     }
 
     public Date getClosed_at() {
@@ -158,5 +139,45 @@ public class Activity implements Serializable {
     public void setPt(GeoPoint pt){
         this.lat = pt.getLatitudeE6() / 1E6;
         this.lng = pt.getLongitudeE6() / 1E6;
+    }
+
+    public List<User> getInterested_users() {
+        return interested_users;
+    }
+
+    public void setInterested_users(List<User> interested_users) {
+        this.interested_users = interested_users;
+    }
+
+    public List<User> getInvited_users() {
+        return invited_users;
+    }
+
+    public void setInvited_users(List<User> invited_users) {
+        this.invited_users = invited_users;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -469,6 +469,7 @@ public class NewActivityBaiduMap extends ZhaohaiActivity {
 //            printInfo("onPostExecute");
             if(activity.get_id() != null){
                 startActivity(new Intent(NewActivityBaiduMap.this, ActivityActivity.class).putExtra(ACTIVITY, activity));
+                finish();
             }
 //            Toast.makeText(NewActivityBaiduMap.this, "Done!", Toast.LENGTH_SHORT).show();
 //            NewActivityBaiduMap.this

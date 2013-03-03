@@ -47,6 +47,7 @@ public class ZhaohaiService {
     private static final int TIMEOUT = 30 * 1000;
 
 
+
 //    private static class UsersWrapper {
 //
 //        private List<User> results;
@@ -101,7 +102,7 @@ public class ZhaohaiService {
         this.userAgentProvider = userAgentProvider;
         this.username = null;
         this.password = null;
-        if(apiKey == null)
+        if (apiKey == null)
             this.apiKey = DD.Android.Zhaohai.authenticator.ZhaohaiAuthenticatorActivity.getAuthToken();
         else
             this.apiKey = apiKey;
@@ -124,7 +125,7 @@ public class ZhaohaiService {
         request.connectTimeout(TIMEOUT).readTimeout(TIMEOUT);
         request.userAgent(userAgentProvider.get());
 
-        if(isPostOrPut(request))
+        if (isPostOrPut(request))
             request.contentType(Constants.Http.CONTENT_TYPE_JSON); // All PUT & POST requests to Parse.com api must be in JSON - https://www.parse.com/docs/rest#general-requests
 
         return addCredentialsTo(request);
@@ -132,14 +133,14 @@ public class ZhaohaiService {
 
     private boolean isPostOrPut(HttpRequest request) {
         return request.getConnection().getRequestMethod().equals(HttpRequest.METHOD_POST)
-               || request.getConnection().getRequestMethod().equals(HttpRequest.METHOD_PUT);
+                || request.getConnection().getRequestMethod().equals(HttpRequest.METHOD_PUT);
 
     }
 
     private HttpRequest addCredentialsTo(HttpRequest request) {
 
         // Required params for
-        request.header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY );
+        request.header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY);
         request.header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
 
         /**
@@ -147,7 +148,7 @@ public class ZhaohaiService {
          * logged in. In the zhaohai sample this is where we are saving the session id as the token.
          * If you actually had received a token you'd take the "apiKey" (aka: token) and add it to the
          * header or form values before you make your requests.
-          */
+         */
 
         /**
          * Add the ABUser name and password to the request here if your service needs username or password for each
@@ -158,7 +159,7 @@ public class ZhaohaiService {
         return request;
     }
 
-//    private <V> List<V> fromJson(HttpRequest request, Class<V> target) throws IOException {
+    //    private <V> List<V> fromJson(HttpRequest request, Class<V> target) throws IOException {
 //        Type collectionType = new TypeToken<List<V>>(){}.getType();
 //        Reader reader = request.bufferedReader();
 //        try {
@@ -174,7 +175,7 @@ public class ZhaohaiService {
 //        }
 //    }
     private HttpRequest getUrl(String url) {
-        return get(url+ "?" + HEADER_PARSE_ACCESS_TOKEN + "=" + apiKey)
+        return get(url + "?" + HEADER_PARSE_ACCESS_TOKEN + "=" + apiKey)
                 .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
                 .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
     }
@@ -187,17 +188,18 @@ public class ZhaohaiService {
      */
     public List<User> getFriend() throws IOException {
         try {
-            if(apiKey == null)
+            if (apiKey == null)
                 return Collections.emptyList();
-            HttpRequest request = get(URL_FRIEND+ "?" + HEADER_PARSE_ACCESS_TOKEN + "=" + apiKey)
-                    .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY )
+            HttpRequest request = get(URL_FRIEND + "?" + HEADER_PARSE_ACCESS_TOKEN + "=" + apiKey)
+                    .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
                     .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
-            Type collectionType = new TypeToken<List<User>>(){}.getType();
+            Type collectionType = new TypeToken<List<User>>() {
+            }.getType();
             List<User> response = GSON.fromJson(request.bufferedReader(), collectionType);
 //            List<User> response = fromJson(request, User.class);
 //            if (response != null && response.size() > 0)
 //            {
-                return response;
+            return response;
 //            }
 //            return Collections.emptyList();
         } catch (HttpRequestException e) {
@@ -216,15 +218,16 @@ public class ZhaohaiService {
         try {
 //            Type collectionType = new TypeToken<List<User>>(){}.getType();
 
-            if(apiKey == null)
+            if (apiKey == null)
                 return Collections.emptyList();
-            HttpRequest request = get(URL_USERS+ "?" + HEADER_PARSE_ACCESS_TOKEN + "=" + apiKey)
-                    .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY )
+            HttpRequest request = get(URL_USERS + "?" + HEADER_PARSE_ACCESS_TOKEN + "=" + apiKey)
+                    .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
                     .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
-            Type collectionType = new TypeToken<List<User>>(){}.getType();
+            Type collectionType = new TypeToken<List<User>>() {
+            }.getType();
             List<User> response = GSON.fromJson(request.bufferedReader(), collectionType);
 //            List<User> response = fromJson(request, User.class);
-            response = (List<User>)response;
+            response = (List<User>) response;
 ////            String strUsers = "[{\"name\":\"dd\",\"_id\":\"123456\",\"avatar\":{\"url\":\"http://shenmajia.tk/images/nopic.gif\",\"thumb\":{\"url\":\"http://shenmajia.tk/images/nopic.gif\"},\"icon\":{\"url\":\"http://shenmajia.tk/images/nopic.gif\"}}},{\"name\":\"ee\",\"_id\":\"111111\",\"avatar\":{\"url\":\"http://shenmajia.tk/images/nopic.gif\",\"thumb\":{\"url\":\"http://shenmajia.tk/images/nopic.gif\"},\"icon\":{\"url\":\"http://shenmajia.tk/images/nopic.gif\"}}}]";
 ////            String strUsers = "[]";
 ////            UsersWrapper response = GSON.fromJson(strUsers, UsersWrapper.class);
@@ -232,7 +235,7 @@ public class ZhaohaiService {
 //                return response.results;
 //            if (response != null && response.size() > 0)
 //            {
-                return response;
+            return response;
 //            }
 //            return Collections.emptyList();
         } catch (HttpRequestException e) {
@@ -248,17 +251,18 @@ public class ZhaohaiService {
      */
     public List<Activity> getActivities() throws IOException {
         try {
-            if(apiKey == null)
+            if (apiKey == null)
                 return Collections.emptyList();
-            HttpRequest request = get(URL_ACTIVITIES+ "?" + HEADER_PARSE_ACCESS_TOKEN + "=" + apiKey)
-                    .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY )
+            HttpRequest request = get(URL_ACTIVITIES + "?" + HEADER_PARSE_ACCESS_TOKEN + "=" + apiKey)
+                    .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
                     .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
-            Type collectionType = new TypeToken<List<Activity>>(){}.getType();
+            Type collectionType = new TypeToken<List<Activity>>() {
+            }.getType();
             List<Activity> response = GSON.fromJson(request.bufferedReader(), collectionType);
 //            List<Activity> response = fromJson(request, Activity.class);
 //            if (response != null && response.size() > 0)
 //            {
-                return response;
+            return response;
 //            }
 //            return Collections.emptyList();
         } catch (HttpRequestException e) {
@@ -266,29 +270,51 @@ public class ZhaohaiService {
         }
     }
 
+    public User getMe() {
+        if (apiKey == null)
+            return null;
+        String url = URL_ME + "?" + getTokenParam();
+        HttpRequest request = get(url)
+                .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
+                .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
+        User response = GSON.fromJson(request.bufferedReader(), User.class);
+        return response;
+    }
+
+
+    public Activity getActivity(String activity_id) {
+        if (apiKey == null)
+            return null;
+        String url = String.format(FORMAT_URL_ACTIVITY, activity_id) + "?" + getTokenParam();
+        HttpRequest request = get(url)
+                .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
+                .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
+        Activity response = GSON.fromJson(request.bufferedReader(), Activity.class);
+        return response;
+
+    }
+
+
     public Activity createActivity(Activity activity) throws IOException {
         try {
-            if(apiKey == null)
+            if (apiKey == null)
                 return null;
             POST_DATE_FORMAT.setTimeZone(CHINA_TIME_ZONE);
-            HttpRequest request = post(URL_ACTIVITIES+ "?" + HEADER_PARSE_ACCESS_TOKEN + "=" + apiKey)
-                    .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY )
+            HttpRequest request = post(URL_ACTIVITIES + "?" + HEADER_PARSE_ACCESS_TOKEN + "=" + apiKey)
+                    .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
                     .header(HEADER_PARSE_APP_ID, PARSE_APP_ID)
-                    .part("activity[title]",activity.getTitle())
-                    .part("activity[desc]",activity.getDesc())
-                    .part("activity[started_at]",POST_DATE_FORMAT.format(activity.getStarted_at()))
-                    .part("activity[address]",activity.getAddress())
-                    .part("activity[lat]",activity.getLat())
-                    .part("activity[lng]",activity.getLng())
-                    ;
-            if(request.ok()){
+                    .part("activity[title]", activity.getTitle())
+                    .part("activity[desc]", activity.getDesc())
+                    .part("activity[started_at]", POST_DATE_FORMAT.format(activity.getStarted_at()))
+                    .part("activity[address]", activity.getAddress())
+                    .part("activity[lat]", activity.getLat())
+                    .part("activity[lng]", activity.getLng());
+            if (request.ok()) {
 //                String tmp = request.body();
-                return GSON.fromJson(request.bufferedReader(),Activity.class);
+                return GSON.fromJson(request.bufferedReader(), Activity.class);
 //                GSON.fromJson(request.body(),GSON);
 //                return tmp;
-            }
-            else
-            {
+            } else {
                 return null;
             }
         } catch (HttpRequestException e) {
@@ -297,21 +323,18 @@ public class ZhaohaiService {
     }
 
 
-    public boolean joinActivity(String activity_id,String message)  throws IOException {
+    public boolean joinActivity(String activity_id, String message) throws IOException {
         try {
-            if(apiKey == null)
+            if (apiKey == null)
                 return false;
-            String url = String.format(FORMAT_URL_ACTIVITY_REQUEST,activity_id) + "?" + getTokenParam();
+            String url = String.format(FORMAT_URL_ACTIVITY_REQUEST, activity_id) + "?" + getTokenParam();
             HttpRequest request = post(url)
                     .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
                     .header(HEADER_PARSE_APP_ID, PARSE_APP_ID)
-                    .part("activity_request[text]",message)
-                    ;
-            if(request.ok()){
+                    .part("activity_request[text]", message);
+            if (request.ok()) {
                 return true;
-            }
-            else
-            {
+            } else {
                 return false;
             }
         } catch (HttpRequestException e) {
@@ -321,18 +344,15 @@ public class ZhaohaiService {
 
     public boolean quitActivity(String activity_id) throws IOException {
         try {
-            if(apiKey == null)
+            if (apiKey == null)
                 return false;
-            String url = String.format(FORMAT_URL_ACTIVITY_QUIT,activity_id) + "?" + getTokenParam();
+            String url = String.format(FORMAT_URL_ACTIVITY_QUIT, activity_id) + "?" + getTokenParam();
             HttpRequest request = post(url)
                     .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
-                    .header(HEADER_PARSE_APP_ID, PARSE_APP_ID)
-                    ;
-            if(request.ok()){
+                    .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
+            if (request.ok()) {
                 return true;
-            }
-            else
-            {
+            } else {
                 return false;
             }
         } catch (HttpRequestException e) {
@@ -342,18 +362,15 @@ public class ZhaohaiService {
 
     public boolean closeActivity(String activity_id) throws IOException {
         try {
-            if(apiKey == null)
+            if (apiKey == null)
                 return false;
-            String url = String.format(FORMAT_URL_ACTIVITY_CLOSE,activity_id) + "?" + getTokenParam();
+            String url = String.format(FORMAT_URL_ACTIVITY_CLOSE, activity_id) + "?" + getTokenParam();
             HttpRequest request = post(url)
                     .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
-                    .header(HEADER_PARSE_APP_ID, PARSE_APP_ID)
-                    ;
-            if(request.ok()){
+                    .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
+            if (request.ok()) {
                 return true;
-            }
-            else
-            {
+            } else {
                 return false;
             }
         } catch (HttpRequestException e) {
@@ -362,32 +379,28 @@ public class ZhaohaiService {
     }
 
 
-    public boolean inviteFriend(String activity_id,List<String> ids)  throws IOException {
+    public boolean inviteFriend(String activity_id, List<String> ids) throws IOException {
         try {
-            if(apiKey == null)
+            if (apiKey == null)
                 return false;
-            String friend_ids = TextUtils.join(",",ids);
-            String url = String.format(FORMAT_URL_ACTIVITY_INVITE_FRIEND,activity_id) + "?" + getTokenParam();
+            String friend_ids = TextUtils.join(",", ids);
+            String url = String.format(FORMAT_URL_ACTIVITY_INVITE_FRIEND, activity_id) + "?" + getTokenParam();
             HttpRequest request = post(url)
                     .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
                     .header(HEADER_PARSE_APP_ID, PARSE_APP_ID)
-                    .part("ids",friend_ids)
-                    ;
-            if(request.ok()){
+                    .part("ids", friend_ids);
+            if (request.ok()) {
                 return true;
-            }
-            else
-            {
+            } else {
                 return false;
             }
         } catch (HttpRequestException e) {
             throw e.getCause();
         }
     }
-
 
 
     private String getTokenParam() {
-        return String.format(FORMAT_ACCESS_TOKEN,HEADER_PARSE_ACCESS_TOKEN,apiKey);
+        return String.format(FORMAT_ACCESS_TOKEN, HEADER_PARSE_ACCESS_TOKEN, apiKey);
     }
 }

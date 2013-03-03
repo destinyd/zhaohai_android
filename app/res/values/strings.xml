@@ -55,5 +55,6 @@
     <string name="menu_activity_invite">invite</string>
     <string name="menu_activity_close">close</string>
     <string name="dialog_sure">Are you sure？</string>
+    <string name="page_new_activity">Hold Activity</string>
 
 </resources>

@@ -3,6 +3,7 @@ package DD.Android.Zhaohai.ui;
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.ZhaohaiServiceProvider;
 import DD.Android.Zhaohai.core.Activity;
+import DD.Android.Zhaohai.core.User;
 import android.accounts.AccountsException;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -10,7 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -24,6 +25,8 @@ import roboguice.inject.InjectView;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TimeZone;
 
 import static DD.Android.Zhaohai.core.Constants.Extra.ACTIVITY;
@@ -64,6 +67,10 @@ public class ActivityActivity extends ZhaohaiActivity {
 
     private String message;
 
+    MenuItem menu_join = null, menu_leave = null,menu_close = null,menu_invite = null;
+
+    User me = null;
+
 
 //    @Inject protected UserAvatarLoader avatarLoader;
 
@@ -77,13 +84,7 @@ public class ActivityActivity extends ZhaohaiActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-//        avatarLoader.bind(avatar, activity);
-        desc.setText(activity.getDesc());
-        address.setText(activity.getAddress());
-        SimpleDateFormat sdf = (SimpleDateFormat) POST_DATE_FORMAT.clone();
-        sdf.setTimeZone(TimeZone.getDefault());
-        started_at.setText(sdf.format(activity.getStarted_at()));
-        finished_at.setText(sdf.format(activity.getFinished_at()));
+        activity_to_view();
 
         join_acitivity =   new OnClickListener(){
             @Override
@@ -93,7 +94,7 @@ public class ActivityActivity extends ZhaohaiActivity {
                 destroy_dialog();
                 try {
                     action = JOIN;
-                    new ActivityTask().execute();
+                    new ActivityActionTask().execute();
                 } catch (Exception e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
@@ -107,7 +108,7 @@ public class ActivityActivity extends ZhaohaiActivity {
                 destroy_dialog();
                 try {
                     action = QUIT;
-                    new ActivityTask().execute();
+                    new ActivityActionTask().execute();
                 } catch (Exception e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
@@ -121,19 +122,50 @@ public class ActivityActivity extends ZhaohaiActivity {
                 destroy_dialog();
                 try {
                     action = CLOSE;
-                    new ActivityTask().execute();
+                    new ActivityActionTask().execute();
                 } catch (Exception e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
             }
 
         };
+
+        new GetActivityTask().execute();
+    }
+
+    private void activity_to_view() {
+        desc.setText(activity.getDesc());
+        address.setText(activity.getAddress());
+        SimpleDateFormat sdf = (SimpleDateFormat) POST_DATE_FORMAT.clone();
+        sdf.setTimeZone(TimeZone.getDefault());
+        started_at.setText(sdf.format(activity.getStarted_at()));
+        finished_at.setText(sdf.format(activity.getFinished_at()));
+        if(activity.getUser() != null){
+            user.setText(activity.getUser().getName());
+
+            List<String> user_names = new ArrayList<String>();
+            List<String> interested_user_names = new ArrayList<String>();
+            for(User u : activity.getUsers()){
+                user_names.add(u.getName());
+            }
+            for(User u : activity.getInterested_users()){
+                interested_user_names.add(u.getName());
+            }
+            users.setText(TextUtils.join(" ",user_names));
+            interested_users.setText(TextUtils.join(" ",interested_user_names));
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.activity, menu);
+
+        menu_join = menu.findItem(R.id.menu_join);
+        menu_leave = menu.findItem(R.id.menu_leave);
+        menu_invite = menu.findItem(R.id.menu_invite);
+        menu_close = menu.findItem(R.id.menu_close);
+
         return true;
     }
 
@@ -214,7 +246,87 @@ public class ActivityActivity extends ZhaohaiActivity {
         serviceProvider.getService().joinActivity(id, message);
     }
 
-    private class ActivityTask extends AsyncTask<Void, String,Void> {
+    public boolean isManager() {
+        return activity.getUser().get_id().equals(me.get_id());
+    }
+
+    public boolean isInActivity() {
+        String me_id = me.get_id();
+        for(User u : activity.getUsers()){
+            if(u.get_id().equals(me_id))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean isJoin() {
+        String me_id = me.get_id();
+        for(User u : activity.getInterested_users()){
+            if(u.get_id().equals(me_id))
+                return true;
+        }
+        return false;
+    }
+
+
+    private class GetActivityTask extends AsyncTask<Void, String,Void> {
+
+        //步骤2：实现抽象方法doInBackground()，代码将在后台线程中执行，由execute()触发，由于这个例子并不需要传递参数，使用Void...，具体书写方式为范式书写
+        protected Void/*参数3*/ doInBackground(Void...params/*参数1*/) {
+            try {
+                activity = serviceProvider.getService().getActivity(activity.get_id());
+            } catch (IOException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            } catch (AccountsException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+
+            if(me == null)
+            try {
+                me = serviceProvider.getService().getMe();
+            } catch (IOException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            } catch (AccountsException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+            return null;
+        }
+
+        //步骤4：定义后台进程执行完后的处理，本例，采用Toast
+        protected void onPostExecute(Void result/*参数3*/) {
+            activity_to_view();
+            show_menu();
+        }
+    }
+
+    private void show_menu() {
+        hidden_menus();
+        if (activity.getStatus().equals("opening") || activity.getStatus().equals("running")){
+            if(isManager()){
+                menu_close.setVisible(true);
+                menu_invite.setVisible(true);
+            }
+            else{
+                if(isInActivity()){
+                    menu_leave.setVisible(true);
+                }
+                else{
+                    if(!isJoin())
+                        menu_join.setVisible(true);
+                }
+            }
+        }
+
+    }
+
+    private void hidden_menus() {
+        menu_close.setVisible(false);
+        menu_invite.setVisible(false);
+        menu_join.setVisible(false);
+        menu_leave.setVisible(false);
+    }
+
+    private class ActivityActionTask extends AsyncTask<Void, String,Void> {
 
         //步骤2：实现抽象方法doInBackground()，代码将在后台线程中执行，由execute()触发，由于这个例子并不需要传递参数，使用Void...，具体书写方式为范式书写
         protected Void/*参数3*/ doInBackground(Void...params/*参数1*/) {
@@ -229,9 +341,6 @@ public class ActivityActivity extends ZhaohaiActivity {
                     case CLOSE:
                         serviceProvider.getService().closeActivity(activity.get_id());
                         break;
-//                    case INVITE:
-//                        Log.e("INVITE", "doInBackground");
-//                        break;
                     default:
                         break;
                 }
@@ -245,12 +354,7 @@ public class ActivityActivity extends ZhaohaiActivity {
 
         //步骤4：定义后台进程执行完后的处理，本例，采用Toast
         protected void onPostExecute(Void result/*参数3*/) {
-//            switch (action){
-//                case INVITE:
-//                    Log.e("INVITE", "onPostExecute");
-//                    startActivity(new Intent(ActivityActivity.this, ActivityInviteFriend.class).putExtra(ACTIVITY, activity));
-//                    break;
-//            }
+            new GetActivityTask().execute();
         }
     }
 

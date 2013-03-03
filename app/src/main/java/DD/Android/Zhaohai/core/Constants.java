@@ -83,6 +83,10 @@ public class Constants {
          */
         public static final String URL_ACTIVITIES = API_BASE + "/activities.json";
 
+        public static final String URL_ME = API_BASE + "/me.json";
+
+        public static final String FORMAT_URL_ACTIVITY = API_BASE + "/activities/%s.json";
+
         public static final String FORMAT_URL_ACTIVITY_REQUEST = API_BASE + "/activities/%s/activity_requests.json";
         public static final String FORMAT_URL_ACTIVITY_QUIT = API_BASE + "/activities/%s/quit.json";
         public static final String FORMAT_URL_ACTIVITY_CLOSE = API_BASE + "/activities/%s/close.json";

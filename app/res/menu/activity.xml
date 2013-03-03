@@ -3,17 +3,21 @@
     <!--<item android:id="@+id/menu_join" android:showAsAction="ifRoom"-->
           <!--android:title="add"-->
             <!--/>-->
-    <item android:id="@+id/menu_join" android:showAsAction="never"
+    <item android:id="@+id/menu_join" android:showAsAction="always"
           android:title="@string/menu_activity_join"
+          android:visible="false"
             />
 
-    <item android:id="@+id/menu_leave" android:showAsAction="never"
+    <item android:id="@+id/menu_leave" android:showAsAction="always"
           android:title="@string/menu_activity_quit"
+          android:visible="false"
     />
     <item android:id="@+id/menu_invite" android:showAsAction="never"
           android:title="@string/menu_activity_invite"
+          android:visible="false"
     />
     <item android:id="@+id/menu_close" android:showAsAction="never"
           android:title="@string/menu_activity_close"
+          android:visible="false"
     />
 </menu>

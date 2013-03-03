@@ -139,9 +139,7 @@ public class ActivityInviteFriend extends ZhaohaiActivity {
         //步骤4：定义后台进程执行完后的处理，本例，采用Toast
 
         protected void onPostExecute(Void result/*参数3*/) {
-//            if(friend != null)
-//                initListData(friend);
-            setSupportProgressBarIndeterminateVisibility(false);
+            finish();
         }
     }
 
