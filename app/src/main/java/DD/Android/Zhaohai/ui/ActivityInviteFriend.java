@@ -44,7 +44,7 @@ public class ActivityInviteFriend extends ZhaohaiActivity {
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setSupportProgressBarIndeterminateVisibility(true);
+        progressDialogShow(this);
         new GetFriendTask().execute();
     }
 
@@ -70,6 +70,7 @@ public class ActivityInviteFriend extends ZhaohaiActivity {
     }
 
     private void invite_friend() {
+        progressDialogShow(this);
         new InviteFriendTask().execute();
     }
 
@@ -111,7 +112,7 @@ public class ActivityInviteFriend extends ZhaohaiActivity {
         protected void onPostExecute(Void result/*参数3*/) {
             if(friend != null)
                 initListData(friend);
-            setSupportProgressBarIndeterminateVisibility(false);
+            progressDialogDismiss();
         }
     }
 
