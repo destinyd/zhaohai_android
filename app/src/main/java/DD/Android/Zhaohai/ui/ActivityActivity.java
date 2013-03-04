@@ -30,9 +30,9 @@ import java.util.List;
 import java.util.TimeZone;
 
 import static DD.Android.Zhaohai.core.Constants.Extra.ACTIVITY;
-import static DD.Android.Zhaohai.core.Constants.Other.*;
 import static DD.Android.Zhaohai.core.Constants.Other.ActivityTaskStatus.*;
-import static android.content.DialogInterface.*;
+import static DD.Android.Zhaohai.core.Constants.Other.POST_DATE_FORMAT;
+import static android.content.DialogInterface.OnClickListener;
 
 public class ActivityActivity extends ZhaohaiActivity {
 
@@ -71,7 +71,6 @@ public class ActivityActivity extends ZhaohaiActivity {
 
     User me = null;
 
-
 //    @Inject protected UserAvatarLoader avatarLoader;
 
     @Override
@@ -94,6 +93,8 @@ public class ActivityActivity extends ZhaohaiActivity {
                 destroy_dialog();
                 try {
                     action = JOIN;
+
+                    progressDialogShow(ActivityActivity.this);
                     new ActivityActionTask().execute();
                 } catch (Exception e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -108,6 +109,8 @@ public class ActivityActivity extends ZhaohaiActivity {
                 destroy_dialog();
                 try {
                     action = QUIT;
+
+                    progressDialogShow(ActivityActivity.this);
                     new ActivityActionTask().execute();
                 } catch (Exception e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -122,6 +125,8 @@ public class ActivityActivity extends ZhaohaiActivity {
                 destroy_dialog();
                 try {
                     action = CLOSE;
+
+                    progressDialogShow(ActivityActivity.this);
                     new ActivityActionTask().execute();
                 } catch (Exception e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -130,6 +135,8 @@ public class ActivityActivity extends ZhaohaiActivity {
 
         };
 
+
+        progressDialogShow(ActivityActivity.this);
         new GetActivityTask().execute();
     }
 
@@ -174,6 +181,10 @@ public class ActivityActivity extends ZhaohaiActivity {
 //        if (!isUsable())
 //            return false;
         switch (item.getItemId()) {
+            case R.id.menu_refresh:
+                progressDialogShow(ActivityActivity.this);
+                new GetActivityTask().execute();
+                return true;
             case R.id.menu_join:
                 show_join_dialog();
                 return true;
@@ -296,6 +307,7 @@ public class ActivityActivity extends ZhaohaiActivity {
         protected void onPostExecute(Void result/*参数3*/) {
             activity_to_view();
             show_menu();
+            progressDialogDismiss();
         }
     }
 
@@ -357,6 +369,7 @@ public class ActivityActivity extends ZhaohaiActivity {
             new GetActivityTask().execute();
         }
     }
+
 
 
 }
