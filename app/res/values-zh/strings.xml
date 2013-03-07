@@ -56,4 +56,14 @@
     <string name="menu_activity_close">关闭活动</string>
     <string name="dialog_sure">你确定？</string>
     <string name="page_new_activity">组织活动</string>
+    <string name="label_notification_type">提醒类型</string>
+    <string name="label_notification_created_at">时间</string>
+    <string name="label_notification_follower">关注者</string>
+    <string name="label_activity">活动</string>
+    <string name="label_notification_reply_admin">回复活动管理员</string>
+    <string name="label_notification_reply_status">答复情况</string>
+    <string name="label_notification_interesting_user">请求加入者</string>
+    <string name="label_activity_request_text">请求内容</string>
+    <string name="label_notification_invite_user">邀请者</string>
+    <string name="menu_activity_requests">加入请求</string>
 </resources>

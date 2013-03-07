@@ -47,7 +47,6 @@ public class ZhaohaiService {
     private static final int TIMEOUT = 30 * 1000;
 
 
-
 //    private static class UsersWrapper {
 //
 //        private List<User> results;
@@ -180,12 +179,6 @@ public class ZhaohaiService {
                 .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
     }
 
-    /**
-     * Get all zhaohai Friend that exists on Parse.com
-     *
-     * @return non-null but possibly empty list of zhaohai
-     * @throws IOException
-     */
     public List<User> getFriend() throws IOException {
         try {
             if (apiKey == null)
@@ -207,12 +200,6 @@ public class ZhaohaiService {
         }
     }
 
-    /**
-     * Get all zhaohai Users that exist on Parse.com
-     *
-     * @return non-null but possibly empty list of zhaohai
-     * @throws java.io.IOException
-     */
     public List<User> getUsers() throws IOException {
 
         try {
@@ -243,12 +230,6 @@ public class ZhaohaiService {
         }
     }
 
-    /**
-     * Get all zhaohai Checkins that exists on Parse.com
-     *
-     * @return non-null but possibly empty list of zhaohai
-     * @throws java.io.IOException
-     */
     public List<Activity> getActivities() throws IOException {
         try {
             if (apiKey == null)
@@ -269,6 +250,59 @@ public class ZhaohaiService {
             throw e.getCause();
         }
     }
+
+    public List<ActivityRequest> getActivityRequests(String activity_id) throws IOException {
+            if (apiKey == null)
+                return Collections.emptyList();
+            String url = String.format(FORMAT_URL_ACTIVITY_REQUEST, activity_id) + "?" + getTokenParam();
+            HttpRequest request = get(url)
+                    .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
+                    .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
+            Type collectionType = new TypeToken<List<ActivityRequest>>() {
+            }.getType();
+        try {
+            List<ActivityRequest> response = GSON.fromJson(request.bufferedReader(), collectionType);
+            return response;
+        } catch (HttpRequestException e) {
+            throw e.getCause();
+        }
+    }
+
+    public List<ZNotification> getNotifications() throws IOException {
+        try {
+            if (apiKey == null)
+                return Collections.emptyList();
+            String url = URL_NOTIFICATIONS + "?" + getTokenParam();
+            HttpRequest request = get(url)
+                    .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
+                    .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
+            Type collectionType = new TypeToken<List<ZNotification>>() {
+            }.getType();
+            List<ZNotification> response = GSON.fromJson(request.bufferedReader(), collectionType);
+            return response;
+        } catch (HttpRequestException e) {
+            throw e.getCause();
+        }
+    }
+
+
+    public ZNotification getNotification(String notification_id) throws IOException {
+        try {
+            if (apiKey == null)
+                return null;
+            String url = String.format(FORMAT_URL_NOTIFICATION, notification_id) + "?" + getTokenParam();
+            HttpRequest request = get(url)
+                    .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
+                    .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
+            ZNotification response = GSON.fromJson(request.bufferedReader(), ZNotification.class);
+            return response;
+        } catch (HttpRequestException e) {
+            throw e.getCause();
+        }
+    }
+
+
+
 
     public User getMe() {
         if (apiKey == null)

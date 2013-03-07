@@ -50,11 +50,22 @@
 
     <string name="set_started_at">Please select activity start time</string>
     <string name="set_join_message">Message to activity holder</string>
-    <string name="menu_activity_join">join</string>
-    <string name="menu_activity_quit">quit</string>
-    <string name="menu_activity_invite">invite</string>
-    <string name="menu_activity_close">close</string>
+    <string name="menu_activity_join">Join</string>
+    <string name="menu_activity_quit">Quit</string>
+    <string name="menu_activity_invite">Invite</string>
+    <string name="menu_activity_close">Close</string>
+    <string name="menu_activity_requests">Join Requests</string>
+
     <string name="dialog_sure">Are you sure？</string>
     <string name="page_new_activity">Hold Activity</string>
+    <string name="label_notification_type">Type</string>
+    <string name="label_notification_created_at">At</string>
+    <string name="label_notification_follower">Follower</string>
+    <string name="label_activity">Activity</string>
+    <string name="label_notification_reply_admin">Reply Admin</string>
+    <string name="label_notification_reply_status">Reply Status</string>
+    <string name="label_notification_interesting_user">Interesting</string>
+    <string name="label_activity_request_text">Request Text</string>
+    <string name="label_notification_invite_user">Invitees</string>
 
 </resources>

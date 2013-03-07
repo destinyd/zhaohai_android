@@ -67,7 +67,7 @@ public class ActivityActivity extends ZhaohaiActivity {
 
     private String message;
 
-    MenuItem menu_join = null, menu_leave = null,menu_close = null,menu_invite = null;
+    MenuItem menu_join = null, menu_leave = null,menu_close = null,menu_invite = null,menu_activity_requests = null;
 
     User me = null;
 
@@ -90,15 +90,9 @@ public class ActivityActivity extends ZhaohaiActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 EditText et_message = (EditText)v_alert_message.findViewById(R.id.et_message);
                 message = et_message.getText().toString();
-                destroy_dialog();
-                try {
-                    action = JOIN;
+                action = JOIN;
 
-                    progressDialogShow(ActivityActivity.this);
-                    new ActivityActionTask().execute();
-                } catch (Exception e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                }
+                runActionTask();
             }
 
         };
@@ -106,15 +100,8 @@ public class ActivityActivity extends ZhaohaiActivity {
         quit_acitivity = new OnClickListener(){
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                destroy_dialog();
-                try {
-                    action = QUIT;
-
-                    progressDialogShow(ActivityActivity.this);
-                    new ActivityActionTask().execute();
-                } catch (Exception e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                }
+                action = QUIT;
+                runActionTask();
             }
 
         };
@@ -122,32 +109,35 @@ public class ActivityActivity extends ZhaohaiActivity {
         close_acitivity = new OnClickListener(){
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                destroy_dialog();
-                try {
-                    action = CLOSE;
-
-                    progressDialogShow(ActivityActivity.this);
-                    new ActivityActionTask().execute();
-                } catch (Exception e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                }
+                action = CLOSE;
+                runActionTask();
             }
 
         };
 
-
-        progressDialogShow(ActivityActivity.this);
+        progressDialogShow(this);
         new GetActivityTask().execute();
+    }
+
+    private void runActionTask() {
+        destroy_dialog();
+        try {
+            progressDialogShow(this);
+            new ActivityActionTask().execute();
+        } catch (Exception e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
     }
 
     private void activity_to_view() {
         desc.setText(activity.getDesc());
         address.setText(activity.getAddress());
-        SimpleDateFormat sdf = (SimpleDateFormat) POST_DATE_FORMAT.clone();
-        sdf.setTimeZone(TimeZone.getDefault());
-        started_at.setText(sdf.format(activity.getStarted_at()));
-        finished_at.setText(sdf.format(activity.getFinished_at()));
         if(activity.getUser() != null){
+            SimpleDateFormat sdf = (SimpleDateFormat) POST_DATE_FORMAT.clone();
+            sdf.setTimeZone(TimeZone.getDefault());
+            started_at.setText(sdf.format(activity.getStarted_at()));
+            finished_at.setText(sdf.format(activity.getFinished_at()));
+
             user.setText(activity.getUser().getName());
 
             List<String> user_names = new ArrayList<String>();
@@ -172,6 +162,7 @@ public class ActivityActivity extends ZhaohaiActivity {
         menu_leave = menu.findItem(R.id.menu_leave);
         menu_invite = menu.findItem(R.id.menu_invite);
         menu_close = menu.findItem(R.id.menu_close);
+        menu_activity_requests = menu.findItem(R.id.menu_activity_requests);
 
         return true;
     }
@@ -196,6 +187,9 @@ public class ActivityActivity extends ZhaohaiActivity {
                 return true;
             case R.id.menu_close:
                 show_close_dialog();
+                return true;
+            case R.id.menu_activity_requests:
+//                startActivity(new Intent(this, ActivityActivityRequests.class).putExtra(ACTIVITY, activity));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -307,7 +301,7 @@ public class ActivityActivity extends ZhaohaiActivity {
         protected void onPostExecute(Void result/*参数3*/) {
             activity_to_view();
             show_menu();
-            progressDialogDismiss();
+            progressDialogCancel();
         }
     }
 
@@ -317,6 +311,7 @@ public class ActivityActivity extends ZhaohaiActivity {
             if(isManager()){
                 menu_close.setVisible(true);
                 menu_invite.setVisible(true);
+//                menu_activity_requests.setVisible(true);
             }
             else{
                 if(isInActivity()){
@@ -336,6 +331,7 @@ public class ActivityActivity extends ZhaohaiActivity {
         menu_invite.setVisible(false);
         menu_join.setVisible(false);
         menu_leave.setVisible(false);
+        menu_activity_requests.setVisible(false);
     }
 
     private class ActivityActionTask extends AsyncTask<Void, String,Void> {

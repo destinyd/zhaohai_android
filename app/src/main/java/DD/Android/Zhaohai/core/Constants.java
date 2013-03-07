@@ -85,6 +85,12 @@ public class Constants {
 
         public static final String URL_ME = API_BASE + "/me.json";
 
+        public static final String URL_NOTIFICATIONS = API_BASE + "/notifications.json";
+
+        public static final String URL_NOTIFICATIONS_COUNT = API_BASE + "/notifications/count.json";
+
+        public static final String FORMAT_URL_NOTIFICATION = API_BASE + "/notifications/%s.json";
+
         public static final String FORMAT_URL_ACTIVITY = API_BASE + "/activities/%s.json";
 
         public static final String FORMAT_URL_ACTIVITY_REQUEST = API_BASE + "/activities/%s/activity_requests.json";
@@ -144,9 +150,13 @@ public class Constants {
 
         public static final String USER = "User";
 
-        public static final String FRIEND = "friend";
+        public static final String FRIEND = "Friend";
 
-        public static final String ACTIVITY = "activity";
+        public static final String ACTIVITY = "Activity";
+
+        public static final String NOTIFICATION = "Notification";
+
+        public static final String APIKEY = "APIKEY";
 
     }
 

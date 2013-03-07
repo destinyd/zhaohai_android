@@ -1,7 +1,7 @@
 package DD.Android.Zhaohai.ui;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import com.actionbarsherlock.view.MenuItem;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockActivity;
@@ -30,25 +30,25 @@ public abstract class ZhaohaiActivity extends RoboSherlockActivity {
 
     ProgressDialog progressDialog = null;
 
-    protected void progressDialogDismiss() {
+    protected void progressDialogCancel() {
         if(progressDialog != null){
-            progressDialog.dismiss();
+            progressDialog.cancel();
             progressDialog = null;
         }
     }
 
-    protected void progressDialogShow(Context activity){
-        progressDialogDismiss();
+    protected void progressDialogShow(Activity activity){
+        progressDialogCancel();
         progressDialog= ProgressDialog.show(activity,"","正在拼命读取中...",true,true);
     }
 
-    protected void progressDialogShow(Context activity,String message){
-        progressDialogDismiss();
+    protected void progressDialogShow(Activity activity,String message){
+        progressDialogCancel();
         progressDialog= ProgressDialog.show(activity,"",message,true,true);
     }
 
-    protected void progressDialogShow(Context activity,String message,boolean cancelable ){
-        progressDialogDismiss();
+    protected void progressDialogShow(Activity activity,String message,boolean cancelable ){
+        progressDialogCancel();
         progressDialog= ProgressDialog.show(activity,"",message,true,cancelable);
     }
 }

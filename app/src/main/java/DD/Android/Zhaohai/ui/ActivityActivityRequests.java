@@ -3,7 +3,7 @@ package DD.Android.Zhaohai.ui;
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.ZhaohaiServiceProvider;
 import DD.Android.Zhaohai.core.Activity;
-import DD.Android.Zhaohai.core.User;
+import DD.Android.Zhaohai.core.ActivityRequest;
 import android.accounts.AccountsException;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,87 +16,80 @@ import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static DD.Android.Zhaohai.core.Constants.Extra.ACTIVITY;
 
-public class ActivityInviteFriend extends ZhaohaiActivity {
+public class ActivityActivityRequests extends ZhaohaiActivity {
 
     //    @InjectView(R.id.iv_avatar) protected ImageView avatar;
-    @InjectView(R.id.lv_friend)
-    protected ListView lv_friend;
+    @InjectView(R.id.lv_requests)
+    protected ListView lv_requests;
     @Inject
     protected ZhaohaiServiceProvider serviceProvider;
 
     @InjectExtra(ACTIVITY)
     protected Activity activity;
 
-    List<User> friend = null;
+    List<ActivityRequest> requests = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_invite_friend);
+        setContentView(R.layout.activity_requests);
 //        setTitle(activity.getTitle());
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        new GetFriendTask().execute();
+        new GetRequests().execute();
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getSupportMenuInflater();
-        inflater.inflate(R.menu.add, menu);
+        inflater.inflate(R.menu.zhaohai, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-//        if (!isUsable())
-//            return false;
         switch (item.getItemId()) {
-            case R.id.menu_invite:
-                invite_friend();
+            case R.id.menu_refresh:
+//                invite_friend();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void invite_friend() {
-        progressDialogShow(this);
-        new InviteFriendTask().execute();
-    }
-
     public ListView getListView() {
-        return lv_friend;
+        return lv_requests;
     }
     /**
      *
      * Desc:初始化列表数据
      * @param personList
      */
-    private void initListData(List<User> personList) {
-        DispatchSelectUserAdapter adapter = new DispatchSelectUserAdapter(
-                this, personList,
-                R.layout.dispatch_select_user_item);
+    private void initListData(List<ActivityRequest> personList) {
+        DispatchActivityRequestAdapter adapter = new DispatchActivityRequestAdapter(
+                this, requests,
+                R.layout.dispatch_activity_request_item);
         getListView().setAdapter(adapter);
 
     }
 
 
-    private class GetFriendTask extends AsyncTask<Void, String, Void> {
+    private class GetRequests extends AsyncTask<Void, String, Void> {
         protected void onPreExecute () {//在 doInBackground(Params...)之前被调用，在ui线程执行
-            progressDialogShow(ActivityInviteFriend.this);
+//            progressDialogShow(ActivityActivityRequests.this);
         }
         //步骤2：实现抽象方法doInBackground()，代码将在后台线程中执行，由execute()触发，由于这个例子并不需要传递参数，使用Void...，具体书写方式为范式书写
         protected Void/*参数3*/ doInBackground(Void... params/*参数1*/) {
             try {
-                friend = serviceProvider.getService().getFriend();
+                requests = serviceProvider.getService().getActivityRequests(activity.get_id());
                 return null;
             } catch (IOException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -110,31 +103,32 @@ public class ActivityInviteFriend extends ZhaohaiActivity {
             //步骤4：定义后台进程执行完后的处理，本例，采用Toast
 
         protected void onPostExecute(Void result/*参数3*/) {
-            if(friend != null)
-                initListData(friend);
+            if(requests != null)
+                initListData(requests);
             progressDialogCancel();
         }
     }
 
     private class InviteFriendTask extends AsyncTask<Void, String, Void> {
         protected void onPreExecute () {//在 doInBackground(Params...)之前被调用，在ui线程执行
-            progressDialogShow(ActivityInviteFriend.this);
+            progressDialogShow(ActivityActivityRequests.this);
         }
+
         //步骤2：实现抽象方法doInBackground()，代码将在后台线程中执行，由execute()触发，由于这个例子并不需要传递参数，使用Void...，具体书写方式为范式书写
         protected Void/*参数3*/ doInBackground(Void... params/*参数1*/) {
-            try {
-                List<String> ids = new ArrayList<String>();
-                for(User user : friend){
-                    if(user.isChecked())
-                        ids.add(user.get_id());
-                }
-                serviceProvider.getService().inviteFriend(activity.get_id(),ids);
-                return null;
-            } catch (IOException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            } catch (AccountsException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            }
+//            try {
+//                List<String> ids = new ArrayList<String>();
+//                for(User user : notifications){
+//                    if(user.isChecked())
+//                        ids.add(user.get_id());
+//                }
+//                serviceProvider.getService().inviteFriend(activity.get_id(),ids);
+//                return null;
+//            } catch (IOException e) {
+//                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//            } catch (AccountsException e) {
+//                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//            }
             return null;
 
         }
@@ -142,7 +136,7 @@ public class ActivityInviteFriend extends ZhaohaiActivity {
         //步骤4：定义后台进程执行完后的处理，本例，采用Toast
 
         protected void onPostExecute(Void result/*参数3*/) {
-            finish();
+//            finish();
         }
     }
 
