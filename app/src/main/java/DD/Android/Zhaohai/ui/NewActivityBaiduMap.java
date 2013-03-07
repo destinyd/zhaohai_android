@@ -445,6 +445,11 @@ public class NewActivityBaiduMap extends ZhaohaiActivity {
     }
 
     private class CreateActivityTask extends AsyncTask<Void, String,Void> {
+        @Override
+        protected void onPreExecute() {
+            progressDialogShow(NewActivityBaiduMap.this);
+            super.onPreExecute();    //To change body of overridden methods use File | Settings | File Templates.
+        }
         //我们加入一个检测信息的方法，打印当前在哪个线程执行的信息
 //        private void printInfo(String info){
 //            Log.d("WEI", info + " : Tread is " + Thread.currentThread().getName());

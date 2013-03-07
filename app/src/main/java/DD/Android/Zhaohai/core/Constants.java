@@ -87,7 +87,7 @@ public class Constants {
 
         public static final String URL_NOTIFICATIONS = API_BASE + "/notifications.json";
 
-        public static final String URL_NOTIFICATIONS_COUNT = API_BASE + "/notifications/count.json";
+        public static final String URL_NOTIFICATIONS_STATUS = API_BASE + "/notifications/status.json";
 
         public static final String FORMAT_URL_NOTIFICATION = API_BASE + "/notifications/%s.json";
 
@@ -187,6 +187,11 @@ public class Constants {
         }
     }
 
+    public static class Delay {
+        private Delay(){}
+        public static final int GET_NOTIFICATION = 120000;
+
+    }
 }
 
 

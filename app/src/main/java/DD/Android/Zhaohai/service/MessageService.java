@@ -2,6 +2,8 @@
 package DD.Android.Zhaohai.service;
 
 import DD.Android.Zhaohai.R;
+import DD.Android.Zhaohai.core.Constants;
+import DD.Android.Zhaohai.core.ZNotificationStatus;
 import DD.Android.Zhaohai.ui.ActivityNotifications;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -13,7 +15,6 @@ import android.os.IBinder;
 import com.github.kevinsawicki.http.HttpRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import roboguice.inject.InjectExtra;
 import roboguice.service.RoboService;
 
 import java.io.IOException;
@@ -43,7 +44,7 @@ public class MessageService extends RoboService {
     private Notification messageNotification = null;
     private NotificationManager messageNotificatioManager = null;
 
-//    int munread_notifications_count = 0;
+    ZNotificationStatus mnotification_status = null;
 
     public static final Gson GSON = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
@@ -84,6 +85,14 @@ public class MessageService extends RoboService {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        System.exit(0);
+        //或者，二选一，推荐使用System.exit(0)，这样进程退出的更干净
+//        //messageThread.isRunning = false;
+        super.onDestroy();    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
     /**
      * 从服务器端获取消息
      */
@@ -95,17 +104,18 @@ public class MessageService extends RoboService {
             while (isRunning) {
                 if(apiKey != null){
                     //获取服务器消息
-                    int unread_notifications_count = 0;
+                    ZNotificationStatus notification_status = null;
                     try {
-                        unread_notifications_count = getNotificationsCount();
+                        notification_status = getNotificationsCount();
                     } catch (IOException e) {
                         e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                     }
     //                            getUnreadCount();
     //                    String serverMessage = getServerMessage();
-                    if (unread_notifications_count > 0) {
+                    if (notification_status != null && notification_status != mnotification_status) {
+                        mnotification_status = notification_status;
                         //更新通知栏
-                        messageNotification.setLatestEventInfo(MessageService.this, "新消息", "您有" + String.valueOf(unread_notifications_count) + "条未读消息", messagePendingIntent);
+                        messageNotification.setLatestEventInfo(MessageService.this, "您有" + notification_status.getCount() + "条未读消息", notification_status.getLast().getTitle() , messagePendingIntent);
                         messageNotificatioManager.notify(messageNotificationID, messageNotification);
                         //每次通知完，通知ID递增一下，避免消息覆盖掉
     //                         messageNotificationID++;
@@ -113,34 +123,22 @@ public class MessageService extends RoboService {
                 }
                 try {
                     //休息2分钟
-                    Thread.sleep(120000);
+                    Thread.sleep(Constants.Delay.GET_NOTIFICATION);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }
 
-//    /**
-//     * 这里以此方法为服务器Demo，仅作示例
-//     *
-//     * @return 返回服务器要推送的消息，否则如果为空的话，不推送
-//     */
-//    public String getServerMessage() {
-//        return "YES!";
-//    }
-
-//    public int getUnreadCount() {
-//        return 5;
-//    }
-        public int getNotificationsCount() throws IOException {
+        public ZNotificationStatus getNotificationsCount() throws IOException {
             try {
                 if (apiKey == null)
-                    return -1;
-                String url = URL_NOTIFICATIONS_COUNT + "?" + getTokenParam();
+                    return null;
+                String url = URL_NOTIFICATIONS_STATUS + "?" + getTokenParam();
                 HttpRequest request = get(url)
                         .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
                         .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
-                int response = GSON.fromJson(request.bufferedReader(), int.class);
+                ZNotificationStatus response = GSON.fromJson(request.bufferedReader(), ZNotificationStatus.class);
                 return response;
             } catch (HttpRequest.HttpRequestException e) {
                 throw e.getCause();

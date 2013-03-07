@@ -33,7 +33,7 @@ public class ZhaohaiPoiOverlay extends PoiOverlay {
             String str_format_alter_message = NewActivityBaiduMap.factory.getResources().getString(R.string.format_alter_message);
             String str_alter_message = String.format(str_format_alter_message,info.name,info.address);
             if(adialog != null)
-                adialog.dismiss();
+                adialog.cancel();
             adialog = new AlertDialog.Builder(NewActivityBaiduMap.factory)
                     .setTitle(getString(R.string.alter_activity_point))
                     .setIcon(android.R.drawable.ic_dialog_info)
@@ -61,11 +61,11 @@ public class ZhaohaiPoiOverlay extends PoiOverlay {
         public void onClick(DialogInterface d, int which) {
 //                        calendar_started_at = adialog.getLayoutInflater()
             try {
+                adialog.cancel();
                 NewActivityBaiduMap.factory.select(last_info);
             } catch (Exception e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
-            adialog.dismiss();
         }
     };
 

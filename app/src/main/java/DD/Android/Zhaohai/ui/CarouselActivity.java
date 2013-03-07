@@ -51,28 +51,6 @@ public class CarouselActivity extends RoboSherlockFragmentActivity {
         indicator.setViewPager(pager);
         pager.setCurrentItem(2);
         new StartMessageService().execute();
-
-//        // 获取NotificationManager的引用
-//        NotificationManager mNM = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-//
-//// 创建一个Notification对象
-//        int icon = R.drawable.icon;
-//        CharSequence tickerText = "Hello";
-//        long when = System.currentTimeMillis();
-//        Notification notification = new Notification(icon, tickerText, when);
-//        notification.flags |= Notification.DEFAULT_ALL;
-//
-//// 定义Notification的title、message、和pendingIntent
-//        Context context = getApplicationContext();
-//        CharSequence contentTitle = "你有新的消息";
-//        CharSequence contentText = "xxx yyy";
-//        Intent notificationIntent = new Intent(this, ActivityNotifications.class);
-//        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-//
-//        notification.setLatestEventInfo(context, contentTitle, contentText, contentIntent);
-//
-//// 通知状态栏显示Notification
-//        mNM.notify(HELLO_ID, notification);
     }
 
     //    private static final int HELLO_ID = 1;
