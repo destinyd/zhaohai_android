@@ -68,5 +68,9 @@
     <string name="label_activity_request_text">Request Text</string>
     <string name="label_notification_invite_user">Invitees</string>
     <string name="notifications">Notifications</string>
+    <string name="access">Accept</string>
+    <string name="deny">Deny</string>
+    <string name="already_deal">Have been processed</string>
+    <string name="label_notification_deal">status</string>
 
 </resources>

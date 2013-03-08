@@ -5,7 +5,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
     <TableLayout android:layout_width="fill_parent"
-                 android:layout_height="fill_parent"
+                 android:layout_height="wrap_content"
                  android:shrinkColumns="1"
             >
         <!--<TableRow-->
@@ -169,6 +169,42 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/table_text_selector" android:layout_marginLeft="5dp"/>
         </TableRow>
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/tr_deal"
+                android:visibility="gone">
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_notification_deal"
+                    style="@style/ShadowText"
+                    android:textColor="?android:attr/textColorPrimaryInverse"/>
+            <TextView
+                    android:id="@+id/tv_invite_user"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/table_text_selector"
+                    android:text="@string/already_deal"
+                    android:layout_marginLeft="5dp"/>
+        </TableRow>
 
     </TableLayout>
+    <LinearLayout android:orientation="horizontal"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content">
+        <Button android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:id="@+id/btn_left"
+                android:text="@string/access"
+                ></Button>
+        <Button android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:id="@+id/btn_right"
+                android:text="@string/deny"
+                ></Button>
+    </LinearLayout>
 </LinearLayout>

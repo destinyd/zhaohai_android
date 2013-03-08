@@ -7,8 +7,10 @@ import android.accounts.AccountsException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
@@ -66,6 +68,12 @@ public class ActivityNotification extends ZhaohaiActivity {
 
     @InjectView(R.id.tv_follower)
     protected TextView tv_follower;
+
+    @InjectView(R.id.btn_left)
+    protected Button btn_left;
+
+    @InjectView(R.id.btn_right)
+    protected Button btn_right;
 
 
 
@@ -144,6 +152,8 @@ public class ActivityNotification extends ZhaohaiActivity {
                     tr_invite_user.setVisibility(View.VISIBLE);
                     tv_activity.setText(notification.getActivity().getTitle());
                     tv_invite_user.setText(notification.getInvite_user().getName());
+
+                    showButton();
                     break;
                 case ZNotification.ACTIVITY_REQUEST:
                     tr_activity.setVisibility(View.VISIBLE);
@@ -152,6 +162,7 @@ public class ActivityNotification extends ZhaohaiActivity {
                     tv_activity.setText(notification.getActivity().getTitle());
                     tv_interesting_user.setText(notification.getInteresting_user().getName());
                     tv_activity_request_text.setText(notification.getText());
+                    showButton();
                     break;
                 case ZNotification.FOLLOW:
                     tr_follower.setVisibility(View.VISIBLE);
@@ -163,8 +174,75 @@ public class ActivityNotification extends ZhaohaiActivity {
             setTitle(notification.getTitle());
 //            tv_type.setText(notification.getTitle());
             tv_created_at.setText(notification.getCreated_at().toLocaleString());
-            progressDialogCancel();
+            progressDialogDismiss();
         }
+    }
+
+    private class ReplyNotification extends AsyncTask<Void, String, Void> {
+
+        protected void onPreExecute () {//在 doInBackground(Params...)之前被调用，在ui线程执行
+            progressDialogShow(ActivityNotification.this);
+        }
+
+        //步骤2：实现抽象方法doInBackground()，代码将在后台线程中执行，由execute()触发，由于这个例子并不需要传递参数，使用Void...，具体书写方式为范式书写
+        protected Void/*参数3*/ doInBackground(Void... params/*参数1*/) {
+            try {
+                bReplyStatus = serviceProvider.getService().replyNotification(notification.get_id(),reply);
+            } catch (IOException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            } catch (AccountsException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+
+            return null;
+
+        }
+
+        //步骤4：定义后台进程执行完后的处理，本例，采用Toast
+
+        protected void onPostExecute(Void result/*参数3*/) {
+            if(bReplyStatus)
+            {
+                disableButton();
+                Toast.makeText(ActivityNotification.this,
+                        "处理已经成功提交", Toast.LENGTH_LONG).show();
+            }
+            else{
+                Toast.makeText(ActivityNotification.this,
+                        "网络错误或该信息已被处理", Toast.LENGTH_LONG).show();
+            }
+            progressDialogDismiss();
+        }
+    }
+
+    String reply = null;
+    boolean bReplyStatus = false;
+
+    private void showButton() {
+        if(notification.getDeal_at() == null){
+            btn_left.setVisibility(View.VISIBLE);
+            btn_right.setVisibility(View.VISIBLE);
+            btn_left.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    reply = "accept";
+                    new ReplyNotification().execute();
+                }
+            });
+
+            btn_right.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    reply = "deny";
+                    new ReplyNotification().execute();
+                }
+            });
+        }
+    }
+
+    void disableButton(){
+        btn_left.setEnabled(false);
+        btn_right.setEnabled(false);
     }
 
 }

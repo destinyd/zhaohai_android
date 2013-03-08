@@ -91,6 +91,8 @@ public class Constants {
 
         public static final String FORMAT_URL_NOTIFICATION = API_BASE + "/notifications/%s.json";
 
+        public static final String FORMAT_URL_REPLY_NOTIFICATION = API_BASE + "/notifications/%s/%s.json";
+
         public static final String FORMAT_URL_ACTIVITY = API_BASE + "/activities/%s.json";
 
         public static final String FORMAT_URL_ACTIVITY_REQUEST = API_BASE + "/activities/%s/activity_requests.json";

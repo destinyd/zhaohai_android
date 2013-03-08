@@ -45,6 +45,7 @@ public class ZhaohaiService {
     private static final int TIMEOUT = 30 * 1000;
 
 
+
 //    private static class UsersWrapper {
 //
 //        private List<User> results;
@@ -289,6 +290,29 @@ public class ZhaohaiService {
         }
     }
 
+    public boolean replyNotification(String notification_id, String reply) throws IOException {
+        if (apiKey == null || (!reply.equals("accept") && !reply.equals("deny")) )
+            return false;
+        String url = String.format(FORMAT_URL_REPLY_NOTIFICATION, notification_id,reply) + "?" + getTokenParam();
+        HttpRequest request = post(url)
+                .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
+                .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
+
+        try {
+            if (request.ok()) {
+//                String tmp = request.body();
+//                return GSON.fromJson(request.bufferedReader(), Activity.class);
+                return true;
+//                GSON.fromJson(request.body(),GSON);
+//                return tmp;
+            } else {
+                return false;
+            }
+        } catch (HttpRequestException e) {
+            throw e.getCause();
+        }
+    }
+
 
     public User getMe() throws IOException {
         if (apiKey == null)
@@ -324,7 +348,6 @@ public class ZhaohaiService {
         }
 
     }
-
 
     public Activity createActivity(Activity activity) throws IOException {
         if (apiKey == null)
