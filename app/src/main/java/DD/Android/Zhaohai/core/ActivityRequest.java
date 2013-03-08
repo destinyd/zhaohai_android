@@ -9,7 +9,7 @@ import java.util.List;
 public class ActivityRequest implements Serializable {
 
     private static final long serialVersionUID = 7102052595843891457L;
-    String _id;
+    public String _id;
     String text;
 //    String user_id;
 //    String activity_id;

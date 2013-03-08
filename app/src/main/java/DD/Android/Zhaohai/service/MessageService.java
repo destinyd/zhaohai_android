@@ -12,9 +12,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import com.alibaba.fastjson.JSON;
 import com.github.kevinsawicki.http.HttpRequest;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import roboguice.service.RoboService;
 
 import java.io.IOException;
@@ -45,8 +44,6 @@ public class MessageService extends RoboService {
     private NotificationManager messageNotificatioManager = null;
 
     ZNotificationStatus mnotification_status = null;
-
-    public static final Gson GSON = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
     @Override
     public void onCreate() {
@@ -112,10 +109,10 @@ public class MessageService extends RoboService {
                     }
     //                            getUnreadCount();
     //                    String serverMessage = getServerMessage();
-                    if (notification_status != null && notification_status != mnotification_status) {
+                    if (notification_status != null && notification_status.getCount() > 0 && notification_status != mnotification_status) {
                         mnotification_status = notification_status;
                         //更新通知栏
-                        messageNotification.setLatestEventInfo(MessageService.this, "您有" + notification_status.getCount() + "条未读消息", notification_status.getLast().getTitle() , messagePendingIntent);
+                        messageNotification.setLatestEventInfo(MessageService.this, "您有" + String.valueOf(notification_status.getCount()) + "条未读消息", notification_status.getLast().getTitle() , messagePendingIntent);
                         messageNotificatioManager.notify(messageNotificationID, messageNotification);
                         //每次通知完，通知ID递增一下，避免消息覆盖掉
     //                         messageNotificationID++;
@@ -138,7 +135,7 @@ public class MessageService extends RoboService {
                 HttpRequest request = get(url)
                         .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
                         .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
-                ZNotificationStatus response = GSON.fromJson(request.bufferedReader(), ZNotificationStatus.class);
+                ZNotificationStatus response = JSON.parseObject(request.body(), ZNotificationStatus.class);
                 return response;
             } catch (HttpRequest.HttpRequestException e) {
                 throw e.getCause();

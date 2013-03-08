@@ -7,8 +7,8 @@ public class ZNotificationStatus implements Serializable {
 
     private static final long serialVersionUID = -8618085900266701391L;
 
-    ZNotification last;
-    int count;
+    public ZNotification last;
+    public int count;
 
     public int getCount() {
         return count;

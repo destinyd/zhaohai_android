@@ -11,7 +11,7 @@
     <string name="page_users">用户</string>
     <string name="page_activities">活动</string>
     <string name="title_column">标题</string>
-    <string name="location_column">定位</string>
+    <!--<string name="location_column">定位</string>-->
     <string name="user_column">用户</string>
     <string name="date_column">日期</string>
     <string name="error_loading_users">读取用户失败</string>

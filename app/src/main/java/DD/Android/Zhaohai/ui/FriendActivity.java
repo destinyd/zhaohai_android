@@ -30,10 +30,10 @@ public class FriendActivity extends ZhaohaiActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        setTitle(friend.name);
+        setTitle(friend.getName());
 
         avatarLoader.bind(avatar, friend);
-        name.setText(friend.name);
+        name.setText(friend.getName());
 
     }
 

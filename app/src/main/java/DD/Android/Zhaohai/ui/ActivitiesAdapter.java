@@ -14,7 +14,7 @@ public class ActivitiesAdapter extends AlternatingColorListAdapter<Activity> {
      */
     public ActivitiesAdapter(LayoutInflater inflater, List<Activity> items,
                              boolean selectable) {
-        super(R.layout.checkin_list_item, inflater, items, selectable);
+        super(R.layout.activities_list_item, inflater, items, selectable);
     }
 
     /**
@@ -22,7 +22,7 @@ public class ActivitiesAdapter extends AlternatingColorListAdapter<Activity> {
      * @param items
      */
     public ActivitiesAdapter(LayoutInflater inflater, List<Activity> items) {
-        super(R.layout.checkin_list_item, inflater, items);
+        super(R.layout.activities_list_item, inflater, items);
     }
 
     @Override
@@ -35,5 +35,6 @@ public class ActivitiesAdapter extends AlternatingColorListAdapter<Activity> {
         super.update(position, item);
 
         setText(R.id.tv_name, item.getTitle());
+        setText(R.id.tv_date, item.getStarted_at().toLocaleString());
     }
 }

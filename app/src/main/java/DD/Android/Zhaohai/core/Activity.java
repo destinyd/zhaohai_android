@@ -9,10 +9,10 @@ import java.util.List;
 public class Activity implements Serializable {
 
     private static final long serialVersionUID = 7102052595843891457L;
-    protected String _id;
+    public String _id;
     protected String title;
     protected String desc;
-    protected String user_id;
+//    protected String user_id;
 
     protected String address;
     protected String status;
@@ -31,31 +31,6 @@ public class Activity implements Serializable {
     protected Date updated_at;
     protected double lat,lng;
 
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public double getLat() {
-        return lat;
-    }
-
-    public void setLat(float lat) {
-        this.lat = lat;
-    }
-
-    public double getLng() {
-        return lng;
-    }
-
-    public void setLng(float lng) {
-        this.lng = lng;
-    }
-
     public String get_id() {
         return _id;
     }
@@ -64,36 +39,12 @@ public class Activity implements Serializable {
         this._id = _id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getAddress() {
+        return address;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
-    }
-
-    public List<String> getTypes() {
-        return types;
-    }
-
-    public void setTypes(List<String> types) {
-        this.types = types;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Date getClosed_at() {
@@ -112,33 +63,20 @@ public class Activity implements Serializable {
         this.created_at = created_at;
     }
 
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
     public Date getFinished_at() {
         return finished_at;
     }
 
     public void setFinished_at(Date finished_at) {
         this.finished_at = finished_at;
-    }
-
-    public Date getStarted_at() {
-        return started_at;
-    }
-
-    public void setStarted_at(Date started_at) {
-        this.started_at = started_at;
-    }
-
-    public Date getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(Date updated_at) {
-        this.updated_at = updated_at;
-    }
-
-    public void setPt(GeoPoint pt){
-        this.lat = pt.getLatitudeE6() / 1E6;
-        this.lng = pt.getLongitudeE6() / 1E6;
     }
 
     public List<User> getInterested_users() {
@@ -157,6 +95,62 @@ public class Activity implements Serializable {
         this.invited_users = invited_users;
     }
 
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
+    public Date getStarted_at() {
+        return started_at;
+    }
+
+    public void setStarted_at(Date started_at) {
+        this.started_at = started_at;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(List<String> types) {
+        this.types = types;
+    }
+
+    public Date getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(Date updated_at) {
+        this.updated_at = updated_at;
+    }
+
     public User getUser() {
         return user;
     }
@@ -173,11 +167,9 @@ public class Activity implements Serializable {
         this.users = users;
     }
 
-    public String getStatus() {
-        return status;
+    public void setPt(GeoPoint pt){
+        this.lat = pt.getLatitudeE6() / 1E6;
+        this.lng = pt.getLongitudeE6() / 1E6;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }

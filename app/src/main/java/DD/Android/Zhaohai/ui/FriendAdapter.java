@@ -52,7 +52,7 @@ public class FriendAdapter extends SingleTypeAdapter<User> {
 
         avatars.bind(imageView(R.id.iv_avatar), user);
 
-        setText(R.id.tv_name, user.name);
+        setText(R.id.tv_name, user.getName());
 
     }
 }

@@ -184,7 +184,7 @@ public class NewActivityBaiduMap extends ZhaohaiActivity {
             @Override
             public void onGetPoiResult(MKPoiResult mkPoiResult, int type, int error) {
                 //To change body of implemented methods use File | Settings | File Templates.
-                if(mkPoiResult.getNumPois() > 0){
+                if(mkPoiResult != null && mkPoiResult.getNumPois() > 0){
                     ZhaohaiPoiOverlay poiOverlay = new ZhaohaiPoiOverlay(NewActivityBaiduMap.this, mMapView, mSearch);
                     poiOverlay.setData(mkPoiResult.getAllPoi());
                     mMapView.getOverlays().clear();

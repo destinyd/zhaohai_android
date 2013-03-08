@@ -13,7 +13,7 @@ public class ZNotification implements Serializable {
     public static final int ACTIVITY_REQUEST_INVITE = 3;
     public static final int FOLLOW = 51;
 
-    String _id;
+    public String _id;
     String text;
 
     //    activity

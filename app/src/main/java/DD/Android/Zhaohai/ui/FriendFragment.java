@@ -43,13 +43,13 @@ public class FriendFragment extends ItemListFragment<User> {
                 .addHeader(activity.getLayoutInflater()
                         .inflate(R.layout.friend_list_item_labels, null));
     }
-//
-//    @Override
-//    public void onDestroyView() {
-//        setListAdapter(null);
-//
-//        super.onDestroyView();
-//    }
+
+    @Override
+    public void onDestroyView() {
+        setListAdapter(null);
+
+        super.onDestroyView();
+    }
 
     @Override
     public Loader<List<User>> onCreateLoader(int id, Bundle args) {
@@ -60,10 +60,11 @@ public class FriendFragment extends ItemListFragment<User> {
 
                 try {
                     List<User> latest = serviceProvider.getService().getFriend();
-                    if (latest != null)
-                        return latest;
-                    else
-                        return Collections.emptyList();
+                    return latest;
+//                    if (latest != null)
+//                        return latest;
+//                    else
+//                        return Collections.emptyList();
                 } catch (OperationCanceledException e) {
                     Activity activity = getActivity();
                     if (activity != null)

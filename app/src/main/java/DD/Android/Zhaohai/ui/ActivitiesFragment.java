@@ -5,7 +5,6 @@ import DD.Android.Zhaohai.ZhaohaiServiceProvider;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.view.View;
@@ -30,7 +29,7 @@ public class ActivitiesFragment extends ItemListFragment<DD.Android.Zhaohai.core
 
         getListAdapter()
                 .addHeader(activity.getLayoutInflater()
-                        .inflate(R.layout.checkins_list_item_labels, null));
+                        .inflate(R.layout.activities_list_item_labels, null));
     }
 
     @Override

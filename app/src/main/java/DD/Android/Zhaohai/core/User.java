@@ -7,15 +7,16 @@ import java.util.List;
 public class User implements Serializable {
 
     private static final long serialVersionUID = 2851521909011520611L;
-    public String _id,name,email;
-//    public List<String> follower_ids;
+    public String _id;
+    protected String name, email;
+    //    public List<String> follower_ids;
 //    public List<String> following_ids;
 //    public List<String> in_activity_ids;
 //    public List<String> interested_activity_ids;
 //    public List<String> invited_activity_ids;
 //    public List<String> role_ids;
-    public Date created_at, updated_at;
-    public Avatar avatar;
+    protected Date created_at, updated_at;
+    protected Avatar avatar;
     private boolean checked;    //保存复选框的状态
 
     public String get_id() {

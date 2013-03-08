@@ -2,6 +2,7 @@ package DD.Android.Zhaohai.ui;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import com.actionbarsherlock.view.MenuItem;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockActivity;
@@ -31,24 +32,34 @@ public abstract class ZhaohaiActivity extends RoboSherlockActivity {
     ProgressDialog progressDialog = null;
 
     protected void progressDialogCancel() {
-        if(progressDialog != null){
-            progressDialog.cancel();
+        if (progressDialog != null) {
+            progressDialog.dismiss();
             progressDialog = null;
         }
     }
 
-    protected void progressDialogShow(Activity activity){
-        progressDialogCancel();
-        progressDialog= ProgressDialog.show(activity,"","正在拼命读取中...",true,true);
+    protected void progressDialogShow(Activity activity) {
+        progressDialogShow(activity, "正在拼命读取中...");
     }
 
-    protected void progressDialogShow(Activity activity,String message){
-        progressDialogCancel();
-        progressDialog= ProgressDialog.show(activity,"",message,true,true);
+    protected void progressDialogShow(Activity activity, String message) {
+        progressDialogShow(activity, message, true);
     }
 
-    protected void progressDialogShow(Activity activity,String message,boolean cancelable ){
+    protected void progressDialogShow(Activity activity, String message, boolean cancelable) {
         progressDialogCancel();
-        progressDialog= ProgressDialog.show(activity,"",message,true,cancelable);
+        progressDialog = ProgressDialog.show(activity, "", message, true, cancelable);
+        progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                progressDialogCancel();
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        progressDialogCancel();
+        super.onDestroy();    //To change body of overridden methods use File | Settings | File Templates.
     }
 }

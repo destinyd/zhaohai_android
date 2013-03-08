@@ -31,7 +31,7 @@ public class UsersActivity extends ZhaohaiActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         avatarLoader.bind(avatar, user);
-        name.setText(user.name);
+        name.setText(user.getName());
 
     }
 
