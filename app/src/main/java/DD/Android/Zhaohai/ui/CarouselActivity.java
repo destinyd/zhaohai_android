@@ -18,6 +18,7 @@ import android.support.v4.view.ViewPager;
 import com.actionbarsherlock.view.Window;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockFragmentActivity;
 import com.google.inject.Inject;
+import com.slidingmenu.lib.SlidingMenu;
 import com.viewpagerindicator.TitlePageIndicator;
 import roboguice.inject.InjectView;
 
@@ -36,6 +37,7 @@ public class CarouselActivity extends RoboSherlockFragmentActivity {
     private ViewPager pager;
 
     @Inject private ApiKeyProvider keyProvider;
+    SlidingMenu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +52,46 @@ public class CarouselActivity extends RoboSherlockFragmentActivity {
 
         indicator.setViewPager(pager);
         pager.setCurrentItem(2);
+
+        menu = new SlidingMenu(this);
+        menu.setSlidingEnabled(false);
+        menu.setMode(SlidingMenu.LEFT);
+        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+//        menu.setShadowWidthRes(R.dimen.shadow_width);
+        menu.setShadowDrawable(R.drawable.shadow);
+//        menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+        menu.setFadeDegree(0.35f);
+        menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+        menu.setMenu(R.layout.slidingmenumain);
+
+//        pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int i, float v, int i2) {
+//                //To change body of implemented methods use File | Settings | File Templates.
+//            }
+//
+//            @Override
+//            public void onPageSelected(int i) {
+////                if(i == 0){
+////                    menu.setSlidingEnabled(true);
+////                }
+////                else{
+////                    menu.setSlidingEnabled(false);
+////                }
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int i) {
+//                //To change body of implemented methods use File | Settings | File Templates.
+//            }
+//        });
+
+
+
         new StartMessageService().execute();
     }
+
+
 
     //    private static final int HELLO_ID = 1;
     private class StartMessageService extends AsyncTask<Void, String, Void> {
