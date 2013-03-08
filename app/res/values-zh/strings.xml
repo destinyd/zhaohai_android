@@ -67,4 +67,8 @@
     <string name="label_notification_invite_user">邀请者</string>
     <string name="menu_activity_requests">加入请求</string>
     <string name="notifications">通知信息</string>
+    <string name="access">接受</string>
+    <string name="deny">拒绝</string>
+    <string name="already_deal">已处理</string>
+    <string name="label_notification_deal">处理情况</string>
 </resources>

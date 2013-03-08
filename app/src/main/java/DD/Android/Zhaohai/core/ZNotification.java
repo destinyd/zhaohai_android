@@ -35,8 +35,9 @@ public class ZNotification implements Serializable {
 
 
     Date created_at;
-    Date read_at;
     Date updated_at;
+    Date read_at;
+    Date deal_at;
 
     public String get_id() {
         return _id;
@@ -137,6 +138,14 @@ public class ZNotification implements Serializable {
 
     public void setUpdated_at(Date updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public Date getDeal_at() {
+        return deal_at;
+    }
+
+    public void setDeal_at(Date deal_at) {
+        this.deal_at = deal_at;
     }
 
     public int getType() {
