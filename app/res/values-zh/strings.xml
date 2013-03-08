@@ -66,4 +66,5 @@
     <string name="label_activity_request_text">请求内容</string>
     <string name="label_notification_invite_user">邀请者</string>
     <string name="menu_activity_requests">加入请求</string>
+    <string name="notifications">通知信息</string>
 </resources>

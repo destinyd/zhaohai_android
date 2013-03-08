@@ -11,6 +11,12 @@
     </item>
 
     <item
+            android:id="@+id/notifications"
+            android:showAsAction="never"
+            android:title="@string/notifications" >
+    </item>
+
+    <item
         android:id="@+id/logout"
         android:showAsAction="never"
         android:title="@string/logout_action" >

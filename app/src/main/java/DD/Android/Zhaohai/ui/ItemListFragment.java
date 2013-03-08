@@ -2,6 +2,7 @@
 package DD.Android.Zhaohai.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
@@ -158,6 +159,9 @@ public abstract class ItemListFragment<E> extends RoboSherlockFragment
         switch (item.getItemId()) {
         case id.refresh:
             forceRefresh();
+            return true;
+        case id.notifications:
+            startActivity(new Intent(getActivity(),ActivityNotifications.class));
             return true;
         case R.id.logout:
             logout();
