@@ -301,7 +301,7 @@ public class ActivityActivity extends ZhaohaiActivity {
         protected void onPostExecute(Void result/*参数3*/) {
             activity_to_view();
             show_menu();
-            progressDialogCancel();
+            progressDialogDismiss();
         }
     }
 

@@ -112,7 +112,7 @@ public class ActivityInviteFriend extends ZhaohaiActivity {
         protected void onPostExecute(Void result/*参数3*/) {
             if(friend != null)
                 initListData(friend);
-            progressDialogCancel();
+            progressDialogDismiss();
         }
     }
 

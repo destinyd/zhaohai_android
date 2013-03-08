@@ -31,7 +31,7 @@ public abstract class ZhaohaiActivity extends RoboSherlockActivity {
 
     ProgressDialog progressDialog = null;
 
-    protected void progressDialogCancel() {
+    protected void progressDialogDismiss() {
         if (progressDialog != null) {
             progressDialog.dismiss();
             progressDialog = null;
@@ -47,19 +47,19 @@ public abstract class ZhaohaiActivity extends RoboSherlockActivity {
     }
 
     protected void progressDialogShow(Activity activity, String message, boolean cancelable) {
-        progressDialogCancel();
+        progressDialogDismiss();
         progressDialog = ProgressDialog.show(activity, "", message, true, cancelable);
         progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialogInterface) {
-                progressDialogCancel();
+                progressDialogDismiss();
             }
         });
     }
 
     @Override
     protected void onDestroy() {
-        progressDialogCancel();
+        progressDialogDismiss();
         super.onDestroy();    //To change body of overridden methods use File | Settings | File Templates.
     }
 }

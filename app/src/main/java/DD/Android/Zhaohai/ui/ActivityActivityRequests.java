@@ -105,7 +105,7 @@ public class ActivityActivityRequests extends ZhaohaiActivity {
         protected void onPostExecute(Void result/*参数3*/) {
             if(requests != null)
                 initListData(requests);
-            progressDialogCancel();
+            progressDialogDismiss();
         }
     }
 

@@ -96,7 +96,7 @@ public class ActivityNotifications extends ZhaohaiActivity {
         protected void onPostExecute(Void result/*参数3*/) {
             if(notifications != null)
                 initListData(notifications);
-            progressDialogCancel();
+            progressDialogDismiss();
         }
     }
 
