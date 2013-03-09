@@ -2,21 +2,20 @@
 
 package DD.Android.Zhaohai.test;
 
+import DD.Android.Zhaohai.ui.Act.ActCarousel;
 import android.test.ActivityInstrumentationTestCase2;
-
-import DD.Android.Zhaohai.ui.CarouselActivity;
 
 
 /**
  * Test displaying of carousel.
  */
-public class CarouselTest extends ActivityInstrumentationTestCase2<CarouselActivity> {
+public class CarouselTest extends ActivityInstrumentationTestCase2<ActCarousel> {
 
     /**
-     * Create test for {@link CarouselActivity}
+     * Create test for {@link DD.Android.Zhaohai.ui.Act.ActCarousel}
      */
     public CarouselTest() {
-        super(CarouselActivity.class);
+        super(ActCarousel.class);
     }
 
     /**

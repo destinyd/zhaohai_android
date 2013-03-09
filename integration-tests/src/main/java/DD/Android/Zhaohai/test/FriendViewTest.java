@@ -3,7 +3,7 @@
 package DD.Android.Zhaohai.test;
 
 import DD.Android.Zhaohai.core.User;
-import DD.Android.Zhaohai.ui.CarouselActivity;
+import DD.Android.Zhaohai.ui.Act.ActCarousel;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 
@@ -13,13 +13,13 @@ import static DD.Android.Zhaohai.core.Constants.Extra.USER;
 /**
  * Tests for displaying a specific {@link User} item
  */
-public class FriendViewTest extends ActivityInstrumentationTestCase2<CarouselActivity> {
+public class FriendViewTest extends ActivityInstrumentationTestCase2<ActCarousel> {
 
     /**
-     * Create test for {@link DD.Android.Zhaohai.ui.CarouselActivity}
+     * Create test for {@link DD.Android.Zhaohai.ui.Act.ActCarousel}
      */
     public FriendViewTest() {
-        super(CarouselActivity.class);
+        super(ActCarousel.class);
     }
 
     /**

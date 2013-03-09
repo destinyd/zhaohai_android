@@ -4,7 +4,7 @@ package DD.Android.Zhaohai.service;
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.core.Constants;
 import DD.Android.Zhaohai.core.ZNotificationStatus;
-import DD.Android.Zhaohai.ui.ActivityNotifications;
+import DD.Android.Zhaohai.ui.Act.ActNotifications;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -59,7 +59,7 @@ public class MessageService extends RoboService {
         messageNotification.defaults = Notification.DEFAULT_SOUND;
         messageNotificatioManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        messageIntent = new Intent(this, ActivityNotifications.class);
+        messageIntent = new Intent(this, ActNotifications.class);
         messagePendingIntent = PendingIntent.getActivity(this, 0, messageIntent, 0);
 
         //开启线程

@@ -1,6 +1,7 @@
 package DD.Android.Zhaohai.ui;
 
 import DD.Android.Zhaohai.R;
+import DD.Android.Zhaohai.ui.Act.ActNewActivityBaiduMap;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -30,11 +31,11 @@ public class ZhaohaiPoiOverlay extends PoiOverlay {
 //        super.onTap(i);
         MKPoiInfo info = getPoi(i);
         if(info.equals(last_info)){
-            String str_format_alter_message = NewActivityBaiduMap.factory.getResources().getString(R.string.format_alter_message);
+            String str_format_alter_message = ActNewActivityBaiduMap.factory.getResources().getString(R.string.format_alter_message);
             String str_alter_message = String.format(str_format_alter_message,info.name,info.address);
             if(adialog != null)
                 adialog.cancel();
-            adialog = new AlertDialog.Builder(NewActivityBaiduMap.factory)
+            adialog = new AlertDialog.Builder(ActNewActivityBaiduMap.factory)
                     .setTitle(getString(R.string.alter_activity_point))
                     .setIcon(android.R.drawable.ic_dialog_info)
                     .setMessage(str_alter_message)
@@ -45,7 +46,7 @@ public class ZhaohaiPoiOverlay extends PoiOverlay {
         }
         else{
             last_info = info;
-            Toast.makeText(NewActivityBaiduMap.factory,
+            Toast.makeText(ActNewActivityBaiduMap.factory,
                     String.format(getString(R.string.select_point_name),info.name),
                     Toast.LENGTH_SHORT).show();
         }
@@ -62,7 +63,7 @@ public class ZhaohaiPoiOverlay extends PoiOverlay {
 //                        calendar_started_at = adialog.getLayoutInflater()
             try {
                 adialog.cancel();
-                NewActivityBaiduMap.factory.select(last_info);
+                ActNewActivityBaiduMap.factory.select(last_info);
             } catch (Exception e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
@@ -70,7 +71,7 @@ public class ZhaohaiPoiOverlay extends PoiOverlay {
     };
 
     protected Resources getResources(){
-        return NewActivityBaiduMap.factory.getResources();
+        return ActNewActivityBaiduMap.factory.getResources();
     }
 
     protected String getString(int id){

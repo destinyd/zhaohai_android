@@ -5,7 +5,7 @@ import DD.Android.Zhaohai.R.id;
 import DD.Android.Zhaohai.R.layout;
 import DD.Android.Zhaohai.R.string;
 import DD.Android.Zhaohai.core.Constants;
-import DD.Android.Zhaohai.ui.TextWatcherAdapter;
+import DD.Android.Zhaohai.ui.Ada.AdaTextWatcher;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Dialog;
@@ -123,7 +123,7 @@ public class ZhaohaiAuthenticatorActivity extends
         confirmCredentials = intent.getBooleanExtra(PARAM_CONFIRMCREDENTIALS,
                 false);
 
-        setContentView(layout.login_activity);
+        setContentView(layout.act_login);
 
         emailText.setAdapter(new ArrayAdapter<String>(this,
                 simple_dropdown_item_1line, userEmailAccounts()));
@@ -169,7 +169,7 @@ public class ZhaohaiAuthenticatorActivity extends
     }
 
     private TextWatcher validationTextWatcher() {
-        return new TextWatcherAdapter() {
+        return new AdaTextWatcher() {
             public void afterTextChanged(Editable gitDirEditText) {
                 updateUIWithValidation();
             }
