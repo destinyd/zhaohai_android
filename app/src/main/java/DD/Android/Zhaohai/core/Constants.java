@@ -68,6 +68,9 @@ public class Constants {
          */
         public static final String URL_AUTH = URL_BASE + "/oauth/token";
 
+        public static final String URL_TEST = API_BASE + "/test";
+        public static final String URL_REG = API_BASE + "/reg";
+
         /**
          * List Users URL
          */

@@ -24,6 +24,7 @@ import android.view.View.OnKeyListener;
 import android.widget.*;
 import android.widget.TextView.OnEditorActionListener;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.kevinsawicki.http.HttpRequest;
 import com.github.kevinsawicki.wishlist.Toaster;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockAccountAuthenticatorActivity;
@@ -373,5 +374,76 @@ public class ZhaohaiAuthenticatorActivity extends
 
     static public String getAuthToken(){
         return authToken;
+    }
+
+    /**
+     * Handles onClick event on the Submit button. Sends username/password to
+     * the server for authentication.
+     * <p/>
+     * Specified by android:onClick="handleLogin" in the layout xml
+     *
+     * @param view
+     */
+    public void handleTest(View view) {
+        if (authenticationTask != null)
+            return;
+        showProgress();
+
+        authenticationTask = new RoboAsyncTask<Boolean>(this) {
+            public Boolean call() throws Exception {
+
+                HttpRequest request = post(URL_TEST)
+                        .part(HEADER_PARSE_APP_ID, PARSE_APP_ID)
+                        .part(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
+                        ;
+
+
+                Log.d("Auth", "response=" + request.code());
+
+                if(request.ok()) {
+                    String tmp = Strings.toString(request.buffer());
+                    Log.d("response body:",tmp);
+                    final AccessToken model = JSON.parseObject(tmp, AccessToken.class);
+                    token = model.getAccess_token();
+                    JSONObject j = JSON.parseObject(tmp);
+                    email = j.getString("email");
+                }
+
+                return request.ok();
+            }
+
+            @Override
+            protected void onException(Exception e) throws RuntimeException {
+                Throwable cause = e.getCause() != null ? e.getCause() : e;
+
+                String message;
+                // A 404 is returned as an Exception with this message
+                if ("Received authentication challenge is null".equals(cause
+                        .getMessage()))
+                    message = getResources().getString(
+                            string.message_bad_credentials);
+                else
+                    message = cause.getMessage();
+
+                Toaster.showLong(ZhaohaiAuthenticatorActivity.this, message);
+            }
+
+            @Override
+            public void onSuccess(Boolean authSuccess) {
+                onAuthenticationResult(authSuccess);
+            }
+
+            @Override
+            protected void onFinally() throws RuntimeException {
+                hideProgress();
+                authenticationTask = null;
+            }
+        };
+        authenticationTask.execute();
+    }
+
+    public void handleReg(View view) {
+        if (authenticationTask != null)
+            return;
     }
 }

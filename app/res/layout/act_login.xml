@@ -84,6 +84,55 @@
                 android:textColor="@color/text"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    style="@style/layout_vertical"
+                    >
+
+                <Button
+                        android:id="@+id/b_test"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@drawable/button_background_states"
+                        android:gravity="center"
+                        android:onClick="handleTest"
+                        android:padding="10dp"
+                        android:text="@string/label_test"
+                        android:textColor="@color/text"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        style="@style/layout_horizontal"
+                        android:layout_weight="2"
+                        />
+
+                <!--style="@style/ShadowText"-->
+
+                <Button
+                        android:id="@+id/b_signup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@drawable/button_background_states"
+                        android:gravity="center"
+                        android:onClick="handleReg"
+                        android:padding="10dp"
+                        android:text="@string/label_signup"
+                        android:textColor="@color/text"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+
+                        style="@style/layout_horizontal"
+                        android:layout_weight="2"
+                        />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
