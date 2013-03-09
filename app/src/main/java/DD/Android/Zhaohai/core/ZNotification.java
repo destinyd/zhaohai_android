@@ -166,11 +166,11 @@ public class ZNotification implements Serializable {
     public String getTitle() {
         switch (getType()) {
             case ACTIVITY_REQUEST_REPLY:
-                return "活动组织者响应了您的加入请求。";
+                return "加入请求被响应。";
             case ACTIVITY_REQUEST:
-                return "有人想加入您的活动。";
+                return "有人想加入。";
             case ACTIVITY_REQUEST_INVITE:
-                return "有人邀请您加入活动。";
+                return "有人邀请您。";
             case FOLLOW:
                 return "有人关注了您！";
             default:
