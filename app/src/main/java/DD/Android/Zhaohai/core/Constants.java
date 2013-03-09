@@ -176,8 +176,13 @@ public class Constants {
         private Other(){}
 
         public static final SimpleDateFormat POST_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        public static final SimpleDateFormat TODAY_DATE_FORMAT = new SimpleDateFormat("HH:mm");
+        public static final SimpleDateFormat THIS_MONTH_DATE_FORMAT = new SimpleDateFormat("M月d日");
+        public static final SimpleDateFormat OTHER_DATE_FORMAT = new SimpleDateFormat("yy-MM-dd");
+
         public static final TimeZone CHINA_TIME_ZONE = TimeZone.getTimeZone("Asia/Shanghai");
         public static final TimeZone UTC_TIME_ZONE = TimeZone.getTimeZone("UTC");
+        public static final TimeZone DEFAULT_TIME_ZONE = TimeZone.getDefault();
 
         public static class ActivityTaskStatus {
             private ActivityTaskStatus(){}

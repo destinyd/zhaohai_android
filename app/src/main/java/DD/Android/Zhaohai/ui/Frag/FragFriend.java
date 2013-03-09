@@ -4,7 +4,7 @@ import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.ZhaohaiServiceProvider;
 import DD.Android.Zhaohai.core.User;
 import DD.Android.Zhaohai.core.UserAvatarLoader;
-import DD.Android.Zhaohai.ui.Act.ActUser;
+import DD.Android.Zhaohai.ui.Act.ActFriend;
 import DD.Android.Zhaohai.ui.Ada.AdaUsers;
 import DD.Android.Zhaohai.ui.ThrowableLoader;
 import android.accounts.OperationCanceledException;
@@ -17,12 +17,11 @@ import android.widget.ListView;
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.google.inject.Inject;
 
-import java.util.Collections;
 import java.util.List;
 
-import static DD.Android.Zhaohai.core.Constants.Extra.USER;
+import static DD.Android.Zhaohai.core.Constants.Extra.FRIEND;
 
-public class UsersFrag extends FragItemList<User> {
+public class FragFriend extends FragItemList<User> {
 
     @Inject protected ZhaohaiServiceProvider serviceProvider;
     @Inject private UserAvatarLoader avatars;
@@ -31,7 +30,7 @@ public class UsersFrag extends FragItemList<User> {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        setEmptyText(R.string.no_users);
+        setEmptyText(R.string.no_friends);
     }
 
     @Override
@@ -41,11 +40,17 @@ public class UsersFrag extends FragItemList<User> {
         listView.setFastScrollEnabled(true);
         listView.setDividerHeight(0);
 
-        getListAdapter().addHeader(activity.getLayoutInflater()
-                .inflate(R.layout.labels_users, null));
+        getListAdapter()
+                .addHeader(activity.getLayoutInflater()
+                        .inflate(R.layout.labels_friend, null));
     }
 
+    @Override
+    public void onDestroyView() {
+        setListAdapter(null);
 
+        super.onDestroyView();
+    }
 
     @Override
     public Loader<List<User>> onCreateLoader(int id, Bundle args) {
@@ -55,11 +60,12 @@ public class UsersFrag extends FragItemList<User> {
             public List<User> loadData() throws Exception {
 
                 try {
-                    List<User> latest = serviceProvider.getService().getUsers();
-                    if (latest != null)
-                        return latest;
-                    else
-                        return Collections.emptyList();
+                    List<User> latest = serviceProvider.getService().getFriend();
+                    return latest;
+//                    if (latest != null)
+//                        return latest;
+//                    else
+//                        return Collections.emptyList();
                 } catch (OperationCanceledException e) {
                     Activity activity = getActivity();
                     if (activity != null)
@@ -74,7 +80,7 @@ public class UsersFrag extends FragItemList<User> {
     public void onListItemClick(ListView l, View v, int position, long id) {
         User user = ((User) l.getItemAtPosition(position));
 
-        startActivity(new Intent(getActivity(), ActUser.class).putExtra(USER, user));
+        startActivity(new Intent(getActivity(), ActFriend.class).putExtra(FRIEND, user));
     }
 
     @Override
@@ -85,7 +91,7 @@ public class UsersFrag extends FragItemList<User> {
 
     @Override
     protected int getErrorMessage(Exception exception) {
-        return R.string.error_loading_users;
+        return R.string.error_loading_friends;
     }
 
     @Override

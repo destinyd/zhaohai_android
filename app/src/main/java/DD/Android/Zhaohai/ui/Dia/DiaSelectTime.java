@@ -144,7 +144,7 @@ public class DiaSelectTime extends AlertDialog {
         calendar.add(Calendar.DAY_OF_MONTH, -1);
         dp_time.setMinDate(calendar.getTimeInMillis());
         calendar.add(Calendar.MONTH,1);
-        dp_time.setMaxDate(calendar.getTimeInMillis()); // max date is next month today
+        dp_time.setMaxDate(calendar.getTimeInMillis()); // max date is next month start_of_today
 
         tp_time.setIs24HourView(true);
         tp_time.setCurrentHour(init_time.get(Calendar.HOUR_OF_DAY));

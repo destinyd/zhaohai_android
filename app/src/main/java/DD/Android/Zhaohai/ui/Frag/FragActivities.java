@@ -1,8 +1,9 @@
-package DD.Android.Zhaohai.ui.Act;
+package DD.Android.Zhaohai.ui.Frag;
 
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.ZhaohaiServiceProvider;
-import DD.Android.Zhaohai.ui.Frag.FragItemList;
+import DD.Android.Zhaohai.ui.Act.ActActivity;
+import DD.Android.Zhaohai.ui.Ada.AdaActivities;
 import DD.Android.Zhaohai.ui.ThrowableLoader;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
@@ -18,7 +19,7 @@ import java.util.List;
 
 import static DD.Android.Zhaohai.core.Constants.Extra.ACTIVITY;
 
-public class ActivitiesFrag extends FragItemList<DD.Android.Zhaohai.core.Activity> {
+public class FragActivities extends FragItemList<DD.Android.Zhaohai.core.Activity> {
 
     @Inject protected ZhaohaiServiceProvider serviceProvider;
 
@@ -62,7 +63,7 @@ public class ActivitiesFrag extends FragItemList<DD.Android.Zhaohai.core.Activit
 
     @Override
     protected SingleTypeAdapter<DD.Android.Zhaohai.core.Activity> createAdapter(List<DD.Android.Zhaohai.core.Activity> items) {
-        return new ActivitiesAda(getActivity().getLayoutInflater(), items);
+        return new AdaActivities(getActivity().getLayoutInflater(), items);
     }
 
     public void onListItemClick(ListView l, View v, int position, long id) {

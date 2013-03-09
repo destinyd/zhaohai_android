@@ -3,10 +3,10 @@
 package DD.Android.Zhaohai.ui.Ada;
 
 import DD.Android.Zhaohai.R;
-import DD.Android.Zhaohai.ui.Act.ActivitiesFrag;
+import DD.Android.Zhaohai.ui.Frag.FragActivities;
+import DD.Android.Zhaohai.ui.Frag.FragFriend;
 import DD.Android.Zhaohai.ui.Frag.FragNewActivity;
-import DD.Android.Zhaohai.ui.Frag.FriendFrag;
-import DD.Android.Zhaohai.ui.Frag.UsersFrag;
+import DD.Android.Zhaohai.ui.Frag.FragUsers;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -41,15 +41,15 @@ public class AdaZhaohaiPager extends FragmentPagerAdapter {
         Bundle bundle = new Bundle();
         switch (position) {
         case 0:
-            FriendFrag friendFragment = new FriendFrag();
+            FragFriend friendFragment = new FragFriend();
             friendFragment.setArguments(bundle);
             return friendFragment;
         case 1:
-            UsersFrag usersFragment = new UsersFrag();
+            FragUsers usersFragment = new FragUsers();
             usersFragment.setArguments(bundle);
             return usersFragment;
         case 2:
-            ActivitiesFrag activitiesFragment = new ActivitiesFrag();
+            FragActivities activitiesFragment = new FragActivities();
             activitiesFragment.setArguments(bundle);
             return activitiesFragment;
         case 3:

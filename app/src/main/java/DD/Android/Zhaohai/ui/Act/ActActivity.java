@@ -3,6 +3,7 @@ package DD.Android.Zhaohai.ui.Act;
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.ZhaohaiServiceProvider;
 import DD.Android.Zhaohai.core.Activity;
+import DD.Android.Zhaohai.core.CuteTime;
 import DD.Android.Zhaohai.core.User;
 import android.accounts.AccountsException;
 import android.app.AlertDialog;
@@ -133,10 +134,10 @@ public class ActActivity extends ActZhaohai {
         desc.setText(activity.getDesc());
         address.setText(activity.getAddress());
         if(activity.getUser() != null){
-            SimpleDateFormat sdf = (SimpleDateFormat) POST_DATE_FORMAT.clone();
-            sdf.setTimeZone(TimeZone.getDefault());
-            started_at.setText(sdf.format(activity.getStarted_at()));
-            finished_at.setText(sdf.format(activity.getFinished_at()));
+//            SimpleDateFormat sdf = (SimpleDateFormat) POST_DATE_FORMAT.clone();
+//            sdf.setTimeZone(TimeZone.getDefault());
+            started_at.setText(CuteTime.format(activity.getStarted_at()));
+            finished_at.setText(CuteTime.format(activity.getFinished_at()));
 
             user.setText(activity.getUser().getName());
 

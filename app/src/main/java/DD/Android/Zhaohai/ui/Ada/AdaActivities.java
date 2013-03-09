@@ -1,19 +1,20 @@
-package DD.Android.Zhaohai.ui.Act;
+package DD.Android.Zhaohai.ui.Ada;
 
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.core.Activity;
+import DD.Android.Zhaohai.core.CuteTime;
 import DD.Android.Zhaohai.ui.Ada.AdaAlternatingColorList;
 import android.view.LayoutInflater;
 
 import java.util.List;
 
-public class ActivitiesAda extends AdaAlternatingColorList<Activity> {
+public class AdaActivities extends AdaAlternatingColorList<Activity> {
     /**
      * @param inflater
      * @param items
      * @param selectable
      */
-    public ActivitiesAda(LayoutInflater inflater, List<Activity> items,
+    public AdaActivities(LayoutInflater inflater, List<Activity> items,
                          boolean selectable) {
         super(R.layout.item_activities, inflater, items, selectable);
     }
@@ -22,7 +23,7 @@ public class ActivitiesAda extends AdaAlternatingColorList<Activity> {
      * @param inflater
      * @param items
      */
-    public ActivitiesAda(LayoutInflater inflater, List<Activity> items) {
+    public AdaActivities(LayoutInflater inflater, List<Activity> items) {
         super(R.layout.item_activities, inflater, items);
     }
 
@@ -36,6 +37,6 @@ public class ActivitiesAda extends AdaAlternatingColorList<Activity> {
         super.update(position, item);
 
         setText(R.id.tv_name, item.getTitle());
-        setText(R.id.tv_date, item.getStarted_at().toLocaleString());
+        setText(R.id.tv_date, CuteTime.format(item.getStarted_at()));
     }
 }
