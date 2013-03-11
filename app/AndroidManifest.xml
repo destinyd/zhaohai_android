@@ -132,6 +132,7 @@
         <activity android:name=".ui.Act.ActNotifications" />
         <activity android:name=".ui.Act.ActActivityRequests" />
         <activity android:name=".ui.Act.ActNotification" />
+        <activity android:name=".ui.Act.ActReg" />
 
         <meta-data
                 android:name="com.google.android.maps.v2.API_KEY"

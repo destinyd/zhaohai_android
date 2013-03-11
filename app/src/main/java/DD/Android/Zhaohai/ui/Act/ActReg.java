@@ -1,11 +1,13 @@
 
-package DD.Android.Zhaohai.authenticator;
+package DD.Android.Zhaohai.ui.Act;
 
+import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.R.id;
 import DD.Android.Zhaohai.R.layout;
 import DD.Android.Zhaohai.R.string;
+import DD.Android.Zhaohai.authenticator.AccessToken;
+import DD.Android.Zhaohai.authenticator.ZhaohaiAuthenticatorActivity;
 import DD.Android.Zhaohai.core.Constants;
-import DD.Android.Zhaohai.ui.Act.ActReg;
 import DD.Android.Zhaohai.ui.Ada.AdaTextWatcher;
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -16,6 +18,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -25,7 +28,7 @@ import android.view.View.OnKeyListener;
 import android.widget.*;
 import android.widget.TextView.OnEditorActionListener;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.github.kevinsawicki.http.HttpRequest;
 import com.github.kevinsawicki.wishlist.Toaster;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockAccountAuthenticatorActivity;
@@ -35,7 +38,9 @@ import roboguice.util.RoboAsyncTask;
 import roboguice.util.Strings;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static DD.Android.Zhaohai.core.Constants.Http.*;
 import static android.R.layout.simple_dropdown_item_1line;
@@ -48,40 +53,44 @@ import static com.github.kevinsawicki.http.HttpRequest.post;
 /**
  * Activity to authenticate the ABUser against an API (example API on Parse.com)
  */
-public class ZhaohaiAuthenticatorActivity extends
+public class ActReg extends
         RoboSherlockAccountAuthenticatorActivity {
 
-    /**
-     * PARAM_CONFIRMCREDENTIALS
-     */
     public static final String PARAM_CONFIRMCREDENTIALS = "confirmCredentials";
-
-    /**
-     * PARAM_PASSWORD
-     */
-    public static final String PARAM_PASSWORD = "password";
-
-    /**
-     * PARAM_USERNAME
-     */
-    public static final String PARAM_USERNAME = "username";
-
-    /**
-     * PARAM_AUTHTOKEN_TYPE
-     */
+    public static final String PARAM_PASSWORD = "user[password]";
+    public static final String PARAM_PASSWORD_CONFIRMATION = "user[password_confirmation]";
+    public static final String PARAM_GENDER = "user[userinfo_attributes][gender]";
+    public static final String PARAM_EMAIL = "user[email]";
+    public static final String PARAM_NAME = "user[name]";
     public static final String PARAM_AUTHTOKEN_TYPE = "authtokenType";
 
 
     private AccountManager accountManager;
 
     @InjectView(id.et_email)
-    private AutoCompleteTextView emailText;
+    private EditText emailText;
+
+    @InjectView(id.et_name)
+    private EditText nameText;
 
     @InjectView(id.et_password)
     private EditText passwordText;
 
-    @InjectView(id.b_signin)
-    private Button signinButton;
+    @InjectView(id.et_password_confirmation)
+    private EditText passwordConfirmationText;
+
+    @InjectView(id.rg_gender)
+    private RadioGroup genderRadioGroup;
+
+    @InjectView(id.rb_female)
+    private RadioButton femaleButton;
+
+    @InjectView(id.rb_male)
+    private RadioButton maleButton;
+
+
+    @InjectView(id.b_signuup)
+    private Button signupButton;
 
     private TextWatcher watcher = validationTextWatcher();
 
@@ -97,7 +106,9 @@ public class ZhaohaiAuthenticatorActivity extends
 
     private String email;
 
-    private String password;
+    private String password, password_comfirmation, gender, name;
+
+    private String errors;
 
 
     /**
@@ -117,28 +128,22 @@ public class ZhaohaiAuthenticatorActivity extends
         super.onCreate(bundle);
 
         accountManager = AccountManager.get(this);
-        if(accountManager.getAccounts().length >0 ){
-            finish();
-        }
         final Intent intent = getIntent();
-        email = intent.getStringExtra(PARAM_USERNAME);
+        email = intent.getStringExtra(PARAM_EMAIL);
         authTokenType = intent.getStringExtra(PARAM_AUTHTOKEN_TYPE);
         authToken = intent.getStringExtra(KEY_AUTHTOKEN);
         requestNewAccount = email == null;
         confirmCredentials = intent.getBooleanExtra(PARAM_CONFIRMCREDENTIALS,
                 false);
 
-        setContentView(layout.act_login);
+        setContentView(layout.act_reg);
 
-        emailText.setAdapter(new ArrayAdapter<String>(this,
-                simple_dropdown_item_1line, userEmailAccounts()));
-
-        passwordText.setOnKeyListener(new OnKeyListener() {
+        passwordConfirmationText.setOnKeyListener(new OnKeyListener() {
 
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event != null && ACTION_DOWN == event.getAction()
-                        && keyCode == KEYCODE_ENTER && signinButton.isEnabled()) {
-                    handleLogin(signinButton);
+                        && keyCode == KEYCODE_ENTER && signupButton.isEnabled()) {
+                    handleReg(signupButton);
                     return true;
                 }
                 return false;
@@ -148,21 +153,24 @@ public class ZhaohaiAuthenticatorActivity extends
         passwordText.setOnEditorActionListener(new OnEditorActionListener() {
 
             public boolean onEditorAction(TextView v, int actionId,
-                    KeyEvent event) {
-                if (actionId == IME_ACTION_DONE && signinButton.isEnabled()) {
-                    handleLogin(signinButton);
+                                          KeyEvent event) {
+                if (actionId == IME_ACTION_DONE && signupButton.isEnabled()) {
+                    handleReg(signupButton);
                     return true;
                 }
                 return false;
             }
         });
 
+        nameText.addTextChangedListener(watcher);
         emailText.addTextChangedListener(watcher);
         passwordText.addTextChangedListener(watcher);
+        passwordConfirmationText.addTextChangedListener(watcher);
+    }
 
-        TextView signupText = (TextView) findViewById(id.tv_signup);
-        signupText.setMovementMethod(LinkMovementMethod.getInstance());
-        signupText.setText(Html.fromHtml(getString(string.signup_link)));
+    private String getGender(int checkedId) {
+        return checkedId == maleButton.getId() ?
+                "male" : "female";
     }
 
     private List<String> userEmailAccounts() {
@@ -189,8 +197,8 @@ public class ZhaohaiAuthenticatorActivity extends
     }
 
     private void updateUIWithValidation() {
-        boolean populated = populated(emailText) && populated(passwordText);
-        signinButton.setEnabled(populated);
+        boolean populated = populated(emailText) && populated(passwordText) && populated(passwordConfirmationText) && populated(nameText) && (passwordConfirmationText.getText().toString().equals(passwordText.getText().toString()));
+        signupButton.setEnabled(populated);
     }
 
     private boolean populated(EditText editText) {
@@ -200,7 +208,7 @@ public class ZhaohaiAuthenticatorActivity extends
     @Override
     protected Dialog onCreateDialog(int id) {
         final ProgressDialog dialog = new ProgressDialog(this);
-        dialog.setMessage(getText(string.message_signing_in));
+        dialog.setMessage(getText(string.message_signing_up));
         dialog.setIndeterminate(true);
         dialog.setCancelable(true);
         dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -220,38 +228,63 @@ public class ZhaohaiAuthenticatorActivity extends
      *
      * @param view
      */
-    public void handleLogin(View view) {
+    public void handleReg(View view) {
         if (authenticationTask != null)
             return;
 
         if (requestNewAccount)
             email = emailText.getText().toString();
+        name = nameText.getText().toString();
         password = passwordText.getText().toString();
+        password_comfirmation = passwordConfirmationText.getText().toString();
+        gender = getGender(genderRadioGroup.getCheckedRadioButtonId());
+
         showProgress();
 
         authenticationTask = new RoboAsyncTask<Boolean>(this) {
             public Boolean call() throws Exception {
 
-//                final String query = String.format("%s=%s&%s=%s", PARAM_USERNAME, email, PARAM_PASSWORD, password);
-                final String query = String.format("?%s=%s", HEADER_PARSE_GRANT_TYPE, GRANT_TYPE);
-                HttpRequest request = post(URL_AUTH + query)
+                HttpRequest request = post(URL_REG)
                         .part(HEADER_PARSE_APP_ID, PARSE_APP_ID)
                         .part(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
-                        .part(PARAM_USERNAME, email)
+                        .part(PARAM_EMAIL, email)
+                        .part(PARAM_NAME, name)
                         .part(PARAM_PASSWORD, password)
-                        ;
+                        .part(PARAM_PASSWORD_CONFIRMATION, password_comfirmation)
+                        .part(PARAM_GENDER, gender);
 
 
-                Log.d("Auth", "response=" + request.code());
+                errors = getResources().getString(string.errors);
 
-                if(request.ok()) {
+                int code = request.code();
+                Log.d("Auth", "response=" + code);
+
+                if (code == 201) {
                     String tmp = Strings.toString(request.buffer());
-                    Log.d("response body:",tmp);
+                    Log.d("response body:", tmp);
                     final AccessToken model = JSON.parseObject(tmp, AccessToken.class);
                     token = model.getAccess_token();
-                }
+                    return true;
+                } else if (request.code() == 422) {
+                    String tmp = Strings.toString(request.buffer());
+                    Log.d("response body:", tmp);
+                    Map<String, List<String>> map = JSON.parseObject(tmp, new TypeReference<Map<String, List<String>>>() {
+                    });
 
-                return request.ok();
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(getResources().getString(string.errors));
+                    sb.append(":\n");
+
+                    for (String key : map.keySet()) {
+                        String i18nkey = getStringResourceByName("label_" + key);
+                        sb.append(i18nkey);
+                        sb.append(":");
+                        sb.append(TextUtils.join(",", map.get(key)));
+                        sb.append("\n");
+                    }
+                    errors = sb.toString();
+                }
+                return false;
             }
 
             @Override
@@ -267,7 +300,7 @@ public class ZhaohaiAuthenticatorActivity extends
                 else
                     message = cause.getMessage();
 
-                Toaster.showLong(ZhaohaiAuthenticatorActivity.this, message);
+                Toaster.showLong(ActReg.this, message);
             }
 
             @Override
@@ -309,7 +342,7 @@ public class ZhaohaiAuthenticatorActivity extends
      * the authToken in AccountManager for this account.
      */
 
-    protected void finishLogin() {
+    protected void finishReg() {
         final Account account = new Account(email, Constants.Auth.ZHAOHAI_ACCOUNT_TYPE);
 
         if (requestNewAccount)
@@ -321,14 +354,12 @@ public class ZhaohaiAuthenticatorActivity extends
         intent.putExtra(KEY_ACCOUNT_NAME, email);
         intent.putExtra(KEY_ACCOUNT_TYPE, Constants.Auth.ZHAOHAI_ACCOUNT_TYPE);
         if (authTokenType != null
-                && authTokenType.equals(Constants.Auth.AUTHTOKEN_TYPE))
-        {
+                && authTokenType.equals(Constants.Auth.AUTHTOKEN_TYPE)) {
             intent.putExtra(KEY_AUTHTOKEN, authToken);
-            accountManager.setAuthToken(account,authTokenType,authToken);
+            accountManager.setAuthToken(account, authTokenType, authToken);
         }
         setAccountAuthenticatorResult(intent.getExtras());
         setResult(RESULT_OK, intent);
-//        make_sure_unique();
         finish();
     }
 
@@ -356,99 +387,18 @@ public class ZhaohaiAuthenticatorActivity extends
     public void onAuthenticationResult(boolean result) {
         if (result)
             if (!confirmCredentials)
-                finishLogin();
+                finishReg();
             else
                 finishConfirmCredentials(true);
         else {
-            Ln.d("onAuthenticationResult: failed to authenticate");
-            if (requestNewAccount)
-                Toaster.showLong(ZhaohaiAuthenticatorActivity.this,
-                        string.message_auth_failed_new_account);
-            else
-                Toaster.showLong(ZhaohaiAuthenticatorActivity.this,
-                        string.message_auth_failed);
+            Toaster.showLong(ActReg.this,
+                    errors);
         }
     }
 
-    static public String getToken(){
-        return token;
-    }
-
-    static public String getAuthToken(){
-        return authToken;
-    }
-
-    /**
-     * Handles onClick event on the Submit button. Sends username/password to
-     * the server for authentication.
-     * <p/>
-     * Specified by android:onClick="handleReg" in the layout xml
-     *
-     * @param view
-     */
-    public void handleTest(View view) {
-        if (authenticationTask != null)
-            return;
-        password = "";
-        showProgress();
-
-        authenticationTask = new RoboAsyncTask<Boolean>(this) {
-            public Boolean call() throws Exception {
-
-                HttpRequest request = post(URL_TEST)
-                        .part(HEADER_PARSE_APP_ID, PARSE_APP_ID)
-                        .part(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
-                        ;
-
-
-                Log.d("Auth", "response=" + request.code());
-
-                if(request.code() == 201) {
-                    String tmp = Strings.toString(request.buffer());
-                    Log.d("response body:",tmp);
-                    final AccessToken model = JSON.parseObject(tmp, AccessToken.class);
-                    token = model.getAccess_token();
-                    JSONObject j = JSON.parseObject(tmp);
-                    email = j.getString("email");
-                    return true;
-                }
-
-                return false;
-            }
-
-            @Override
-            protected void onException(Exception e) throws RuntimeException {
-                Throwable cause = e.getCause() != null ? e.getCause() : e;
-
-                String message;
-                // A 404 is returned as an Exception with this message
-                if ("Received authentication challenge is null".equals(cause
-                        .getMessage()))
-                    message = getResources().getString(
-                            string.message_bad_credentials);
-                else
-                    message = cause.getMessage();
-
-                Toaster.showLong(ZhaohaiAuthenticatorActivity.this, message);
-            }
-
-            @Override
-            public void onSuccess(Boolean authSuccess) {
-                onAuthenticationResult(authSuccess);
-            }
-
-            @Override
-            protected void onFinally() throws RuntimeException {
-                hideProgress();
-                authenticationTask = null;
-            }
-        };
-        authenticationTask.execute();
-    }
-
-    public void handleReg(View view) {
-        if (authenticationTask != null)
-            return;
-        startActivity(new Intent(ZhaohaiAuthenticatorActivity.this,ActReg.class));
+    private String getStringResourceByName(String aString) {
+        String packageName = getPackageName();
+        int resId = getResources().getIdentifier(aString, "string", packageName);
+        return getString(resId);
     }
 }

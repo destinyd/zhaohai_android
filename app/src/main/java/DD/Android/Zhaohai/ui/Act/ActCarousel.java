@@ -54,6 +54,14 @@ public class ActCarousel extends RoboSherlockFragmentActivity {
         indicator.setViewPager(pager);
         pager.setCurrentItem(2);
 
+        init_sliding_menu();
+
+
+
+        new StartMessageService().execute();
+    }
+
+    private void init_sliding_menu() {
         menu = new SlidingMenu(this);
         menu.setSlidingEnabled(false);
         menu.setMode(SlidingMenu.LEFT);
@@ -86,12 +94,7 @@ public class ActCarousel extends RoboSherlockFragmentActivity {
 //                //To change body of implemented methods use File | Settings | File Templates.
 //            }
 //        });
-
-
-
-        new StartMessageService().execute();
     }
-
 
 
     //    private static final int HELLO_ID = 1;

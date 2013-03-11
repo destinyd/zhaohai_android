@@ -180,7 +180,8 @@ public abstract class FragItemList<E> extends RoboSherlockFragment
             public void run() {
                 // Calling a refresh will force the service to look for a logged in ABUser
                 // and when it finds none the ABUser will be requested to log in again.
-                forceRefresh();
+//                forceRefresh();
+                getActivity().finish();
             }
         });
     }
