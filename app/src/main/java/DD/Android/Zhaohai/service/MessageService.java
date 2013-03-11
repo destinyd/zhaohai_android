@@ -29,7 +29,7 @@ public class MessageService extends RoboService {
 //    @Inject
 //    protected ZhaohaiServiceProvider serviceProvider;
 //    @InjectExtra(APIKEY)
-    protected String apiKey;
+    public String apiKey = null;
 
     //获取消息线程
     private MessageThread messageThread = null;
@@ -44,11 +44,6 @@ public class MessageService extends RoboService {
     private NotificationManager messageNotificatioManager = null;
 
     ZNotificationStatus mnotification_status = null;
-
-    @Override
-    public void onCreate() {
-        super.onCreate();    //To change body of overridden methods use File | Settings | File Templates.
-    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {

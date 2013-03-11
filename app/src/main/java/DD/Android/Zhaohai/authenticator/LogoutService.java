@@ -1,5 +1,6 @@
 package DD.Android.Zhaohai.authenticator;
 
+import DD.Android.Zhaohai.service.MessageService;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerFuture;
@@ -24,7 +25,7 @@ public class LogoutService {
 
 
     public void logout(final Runnable onSuccess) {
-
+        MessageService.apiKey = null;
         new LogoutTask(context, onSuccess).execute();
     }
 

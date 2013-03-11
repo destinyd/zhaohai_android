@@ -5,15 +5,18 @@ import DD.Android.Zhaohai.R.id;
 import DD.Android.Zhaohai.R.layout;
 import DD.Android.Zhaohai.R.string;
 import DD.Android.Zhaohai.core.Constants;
+import DD.Android.Zhaohai.service.MessageService;
 import DD.Android.Zhaohai.ui.Act.ActReg;
 import DD.Android.Zhaohai.ui.Ada.AdaTextWatcher;
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.accounts.AccountsException;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.*;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -34,9 +37,11 @@ import roboguice.util.Ln;
 import roboguice.util.RoboAsyncTask;
 import roboguice.util.Strings;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static DD.Android.Zhaohai.core.Constants.Extra.APIKEY;
 import static DD.Android.Zhaohai.core.Constants.Http.*;
 import static android.R.layout.simple_dropdown_item_1line;
 import static android.accounts.AccountManager.*;
@@ -117,9 +122,7 @@ public class ZhaohaiAuthenticatorActivity extends
         super.onCreate(bundle);
 
         accountManager = AccountManager.get(this);
-        if(accountManager.getAccounts().length >0 ){
-            finish();
-        }
+
         final Intent intent = getIntent();
         email = intent.getStringExtra(PARAM_USERNAME);
         authTokenType = intent.getStringExtra(PARAM_AUTHTOKEN_TYPE);
@@ -328,7 +331,6 @@ public class ZhaohaiAuthenticatorActivity extends
         }
         setAccountAuthenticatorResult(intent.getExtras());
         setResult(RESULT_OK, intent);
-//        make_sure_unique();
         finish();
     }
 

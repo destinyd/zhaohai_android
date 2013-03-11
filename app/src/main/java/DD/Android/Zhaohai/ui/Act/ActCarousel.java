@@ -4,26 +4,20 @@ package DD.Android.Zhaohai.ui.Act;
 
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.R.id;
-import DD.Android.Zhaohai.authenticator.ApiKeyProvider;
 import DD.Android.Zhaohai.service.MessageService;
 import DD.Android.Zhaohai.ui.Ada.AdaZhaohaiPager;
-import android.accounts.AccountsException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.view.ViewPager;
 import com.actionbarsherlock.view.Window;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockFragmentActivity;
-import com.google.inject.Inject;
 import com.slidingmenu.lib.SlidingMenu;
 import com.viewpagerindicator.TitlePageIndicator;
 import roboguice.inject.InjectView;
-
-import java.io.IOException;
 
 import static DD.Android.Zhaohai.core.Constants.Extra.APIKEY;
 
@@ -37,7 +31,7 @@ public class ActCarousel extends RoboSherlockFragmentActivity {
     @InjectView(id.vp_pages)
     private ViewPager pager;
 
-    @Inject private ApiKeyProvider keyProvider;
+//    @Inject private ApiKeyProvider keyProvider;
     SlidingMenu menu;
 
     @Override
@@ -57,8 +51,30 @@ public class ActCarousel extends RoboSherlockFragmentActivity {
         init_sliding_menu();
 
 
+        bind_message_service();
+    }
 
-        new StartMessageService().execute();
+    @Override
+    protected void onDestroy() {
+        if(is_bind_message_service){
+            unbindService(serviceConnection);
+        }
+        super.onDestroy();    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    boolean is_bind_message_service = false;
+
+    private void bind_message_service() {
+            try {
+//                String apiKey = keyProvider.getAuthKey();
+                String apiKey = DD.Android.Zhaohai.authenticator.ZhaohaiAuthenticatorActivity.getAuthToken();
+                Intent serviceIntent = new Intent(ActCarousel.this, MessageService.class).putExtra(APIKEY,apiKey);
+    //                        startService(serviceIntent);
+                bindService(serviceIntent,serviceConnection, Context.BIND_AUTO_CREATE);
+                is_bind_message_service = true;
+            } catch (Exception e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
     }
 
     private void init_sliding_menu() {
@@ -95,38 +111,22 @@ public class ActCarousel extends RoboSherlockFragmentActivity {
 //            }
 //        });
     }
-
+//
+//    @Override
+//    protected void onDestroy() {
+//        try{
+//            if(messageService != null)
+//                unbindService(serviceConnection);
+//        }catch (Exception e){
+//
+//        }
+//        super.onDestroy();    //To change body of overridden methods use File | Settings | File Templates.
+//    }
 
     //    private static final int HELLO_ID = 1;
-    private class StartMessageService extends AsyncTask<Void, String, Void> {
-        //步骤2：实现抽象方法doInBackground()，代码将在后台线程中执行，由execute()触发，由于这个例子并不需要传递参数，使用Void...，具体书写方式为范式书写
-        protected Void/*参数3*/ doInBackground(Void... params/*参数1*/) {
-            boolean isMessagePush = true;//不开启就设置为false;
-            if (isMessagePush) {
-                try {
-                    String apiKey = keyProvider.getAuthKey();
-                    Intent serviceIntent = new Intent(ActCarousel.this, MessageService.class).putExtra(APIKEY,apiKey);
-                    startService(serviceIntent);
-                    bindService(serviceIntent,serviceConnection, Context.BIND_AUTO_CREATE);
 
-                } catch (AccountsException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                } catch (IOException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                }
-            }
-            return null;
-
-        }
-
-        //步骤4：定义后台进程执行完后的处理，本例，采用Toast
-
-        protected void onPostExecute(Void result/*参数3*/) {
-        }
-    }
-
-    MessageService messageService;
-    ServiceConnection serviceConnection = new ServiceConnection() {
+    MessageService messageService = null;
+    public ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             messageService = ((MessageService.MessageBinder) iBinder).getService();
@@ -137,5 +137,4 @@ public class ActCarousel extends RoboSherlockFragmentActivity {
             messageService = null;
         }
     };
-
 }
