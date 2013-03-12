@@ -25,7 +25,6 @@ public class LogoutService {
 
 
     public void logout(final Runnable onSuccess) {
-        MessageService.apiKey = null;
         new LogoutTask(context, onSuccess).execute();
     }
 
