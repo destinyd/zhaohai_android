@@ -35,4 +35,6 @@
 
     <color name="background_selected">#1fb6ed</color>
 
+    <!--jiepang-->
+    <color name="head_background">#ffdbdbdb</color>
 </resources>

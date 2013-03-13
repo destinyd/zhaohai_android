@@ -80,4 +80,12 @@
     <string name="male">Male</string>
     <string name="label_name">Nickname</string>
     <string name="errors">Errors</string>
+
+    <!--jiepang-->
+    <string name="hyphen">-</string>
+    <string name="join_activity">Join</string>
+    <string name="followers">Followers</string>
+    <string name="points_hold">组织</string>
+    <string name="points_join">参加</string>
+    <string name="points_interested">感兴趣</string>
 </resources>

@@ -105,4 +105,25 @@
     <style name="layout_vertical" parent="layout_full">
         <item name="android:layout_height">0px</item>
     </style>
+
+    <!--momo-->
+    <style name="Style_Scrollable">
+        <item name="android:fadingEdge">none</item>
+        <item name="android:scrollingCache">false</item>
+        <item name="android:cacheColorHint">#00000000</item>
+    </style>
+    <!--jiepang-->
+    <style name="subdivider_text_white">
+        <item name="android:textSize">14.0dip</item>
+        <item name="android:textColor">#ffffffff</item>
+    </style>
+    <style name="user_profile_score_text">
+        <item name="android:textSize">20.0dip</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ffffffff</item>
+    </style>
+    <style name="title_primary">
+        <item name="android:textSize">18.0px</item>
+        <item name="android:textColor">#ff3b3b3b</item>
+    </style>
 </resources>
