@@ -1,7 +1,7 @@
 package DD.Android.Zhaohai.ui.Ada;
 
 import DD.Android.Zhaohai.R;
-import DD.Android.Zhaohai.core.CuteTime;
+import DD.Android.Zhaohai.core.PrettyDateFormat;
 import DD.Android.Zhaohai.core.ZNotification;
 import DD.Android.Zhaohai.ui.Act.ActNotification;
 import android.content.Context;
@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
+
 import static DD.Android.Zhaohai.core.Constants.Extra.NOTIFICATION;
 
 public class AdaNotifications extends BaseAdapter {
@@ -62,7 +63,7 @@ public class AdaNotifications extends BaseAdapter {
             rl.setBackgroundColor(R.color.background_selected);
 
         tvText.setText(notification.getTitle());
-        tvTime.setText(CuteTime.format(notification.getCreated_at()));
+        tvTime.setText(PrettyDateFormat.defaultFormat(notification.getCreated_at()));
 
         rl.setOnClickListener(new View.OnClickListener() {
 

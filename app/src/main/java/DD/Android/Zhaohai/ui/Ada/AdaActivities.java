@@ -2,8 +2,7 @@ package DD.Android.Zhaohai.ui.Ada;
 
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.core.Activity;
-import DD.Android.Zhaohai.core.CuteTime;
-import DD.Android.Zhaohai.ui.Ada.AdaAlternatingColorList;
+import DD.Android.Zhaohai.core.PrettyDateFormat;
 import android.view.LayoutInflater;
 
 import java.util.List;
@@ -37,6 +36,6 @@ public class AdaActivities extends AdaAlternatingColorList<Activity> {
         super.update(position, item);
 
         setText(0, item.getTitle());
-        setText(1, CuteTime.format(item.getStarted_at()));
+        setText(1, PrettyDateFormat.defaultFormat(item.getStarted_at()));
     }
 }
