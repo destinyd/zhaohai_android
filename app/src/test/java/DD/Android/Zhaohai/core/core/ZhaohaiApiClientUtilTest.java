@@ -21,7 +21,7 @@ public class ZhaohaiApiClientUtilTest {
     @Test
     @Ignore("Requires the API to use basic authentication. Parse.com api does not. See BootstrapService for more info.")
     public void shouldCreateClient() throws Exception {
-        List<User> users = new ZhaohaiService("demo@androidbootstrap.com", "foobar").getUsers();
+        List<User> users = new ZhaohaiService("demo@androidbootstrap.com", "foobar").getUsers(1);
 
         assertThat(users.get(0).getName(), notNullValue());
     }

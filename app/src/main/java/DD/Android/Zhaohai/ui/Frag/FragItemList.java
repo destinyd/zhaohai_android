@@ -13,18 +13,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
+import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.authenticator.LogoutService;
+import com.costum.android.widget.LoadMoreListView;
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 import com.github.kevinsawicki.wishlist.Toaster;
 import com.github.kevinsawicki.wishlist.ViewUtils;
@@ -67,7 +64,7 @@ public abstract class FragItemList<E> extends RoboSherlockFragment
     /**
      * List view
      */
-    protected ListView listView;
+    protected LoadMoreListView listView;
 
     /**
      * Empty view
@@ -83,6 +80,14 @@ public abstract class FragItemList<E> extends RoboSherlockFragment
      * Is the list currently shown?
      */
     protected boolean listShown;
+
+    AdaHeaderFooterList<SingleTypeAdapter<E>> mAdapter;
+
+    protected int mPage = 1;
+
+    protected List<E> mItems = items;
+
+    protected int mItemsCount = 0;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -117,13 +122,13 @@ public abstract class FragItemList<E> extends RoboSherlockFragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        listView = (ListView) view.findViewById(android.R.id.list);
+        listView = (LoadMoreListView) view.findViewById(android.R.id.list);
         listView.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
-                onListItemClick((ListView) parent, view, position, id);
+                onListItemClick((LoadMoreListView) parent, view, position, id);
             }
         });
         progressBar = (ProgressBar) view.findViewById(id.pb_loading);
@@ -139,7 +144,7 @@ public abstract class FragItemList<E> extends RoboSherlockFragment
      * @param activity
      * @param listView
      */
-    protected void configureList(Activity activity, ListView listView) {
+    protected void configureList(Activity activity, LoadMoreListView listView) {
         listView.setAdapter(createAdapter());
     }
 
@@ -242,8 +247,9 @@ public abstract class FragItemList<E> extends RoboSherlockFragment
      */
     protected AdaHeaderFooterList<SingleTypeAdapter<E>> createAdapter() {
         SingleTypeAdapter<E> wrapped = createAdapter(items);
-        return new AdaHeaderFooterList<SingleTypeAdapter<E>>(getListView(),
+        mAdapter = new AdaHeaderFooterList<SingleTypeAdapter<E>>(getListView(),
                 wrapped);
+        return mAdapter;
     }
 
     /**
@@ -303,7 +309,7 @@ public abstract class FragItemList<E> extends RoboSherlockFragment
      *
      * @return listView
      */
-    public ListView getListView() {
+    public LoadMoreListView getListView() {
         return listView;
     }
 
@@ -315,11 +321,20 @@ public abstract class FragItemList<E> extends RoboSherlockFragment
     @SuppressWarnings("unchecked")
     protected AdaHeaderFooterList<SingleTypeAdapter<E>> getListAdapter() {
         if (listView != null)
-            return (AdaHeaderFooterList<SingleTypeAdapter<E>>) listView
-                    .getAdapter();
+//            return (AdaHeaderFooterList<SingleTypeAdapter<E>>) listView
+//                    .getAdapter();
+            return mAdapter;
         else
             return null;
     }
+//    @SuppressWarnings("unchecked")
+//    protected HeaderViewListAdapter getListAdapter() {
+//        if (listView != null)
+//            return (HeaderViewListAdapter) listView
+//                    .getAdapter();
+//        else
+//            return null;
+//    }
 
     /**
      * Set list adapter to use on list view
@@ -434,7 +449,7 @@ public abstract class FragItemList<E> extends RoboSherlockFragment
      * @param position
      * @param id
      */
-    public void onListItemClick(ListView l, View v, int position, long id) {
+    public void onListItemClick(LoadMoreListView l, View v, int position, long id) {
     }
 
     /**

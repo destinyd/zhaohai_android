@@ -69,7 +69,7 @@ public class ZhaohaiServiceTest {
     @Test
     public void getUsersEmptyResponse() throws IOException {
         doReturn(createReader("")).when(request).bufferedReader();
-        List<User> users = service.getUsers();
+        List<User> users = service.getUsers(1);
         assertNotNull(users);
         assertTrue(users.isEmpty());
     }
@@ -95,7 +95,7 @@ public class ZhaohaiServiceTest {
     @Test
     public void getReferrersEmptyResponse() throws IOException {
         doReturn(createReader("")).when(request).bufferedReader();
-        List<Activity> referrers = service.getActivities();
+        List<Activity> referrers = service.getActivities(1);
         assertNotNull(referrers);
         assertTrue(referrers.isEmpty());
     }
