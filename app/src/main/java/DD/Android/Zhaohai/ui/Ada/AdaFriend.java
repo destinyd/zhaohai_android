@@ -50,9 +50,9 @@ public class AdaFriend extends SingleTypeAdapter<User> {
     @Override
     protected void update(int position, User user) {
 
-        avatars.bind(imageView(R.id.iv_avatar), user);
+        avatars.bind(imageView(0), user);
 
-        setText(R.id.tv_name, user.getName());
+        setText(1, user.getName());
 
     }
 }

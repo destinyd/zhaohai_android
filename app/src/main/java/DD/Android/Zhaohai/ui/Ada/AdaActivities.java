@@ -36,7 +36,7 @@ public class AdaActivities extends AdaAlternatingColorList<Activity> {
     protected void update(int position, Activity item) {
         super.update(position, item);
 
-        setText(R.id.tv_name, item.getTitle());
-        setText(R.id.tv_date, CuteTime.format(item.getStarted_at()));
+        setText(0, item.getTitle());
+        setText(1, CuteTime.format(item.getStarted_at()));
     }
 }
