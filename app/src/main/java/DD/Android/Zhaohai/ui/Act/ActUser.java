@@ -30,7 +30,7 @@ public class ActUser extends ActZhaohai {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        avatarLoader.bind(avatar, user);
+        avatarLoader.bind(avatar, user,"avatar");
         name.setText(user.getName());
 
     }

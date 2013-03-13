@@ -275,8 +275,15 @@ public class UserAvatarLoader {
         return this;
     }
 
-    private String getAvatarUrl(User user) {
-        String avatarUrl = URL_BASE + user.getIconUrl();
+    private String getAvatarUrl(User user,String type) {
+        String avatarUrl = URL_BASE;
+        if(type.equals("avatar")){
+            avatarUrl += user.getAvatarUrl();
+        }else if(type.equals("thumb")){
+            avatarUrl += user.getThumbUrl();
+        }else{
+            avatarUrl += user.getIconUrl();
+        }
         return avatarUrl;
     }
 
@@ -292,15 +299,19 @@ public class UserAvatarLoader {
      * @return this helper
      */
     public UserAvatarLoader bind(final ImageView view, final User user) {
+        return bind(view,user,"icon");
+    }
+
+    public UserAvatarLoader bind(final ImageView view, final User user,final String type) {
         if (user == null)
             return setImage(loadingAvatar, view);
 
-        String avatarUrl = getAvatarUrl(user);
-        if(avatarUrl.equals("http://192.168.1.4:3002/assets/noface_icon.gif") || TextUtils.isEmpty(avatarUrl))
-        {
-//            if (TextUtils.isEmpty(avatarUrl))
-            return setImage(loadingAvatar, view);
-        }
+        String avatarUrl = getAvatarUrl(user,type);
+//        if(avatarUrl.startsWith(URL_BASE + "/assets/noface") || TextUtils.isEmpty(avatarUrl))
+//        {
+////            if (TextUtils.isEmpty(avatarUrl))
+//            return setImage(loadingAvatar, view);
+//        }
 
         final String userId = user._id;
 

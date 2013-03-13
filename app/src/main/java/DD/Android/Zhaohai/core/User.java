@@ -72,7 +72,11 @@ public class User implements Serializable {
     }
 
     public String getIconUrl() {
-        return avatar.icon.url;
+        return avatar.getIcon().getUrl();
+    }
+
+    public String getThumbUrl() {
+        return avatar.getThumb().getUrl();
     }
 
     public boolean isChecked() {
