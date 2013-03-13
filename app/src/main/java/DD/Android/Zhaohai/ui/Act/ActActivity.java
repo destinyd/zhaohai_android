@@ -3,7 +3,7 @@ package DD.Android.Zhaohai.ui.Act;
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.ZhaohaiServiceProvider;
 import DD.Android.Zhaohai.core.Activity;
-import DD.Android.Zhaohai.core.CuteTime;
+import DD.Android.Zhaohai.core.PrettyDateFormat;
 import DD.Android.Zhaohai.core.User;
 import android.accounts.AccountsException;
 import android.app.AlertDialog;
@@ -25,14 +25,11 @@ import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimeZone;
 
 import static DD.Android.Zhaohai.core.Constants.Extra.ACTIVITY;
 import static DD.Android.Zhaohai.core.Constants.Other.ActivityTaskStatus.*;
-import static DD.Android.Zhaohai.core.Constants.Other.POST_DATE_FORMAT;
 import static android.content.DialogInterface.OnClickListener;
 
 public class ActActivity extends ActZhaohai {
@@ -136,8 +133,8 @@ public class ActActivity extends ActZhaohai {
         if(activity.getUser() != null){
 //            SimpleDateFormat sdf = (SimpleDateFormat) POST_DATE_FORMAT.clone();
 //            sdf.setTimeZone(TimeZone.getDefault());
-            started_at.setText(CuteTime.format(activity.getStarted_at()));
-            finished_at.setText(CuteTime.format(activity.getFinished_at()));
+            started_at.setText(PrettyDateFormat.defaultFormat(activity.getStarted_at()));
+            finished_at.setText(PrettyDateFormat.defaultFormat(activity.getFinished_at()));
 
             user.setText(activity.getUser().getName());
 

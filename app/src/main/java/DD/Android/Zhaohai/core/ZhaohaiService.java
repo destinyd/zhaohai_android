@@ -7,7 +7,6 @@ import com.github.kevinsawicki.http.HttpRequest;
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
 
@@ -178,31 +177,35 @@ public class ZhaohaiService {
                 .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
     }
 
-    public List<User> getFriend() throws IOException {
+    public List<User> getFriend(
+//            int page
+    ) throws IOException {
         try {
             if (apiKey == null)
                 return Collections.emptyList();
+//            String url = String.format(FORMAT_URL_FRIEND,page) + getTokenParam();
             HttpRequest request = get(URL_FRIEND + "?" + HEADER_PARSE_ACCESS_TOKEN + "=" + apiKey)
+//            HttpRequest request = get(url)
                     .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
                     .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
             String body = request.body();
             List<User> response = JSON.parseArray(body, User.class);
             return response;
-//            }
-//            return Collections.emptyList();
         } catch (HttpRequestException e) {
             throw e.getCause();
         }
     }
 
-    public List<User> getUsers() throws IOException {
+    public List<User> getUsers(int page) throws IOException {
 
         try {
 //            Type collectionType = new TypeToken<List<User>>(){}.getType();
 
             if (apiKey == null)
                 return Collections.emptyList();
-            HttpRequest request = get(URL_USERS + "?" + HEADER_PARSE_ACCESS_TOKEN + "=" + apiKey)
+            String url = String.format(FORMAT_URL_USERS,page) + getTokenParam();
+            HttpRequest request = //get(URL_USERS + "?" + HEADER_PARSE_ACCESS_TOKEN + "=" + apiKey)
+                    get(url)
                     .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
                     .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
             String body = request.body();
@@ -213,22 +216,26 @@ public class ZhaohaiService {
         }
     }
 
-    public List<Activity> getActivities() throws IOException {
+    public List<Activity> getActivities(int page) throws IOException {
         try {
             if (apiKey == null)
                 return Collections.emptyList();
-            HttpRequest request = get(URL_ACTIVITIES + "?" + HEADER_PARSE_ACCESS_TOKEN + "=" + apiKey)
+//                return null;
+            String url = String.format(FORMAT_URL_ACTIVITIES,page) + getTokenParam();
+//            HttpRequest request = get(URL_ACTIVITIES + "?" + HEADER_PARSE_ACCESS_TOKEN + "=" + apiKey)
+            HttpRequest request = get(url)
                     .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
                     .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
-//            Type collectionType = new TypeToken<List<Activity>>() {
-//            }.getType();
-//            List<Activity> response = GSON.fromJson(request.bufferedReader(), collectionType);
             String body = request.body();
             List<Activity> response = JSON.parseArray(body, Activity.class);
-//            List<Activity> response = fromJson(request, Activity.class);
-//            if (response != null && response.size() > 0)
+//            if(request.ok())
 //            {
-            return response;
+                return response;
+//            }
+//            else
+//            {
+//                return Collections.emptyList();
+////                return null;
 //            }
 //            return Collections.emptyList();
         } catch (HttpRequestException e) {

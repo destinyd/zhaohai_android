@@ -76,15 +76,20 @@ public class Constants {
          */
         public static final String URL_USERS = API_BASE + "/users.json";
 
+        public static final String FORMAT_URL_USERS = API_BASE + "/users.json?page=%d&";
+
         /**
          * List Friend URL
          */
         public static final String URL_FRIEND = API_BASE + "/users/friend.json";
+        public static final String FORMAT_URL_FRIEND = API_BASE + "/users/friend.json?page=%d&";
 
         /**
          * List Checkin's URL
          */
         public static final String URL_ACTIVITIES = API_BASE + "/activities.json";
+
+        public static final String FORMAT_URL_ACTIVITIES = API_BASE + "/activities.json?page=%d&";
 
         public static final String URL_ME = API_BASE + "/me.json";
 

@@ -2,7 +2,7 @@ package DD.Android.Zhaohai.ui.Act;
 
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.ZhaohaiServiceProvider;
-import DD.Android.Zhaohai.core.CuteTime;
+import DD.Android.Zhaohai.core.PrettyDateFormat;
 import DD.Android.Zhaohai.core.ZNotification;
 import android.accounts.AccountsException;
 import android.os.AsyncTask;
@@ -174,7 +174,7 @@ public class ActNotification extends ActZhaohai {
             }
             setTitle(notification.getTitle());
 //            tv_type.setText(notification.getTitle());
-            tv_created_at.setText(CuteTime.format(notification.getCreated_at()));
+            tv_created_at.setText(PrettyDateFormat.defaultFormat(notification.getCreated_at()));
             progressDialogDismiss();
         }
     }

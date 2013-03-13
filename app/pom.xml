@@ -90,9 +90,9 @@
             <!--<type>apklib</type>-->
         <!--</dependency>-->
         <dependency>
-            <groupId>com.github.chrisbanes.pulltorefresh</groupId>
-            <artifactId>extra-listfragment</artifactId>
-            <version>2.1.1</version>
+            <groupId>com.costum</groupId>
+            <artifactId>loadmorelistview</artifactId>
+            <version>0.1.0</version>
             <type>apklib</type>
         </dependency>
         <dependency>
@@ -137,7 +137,7 @@
         <dependency>
             <groupId>com.github.kevinsawicki</groupId>
             <artifactId>wishlist</artifactId>
-            <version>0.3</version>
+            <version>0.8</version>
             <type>apklib</type>
         </dependency>
         <dependency>
