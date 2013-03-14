@@ -6,4 +6,6 @@
   <dimen name="normal_padding_length">10.0dip</dimen>
   <dimen name="profile_image_length">93.0dip</dimen>
   <dimen name="tiny1_padding_length">3.0dip</dimen>
+  <!--momo-->
+  <dimen name="style_patterns">16.0dip</dimen>
 </resources>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:id="@+id/venue_title"
+                android:background="@color/head_background" android:layout_width="fill_parent"
+                android:layout_height="@dimen/venue_title_height_2"
+                xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@+id/divider_a" android:background="@drawable/img_divider"
+               android:layout_width="fill_parent" android:layout_height="wrap_content"
+               android:layout_alignParentBottom="true"/>
+    <RelativeLayout android:id="@+id/view_default_avatar" android:background="@android:color/white"
+                    android:layout_width="@dimen/sample_image_length"
+                    android:layout_height="@dimen/sample_image_length"
+                    android:layout_marginLeft="@dimen/normal_padding_length"
+                    android:layout_marginRight="@dimen/normal_padding_length"
+                    android:layout_alignParentLeft="true" android:layout_centerVertical="true">
+        <ImageView android:id="@+id/iv_avatar" android:background="@drawable/bg_photo"
+                   android:layout_width="@dimen/profile_image_length"
+                   android:layout_height="@dimen/profile_image_length"
+                   android:src="@drawable/img_default_avatar_large" android:scaleType="fitXY"
+                   android:layout_centerInParent="true"/>
+    </RelativeLayout>
+    <TableLayout android:id="@+id/points_table" android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginRight="@dimen/normal_padding_length" android:stretchColumns="*"
+                 android:shrinkColumns="*" android:layout_toRightOf="@+id/view_default_avatar"
+                 android:layout_alignBottom="@+id/view_default_avatar">
+        <TableRow>
+            <RelativeLayout android:id="@+id/relative_profile_mayors"
+                            android:background="@drawable/bg_score_left"
+                            android:paddingBottom="@dimen/tiny1_padding_length" android:focusable="true"
+                            android:layout_height="wrap_content">
+                <TextView android:id="@+id/text_mayors_title" android:layout_width="wrap_content"
+                          android:layout_height="wrap_content" android:text="@string/points_hold"
+                          android:shadowColor="#ff000000" android:shadowDx="0.0" android:shadowDy="-1.0"
+                          android:shadowRadius="1.0" android:layout_alignParentLeft="true"
+                          android:layout_alignParentTop="true" style="@style/subdivider_text_white"/>
+                <TextView android:id="@+id/tv_points_hold" android:layout_width="wrap_content"
+                          android:layout_height="wrap_content" android:text="@string/hyphen"
+                          android:shadowColor="#ff000000" android:shadowDx="0.0" android:shadowDy="-1.0"
+                          android:shadowRadius="1.0" android:layout_below="@+id/text_mayors_title"
+                          android:layout_alignParentLeft="true" style="@style/user_profile_score_text"/>
+            </RelativeLayout>
+            <RelativeLayout android:id="@+id/relative_profile_badges"
+                            android:background="@drawable/bg_score_center"
+                            android:paddingBottom="@dimen/tiny1_padding_length" android:focusable="true"
+                            android:layout_height="wrap_content">
+                <TextView android:id="@+id/text_badge_title" android:layout_width="wrap_content"
+                          android:layout_height="wrap_content" android:text="@string/points_join"
+                          android:shadowColor="#ff000000" android:shadowDx="0.0" android:shadowDy="-1.0"
+                          android:shadowRadius="1.0" android:layout_alignParentLeft="true"
+                          android:layout_alignParentTop="true" style="@style/subdivider_text_white"/>
+                <TextView android:id="@+id/tv_points_join" android:layout_width="wrap_content"
+                          android:layout_height="wrap_content" android:text="@string/hyphen"
+                          android:shadowColor="#ff000000" android:shadowDx="0.0" android:shadowDy="-1.0"
+                          android:shadowRadius="1.0" android:layout_below="@+id/text_badge_title"
+                          android:layout_alignParentLeft="true" style="@style/user_profile_score_text"/>
+            </RelativeLayout>
+            <RelativeLayout android:id="@+id/relative_profile_score"
+                            android:background="@drawable/bg_score_right"
+                            android:paddingBottom="@dimen/tiny1_padding_length" android:focusable="true"
+                            android:layout_height="wrap_content">
+                <TextView android:id="@+id/text_points_title" android:layout_width="wrap_content"
+                          android:layout_height="wrap_content" android:text="@string/points_interested"
+                          android:shadowColor="#ff000000" android:shadowDx="0.0" android:shadowDy="-1.0"
+                          android:shadowRadius="1.0" android:layout_alignParentLeft="true"
+                          android:layout_alignParentTop="true" style="@style/subdivider_text_white"/>
+                <TextView android:id="@+id/tv_points_interested" android:layout_width="wrap_content"
+                          android:layout_height="wrap_content" android:text="@string/hyphen"
+                          android:shadowColor="#ff000000" android:shadowDx="0.0" android:shadowDy="-1.0"
+                          android:shadowRadius="1.0" android:layout_below="@+id/text_points_title"
+                          android:layout_alignParentLeft="true" style="@style/user_profile_score_text"/>
+            </RelativeLayout>
+        </TableRow>
+    </TableLayout>
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+                    android:layout_toRightOf="@+id/view_default_avatar"
+                    android:layout_above="@+id/points_table">
+        <TextView android:ellipsize="marquee" android:id="@+id/tv_name"
+                  android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:layout_marginRight="@dimen/normal_padding_length" android:singleLine="true"
+                  android:layout_alignParentLeft="true" android:layout_centerVertical="true"
+                  style="@style/title_primary"/>
+    </RelativeLayout>
+</RelativeLayout>

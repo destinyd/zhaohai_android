@@ -37,4 +37,9 @@
 
     <!--jiepang-->
     <color name="head_background">#ffdbdbdb</color>
+    <!--momo-->
+    <color name="blue">#ff0f81d9</color>
+    <color name="devideline">#ffd0c9b8</color>
+    <color name="font_attribute">#ff000000</color>
+    <color name="font_value">#ff888271</color>
 </resources>

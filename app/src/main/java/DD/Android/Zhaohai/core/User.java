@@ -19,6 +19,10 @@ public class User implements Serializable {
     protected Avatar avatar;
     private boolean checked;    //保存复选框的状态
 
+    protected Userinfo userinfo;
+
+    protected Points points;
+
     public String get_id() {
         return _id;
     }
@@ -85,5 +89,33 @@ public class User implements Serializable {
 
     public void setChecked(boolean checked) {
         this.checked = checked;
+    }
+
+    public Userinfo getUserinfo() {
+        return userinfo;
+    }
+
+    public void setUserinfo(Userinfo userinfo) {
+        this.userinfo = userinfo;
+    }
+
+    public Points getPoints() {
+        return points;
+    }
+
+    public void setPoints(Points points) {
+        this.points = points;
+    }
+
+    public String getPointsHold(){
+        return String.valueOf(getPoints().getActivities());
+    }
+
+    public String getPointsJoin(){
+        return String.valueOf(getPoints().getIn_activities());
+    }
+
+    public String getPointsInterested(){
+        return String.valueOf(getPoints().getInterested_activities());
     }
 }

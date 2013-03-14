@@ -126,4 +126,61 @@
         <item name="android:textSize">18.0px</item>
         <item name="android:textColor">#ff3b3b3b</item>
     </style>
+    <style name="style_patterns">
+        <item name="android:paddingLeft">@dimen/style_patterns</item>
+        <item name="android:paddingRight">@dimen/style_patterns</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="style_patterns_sectionBar">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">10.0dip</item>
+        <item name="android:paddingTop">10.0dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">40.0dip</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+    <style name="Profile_Item_Top">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:textColor">@color/font_attribute</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentTop">true</item>
+    </style>
+    <style name="Profile_Item_Bottom">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textColor">@color/font_value</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="Style_Patterns_Content">
+        <item name="android:paddingLeft">10.0dip</item>
+        <item name="android:paddingRight">10.0dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">50.0dip</item>
+    </style>
+    <style name="Patterns_Text_Left">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:textColor">@color/font_attribute</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+    <style name="Profile_Item_Right" parent="@style/Item_Right">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:textColor">@color/font_value</item>
+        <item name="android:singleLine">true</item>
+    </style>
+    <style name="Item_Right">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">12.0dip</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
 </resources>

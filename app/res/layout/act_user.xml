@@ -7,87 +7,106 @@
 
         <LinearLayout android:orientation="vertical" android:layout_width="fill_parent"
                       android:layout_height="fill_parent">
-            <RelativeLayout android:orientation="vertical" android:id="@+id/venue_title"
-                            android:background="@color/head_background" android:layout_width="fill_parent"
-                            android:layout_height="@dimen/venue_title_height_2">
-                <ImageView android:id="@+id/divider_a" android:background="@drawable/img_divider"
-                           android:layout_width="fill_parent" android:layout_height="wrap_content"
-                           android:layout_alignParentBottom="true"/>
-                <RelativeLayout android:id="@+id/view_default_avatar" android:background="@android:color/white"
-                                android:layout_width="@dimen/sample_image_length"
-                                android:layout_height="@dimen/sample_image_length"
-                                android:layout_marginLeft="@dimen/normal_padding_length"
-                                android:layout_marginRight="@dimen/normal_padding_length"
-                                android:layout_alignParentLeft="true" android:layout_centerVertical="true">
-                    <ImageView android:id="@+id/iv_avatar" android:background="@drawable/bg_photo"
-                               android:layout_width="@dimen/profile_image_length"
-                               android:layout_height="@dimen/profile_image_length"
-                               android:src="@drawable/img_default_avatar_large" android:scaleType="fitXY"
-                               android:layout_centerInParent="true"/>
-                </RelativeLayout>
-                <TableLayout android:id="@+id/points_table" android:layout_width="fill_parent"
-                             android:layout_height="wrap_content"
-                             android:layout_marginRight="@dimen/normal_padding_length" android:stretchColumns="*"
-                             android:shrinkColumns="*" android:layout_toRightOf="@+id/view_default_avatar"
-                             android:layout_alignBottom="@+id/view_default_avatar">
-                    <TableRow>
-                        <RelativeLayout android:id="@+id/relative_profile_mayors"
-                                        android:background="@drawable/bg_score_left"
-                                        android:paddingBottom="@dimen/tiny1_padding_length" android:focusable="true"
-                                        android:layout_height="wrap_content">
-                            <TextView android:id="@+id/text_mayors_title" android:layout_width="wrap_content"
-                                      android:layout_height="wrap_content" android:text="@string/points_hold"
-                                      android:shadowColor="#ff000000" android:shadowDx="0.0" android:shadowDy="-1.0"
-                                      android:shadowRadius="1.0" android:layout_alignParentLeft="true"
-                                      android:layout_alignParentTop="true" style="@style/subdivider_text_white"/>
-                            <TextView android:id="@+id/text_mayors" android:layout_width="wrap_content"
-                                      android:layout_height="wrap_content" android:text="@string/hyphen"
-                                      android:shadowColor="#ff000000" android:shadowDx="0.0" android:shadowDy="-1.0"
-                                      android:shadowRadius="1.0" android:layout_below="@+id/text_mayors_title"
-                                      android:layout_alignParentLeft="true" style="@style/user_profile_score_text"/>
+            <include layout="@layout/include_user_head"/>
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent"
+                          android:layout_height="fill_parent"
+                          style="@style/style_patterns"
+                          android:id="@+id/layout_base"
+                    >
+                <LinearLayout android:orientation="vertical" android:layout_width="fill_parent"
+                              android:layout_height="fill_parent"
+                        >
+                    <TextView android:id="@+id/textview_introduction_title" android:text="基本信息"
+                              style="@style/style_patterns_sectionBar"/>
+                    <include layout="@layout/include_patterns_sectionline"/>
+
+                    <LinearLayout android:orientation="vertical" android:id="@+id/ll_status"
+                                  android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <RelativeLayout android:padding="12.0dip"
+                                        android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <TextView android:id="@+id/profile_status" android:text="签名"
+                                      style="@style/Profile_Item_Top"/>
+                            <TextView android:id="@+id/tv_status" android:text=""
+                                      android:layout_below="@+id/profile_status"
+                                      style="@style/Profile_Item_Bottom"/>
                         </RelativeLayout>
-                        <RelativeLayout android:id="@+id/relative_profile_badges"
-                                        android:background="@drawable/bg_score_center"
-                                        android:paddingBottom="@dimen/tiny1_padding_length" android:focusable="true"
-                                        android:layout_height="wrap_content">
-                            <TextView android:id="@+id/text_badge_title" android:layout_width="wrap_content"
-                                      android:layout_height="wrap_content" android:text="@string/points_join"
-                                      android:shadowColor="#ff000000" android:shadowDx="0.0" android:shadowDy="-1.0"
-                                      android:shadowRadius="1.0" android:layout_alignParentLeft="true"
-                                      android:layout_alignParentTop="true" style="@style/subdivider_text_white"/>
-                            <TextView android:id="@+id/text_badges" android:layout_width="wrap_content"
-                                      android:layout_height="wrap_content" android:text="@string/hyphen"
-                                      android:shadowColor="#ff000000" android:shadowDx="0.0" android:shadowDy="-1.0"
-                                      android:shadowRadius="1.0" android:layout_below="@+id/text_badge_title"
-                                      android:layout_alignParentLeft="true" style="@style/user_profile_score_text"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:orientation="vertical" android:id="@+id/ll_work"
+                                  android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <RelativeLayout android:padding="12.0dip"
+                                        android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <TextView android:id="@+id/profile_work" android:text="工作"
+                                      style="@style/Profile_Item_Top"/>
+                            <TextView android:id="@+id/tv_work" android:text=""
+                                      android:layout_below="@+id/profile_work"
+                                      style="@style/Profile_Item_Bottom"/>
                         </RelativeLayout>
-                        <RelativeLayout android:id="@+id/relative_profile_score"
-                                        android:background="@drawable/bg_score_right"
-                                        android:paddingBottom="@dimen/tiny1_padding_length" android:focusable="true"
-                                        android:layout_height="wrap_content">
-                            <TextView android:id="@+id/text_points_title" android:layout_width="wrap_content"
-                                      android:layout_height="wrap_content" android:text="@string/points_interested"
-                                      android:shadowColor="#ff000000" android:shadowDx="0.0" android:shadowDy="-1.0"
-                                      android:shadowRadius="1.0" android:layout_alignParentLeft="true"
-                                      android:layout_alignParentTop="true" style="@style/subdivider_text_white"/>
-                            <TextView android:id="@+id/text_points" android:layout_width="wrap_content"
-                                      android:layout_height="wrap_content" android:text="@string/hyphen"
-                                      android:shadowColor="#ff000000" android:shadowDx="0.0" android:shadowDy="-1.0"
-                                      android:shadowRadius="1.0" android:layout_below="@+id/text_points_title"
-                                      android:layout_alignParentLeft="true" style="@style/user_profile_score_text"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:orientation="vertical" android:id="@+id/ll_school"
+                                  android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <RelativeLayout android:padding="12.0dip"
+                                        android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <TextView android:id="@+id/profile_school" android:text="学校"
+                                      style="@style/Profile_Item_Top"/>
+                            <TextView android:id="@+id/tv_school" android:text=""
+                                      android:layout_below="@+id/profile_school"
+                                      style="@style/Profile_Item_Bottom"/>
                         </RelativeLayout>
-                    </TableRow>
-                </TableLayout>
-                <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
-                                android:layout_toRightOf="@+id/view_default_avatar"
-                                android:layout_above="@+id/points_table">
-                    <TextView android:ellipsize="marquee" android:id="@+id/tv_name"
-                              android:layout_width="wrap_content" android:layout_height="wrap_content"
-                              android:layout_marginRight="@dimen/normal_padding_length" android:singleLine="true"
-                              android:layout_alignParentLeft="true" android:layout_centerVertical="true"
-                              style="@style/title_primary"/>
-                </RelativeLayout>
-            </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent"
+                          android:layout_height="fill_parent"
+                          style="@style/style_patterns"
+                          android:id="@+id/layout_pos"
+                    >
+                <LinearLayout android:orientation="vertical" android:layout_width="fill_parent"
+                              android:layout_height="fill_parent"
+                        >
+                    <TextView android:id="@+id/textview_introduction_title" android:text="地理信息"
+                              style="@style/style_patterns_sectionBar"/>
+                    <include layout="@layout/include_patterns_sectionline"/>
+
+                    <LinearLayout android:orientation="vertical" android:id="@+id/ll_now"
+                                  android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <RelativeLayout android:padding="12.0dip"
+                                        android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <TextView android:id="@+id/profile_now" android:text="现在地"
+                                      style="@style/Profile_Item_Top"/>
+                            <TextView android:id="@+id/tv_now" android:text=""
+                                      android:layout_below="@+id/profile_now"
+                                      style="@style/Profile_Item_Bottom"/>
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout android:orientation="vertical" android:id="@+id/ll_home"
+                                  android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <RelativeLayout android:padding="12.0dip"
+                                        android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <TextView android:id="@+id/profile_home" android:text="家乡"
+                                      style="@style/Profile_Item_Top"/>
+                            <TextView android:id="@+id/tv_home" android:text=""
+                                      android:layout_below="@+id/profile_home"
+                                      style="@style/Profile_Item_Bottom"/>
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <!--<LinearLayout android:orientation="vertical" android:id="@+id/layout_hangout"-->
+                                  <!--android:layout_width="fill_parent" android:layout_height="wrap_content">-->
+                        <!--<include layout="@layout/include_patterns_divideline"/>-->
+                        <!--<RelativeLayout android:id="@+id/test" style="@style/Style_Patterns_Content">-->
+                            <!--<TextView android:id="@+id/profile_home" android:text="Left Right test"-->
+                                      <!--style="@style/Patterns_Text_Left"/>-->
+                            <!--<TextView android:id="@+id/profile_tv_hangout" android:text="testtesttest222222222"-->
+                                      <!--android:layout_below="@+id/profile_intro_place"-->
+                                      <!--style="@style/Profile_Item_Right"/>-->
+                        <!--</RelativeLayout>-->
+                    <!--</LinearLayout>-->
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
         <!--<ImageView-->

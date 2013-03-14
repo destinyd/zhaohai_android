@@ -78,6 +78,7 @@ public class Constants {
 
         public static final String FORMAT_URL_USERS = API_BASE + "/users.json?page=%d&";
 
+        public static final String FORMAT_URL_USER = API_BASE + "/users/%s.json";
         /**
          * List Friend URL
          */

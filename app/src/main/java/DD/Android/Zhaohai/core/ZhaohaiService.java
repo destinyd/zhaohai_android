@@ -44,7 +44,6 @@ public class ZhaohaiService {
     private static final int TIMEOUT = 30 * 1000;
 
 
-
 //    private static class UsersWrapper {
 //
 //        private List<User> results;
@@ -355,6 +354,26 @@ public class ZhaohaiService {
         }
 
     }
+
+
+    public User getUser(String user_id)  throws IOException {
+        if (apiKey == null)
+            return null;
+        String url = String.format(FORMAT_URL_USER, user_id) + "?" + getTokenParam();
+        HttpRequest request = get(url)
+                .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
+                .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
+//        Activity response = GSON.fromJson(request.bufferedReader(), Activity.class);
+        try {
+            String body = request.body();
+            User response = JSON.parseObject(body, User.class);
+            return response;
+        } catch (HttpRequestException e) {
+            throw e.getCause();
+        }
+
+    }
+
 
     public Activity createActivity(Activity activity) throws IOException {
         if (apiKey == null)
