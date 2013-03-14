@@ -2,13 +2,11 @@ package DD.Android.Zhaohai.ui.Act;
 
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.ZhaohaiServiceProvider;
-import DD.Android.Zhaohai.core.PrettyDateFormat;
 import DD.Android.Zhaohai.core.User;
 import DD.Android.Zhaohai.core.UserAvatarLoader;
 import android.accounts.AccountsException;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,8 +15,6 @@ import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static DD.Android.Zhaohai.core.Constants.Extra.USER;
 
@@ -48,6 +44,10 @@ public class ActUser extends ActZhaohai {
     @InjectView(R.id.layout_base) protected LinearLayout layout_base;
     @InjectView(R.id.layout_pos) protected LinearLayout layout_pos;
 
+    @InjectView(R.id.iv_gender) protected ImageView iv_gender;
+    @InjectView(R.id.tv_age) protected TextView tv_age;
+    @InjectView(R.id.ll_sex_background) protected LinearLayout ll_sex_background;
+
     @InjectExtra(USER) protected User user;
 
     @Inject
@@ -73,6 +73,16 @@ public class ActUser extends ActZhaohai {
 
 
     private void user_to_view() {
+        if(user.isMale()){
+            ll_sex_background.setBackgroundResource(R.drawable.bg_user_info_male);
+            iv_gender.setImageDrawable(getResources().getDrawable(R.drawable.ic_user_male));
+        }
+        else {
+            ll_sex_background.setBackgroundResource(R.drawable.bg_user_info_famale);
+            iv_gender.setImageDrawable(getResources().getDrawable(R.drawable.ic_user_famale ));
+        }
+        tv_age.setText(user.getStrAge());
+
         tv_points_hold.setText(user.getPointsHold());
         tv_points_join.setText(user.getPointsJoin());
         tv_points_interested.setText(user.getPointsInterested());

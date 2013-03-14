@@ -1,7 +1,11 @@
 package DD.Android.Zhaohai.core;
 
+import android.provider.CalendarContract;
+
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class User implements Serializable {
@@ -22,6 +26,7 @@ public class User implements Serializable {
     protected Userinfo userinfo;
 
     protected Points points;
+    private String age;
 
     public String get_id() {
         return _id;
@@ -118,4 +123,53 @@ public class User implements Serializable {
     public String getPointsInterested(){
         return String.valueOf(getPoints().getInterested_activities());
     }
+
+    public boolean isMale(){
+        String gender = getUserinfo().getGender();
+        if(gender != null && gender.equals("male") ){
+            return true;
+        }
+        return false;
+    }
+
+    public String getStrAge() {
+        return getAge(getUserinfo().getBirth());
+    }
+
+    private String getAge(Date date){
+        Calendar dob = new GregorianCalendar();
+        Calendar today = Calendar.getInstance();
+
+        dob.setTime(date);
+//        dob.set(year, month, day);
+
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+
+        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
+            age--;
+        }
+
+        Integer ageInt = new Integer(age);
+        String ageS = ageInt.toString();
+
+        return ageS;
+    }
+//
+//    private String getAge(int year, int month, int day){
+//        Calendar dob = Calendar.getInstance();
+//        Calendar today = Calendar.getInstance();
+//
+//        dob.set(year, month, day);
+//
+//        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+//
+//        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
+//            age--;
+//        }
+//
+//        Integer ageInt = new Integer(age);
+//        String ageS = ageInt.toString();
+//
+//        return ageS;
+//    }
 }
