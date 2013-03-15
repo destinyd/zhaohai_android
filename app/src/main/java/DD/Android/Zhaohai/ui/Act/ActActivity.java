@@ -5,6 +5,7 @@ import DD.Android.Zhaohai.ZhaohaiServiceProvider;
 import DD.Android.Zhaohai.core.Activity;
 import DD.Android.Zhaohai.core.PrettyDateFormat;
 import DD.Android.Zhaohai.core.User;
+import DD.Android.Zhaohai.core.UserAvatarLoader;
 import android.accounts.AccountsException;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -16,10 +17,13 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.github.kevinsawicki.wishlist.ImageViewBitmapTask;
 import com.google.inject.Inject;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
@@ -35,22 +39,36 @@ import static android.content.DialogInterface.OnClickListener;
 public class ActActivity extends ActZhaohai {
 
     //    @InjectView(R.id.iv_avatar) protected ImageView avatar;
+    @InjectView(R.id.tv_title)
+    protected TextView tv_title;
     @InjectView(R.id.tv_desc)
-    protected TextView desc;
+    protected TextView tv_desc;
     @InjectView(R.id.tv_address)
-    protected TextView address;
+    protected TextView tv_address;
     @InjectView(R.id.tv_started_at)
-    protected TextView started_at;
+    protected TextView tv_started_at;
     @InjectView(R.id.tv_finished_at)
-    protected TextView finished_at;
+    protected TextView tv_finished_at;
     @InjectView(R.id.tv_user)
-    protected TextView user;
-    @InjectView(R.id.tv_users)
-    protected TextView users;
-    @InjectView(R.id.tv_interested_users)
-    protected TextView interested_users;
+    protected TextView tv_user;
+//    @InjectView(R.id.tv_users)
+//    protected TextView tv_users;
+//    @InjectView(R.id.tv_interested_users)
+//    protected TextView tv_interested_users;
+
+    @InjectView(R.id.iv_user)
+    protected ImageView iv_user;
+
+
+    @InjectView(R.id.rl_users)
+    protected RelativeLayout rl_users;
+    @InjectView(R.id.rl_interested_users)
+    protected RelativeLayout rl_interested_users;
+
     @Inject
     protected ZhaohaiServiceProvider serviceProvider;
+    @Inject
+    protected UserAvatarLoader avatarLoader;
 
     Dialog adialog = null;
     View v_alert_message = null;
@@ -128,26 +146,35 @@ public class ActActivity extends ActZhaohai {
     }
 
     private void activity_to_view() {
-        desc.setText(activity.getDesc());
-        address.setText(activity.getAddress());
+        tv_desc.setText(activity.getDesc());
+        tv_address.setText(activity.getAddress());
         if(activity.getUser() != null){
 //            SimpleDateFormat sdf = (SimpleDateFormat) POST_DATE_FORMAT.clone();
 //            sdf.setTimeZone(TimeZone.getDefault());
-            started_at.setText(PrettyDateFormat.defaultFormat(activity.getStarted_at()));
-            finished_at.setText(PrettyDateFormat.defaultFormat(activity.getFinished_at()));
 
-            user.setText(activity.getUser().getName());
+            tv_title.setText(activity.getTitle());
 
-            List<String> user_names = new ArrayList<String>();
-            List<String> interested_user_names = new ArrayList<String>();
+            tv_started_at.setText(PrettyDateFormat.defaultFormat(activity.getStarted_at()));
+            tv_finished_at.setText(PrettyDateFormat.defaultFormat(activity.getFinished_at()));
+
+            tv_user.setText(activity.getUser().getName());
+            avatarLoader.bind(iv_user,activity.getUser());
+
+
+//            List<String> user_names = new ArrayList<String>();
+//            List<String> interested_user_names = new ArrayList<String>();
             for(User u : activity.getUsers()){
-                user_names.add(u.getName());
+                ImageView iv_u = new ImageView(this,null,R.style.AvatarLarge);
+                avatarLoader.bind(iv_u,u);
+                rl_users.addView(iv_u);
             }
             for(User u : activity.getInterested_users()){
-                interested_user_names.add(u.getName());
+                ImageView iv_u = new ImageView(this,null,R.style.AvatarLarge);
+                avatarLoader.bind(iv_u,u);
+                rl_interested_users.addView(iv_u);
             }
-            users.setText(TextUtils.join(" ",user_names));
-            interested_users.setText(TextUtils.join(" ",interested_user_names));
+//            tv_users.setText(TextUtils.join(" ",user_names));
+//            tv_interested_users.setText(TextUtils.join(" ",interested_user_names));
         }
     }
 

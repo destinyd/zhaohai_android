@@ -1,220 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+                xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView android:scrollbars="none" android:fadingEdge="none" android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent"
+                      android:layout_height="fill_parent"
+                      style="@style/style_patterns"
+                      android:id="@+id/layout_base"
+                >
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent"
+                          android:layout_height="fill_parent"
+                    >
+                <TextView android:id="@+id/textview_introduction_title" android:text="基本信息"
+                          style="@style/style_patterns_sectionBar"/>
+                <include layout="@layout/include_patterns_sectionline"/>
 
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical">
-    <!--<ImageView-->
-    <!--android:id="@+id/iv_avatar"-->
-    <!--style="@style/AvatarLarge"-->
-    <!--android:layout_alignParentLeft="true"-->
-    <!--android:layout_alignParentTop="true"-->
-    <!--android:layout_marginRight="10dp"-->
-    <!--android:contentDescription="@string/avatar"-->
-    <!--/>-->
-    <TableLayout android:layout_width="fill_parent"
-                 android:layout_height="fill_parent"
-                 android:shrinkColumns="1"
-            >
-        <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="?android:attr/textColorPrimaryInverse"
-                    android:text="@string/label_activity_desc"
-                    style="@style/ShadowText"/>
-            <TextView
-                    android:id="@+id/tv_desc"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/table_text_selector" android:layout_marginLeft="5dp"
-                    android:maxLines="4"
-                    android:singleLine="false"
-                    />
-        </TableRow>
-        <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="?android:attr/textColorPrimaryInverse"
-                    android:text="@string/label_activity_address"
-                    style="@style/ShadowText"/>
-            <TextView
-                    android:id="@+id/tv_address"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:maxLines="4"
-                    android:singleLine="false"
-                    android:textColor="@color/table_text_selector" android:layout_marginLeft="5dp"/>
-        </TableRow>
-        <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="?android:attr/textColorPrimaryInverse"
-                    android:text="@string/label_activity_started_at"          style="@style/ShadowText"/>
-            <TextView
-                    android:id="@+id/tv_started_at"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/table_text_selector" android:layout_marginLeft="5dp"/>
-        </TableRow>
-        <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="?android:attr/textColorPrimaryInverse"
-                    android:text="@string/label_activity_finished_at"
-                             style="@style/ShadowText"/>
-            <TextView
-                    android:id="@+id/tv_finished_at"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/table_text_selector" android:layout_marginLeft="5dp"/>
-        </TableRow>
-        <!--<TableRow-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="fill_parent">-->
-        <!--<TextView-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--/>-->
-        <!--<TextView-->
-        <!--android:id="@+id/tv_status"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-        <!--android:textColor="@color/table_text_selector"/>-->
-        <!--</TableRow>-->
-        <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="?android:attr/textColorPrimaryInverse"
-                    android:text="@string/label_activity_user"          style="@style/ShadowText"/>
-            <TextView
-                    android:id="@+id/tv_user"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/table_text_selector" android:layout_marginLeft="5dp"/>
-        </TableRow>
-        <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_activity_users"          style="@style/ShadowText"
-                    android:textColor="?android:attr/textColorPrimaryInverse"/>
-            <TextView
-                    android:id="@+id/tv_users"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/table_text_selector" android:layout_marginLeft="5dp"/>
-        </TableRow>
-        <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_activity_interested_users"          style="@style/ShadowText"
-                    android:textColor="?android:attr/textColorPrimaryInverse"/>
-            <TextView
-                    android:id="@+id/tv_interested_users"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/table_text_selector" android:layout_marginLeft="5dp"/>
-        </TableRow>
-        <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/tr_invite"
-                android:visibility="gone">
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/ShadowText"
-                    android:textColor="?android:attr/textColorPrimaryInverse"/>
-            <TextView
-                    android:id="@+id/btn_invite"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/table_text_selector" android:layout_marginLeft="5dp"/>
-        </TableRow>
-        <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/tr_close"
-                android:visibility="gone">
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/ShadowText"
-                    android:textColor="?android:attr/textColorPrimaryInverse"/>
-            <TextView
-                    android:id="@+id/btn_close"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/table_text_selector" android:layout_marginLeft="5dp"/>
-        </TableRow>
-        <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/tr_join"
-                android:visibility="gone">
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/ShadowText"
-                    android:textColor="?android:attr/textColorPrimaryInverse"/>
-            <TextView
-                    android:id="@+id/btn_join"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:maxLines="4"
-                    android:singleLine="false"
-                    android:textColor="@color/table_text_selector" android:layout_marginLeft="5dp"/>
-        </TableRow>
-        <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/tr_leave"
-                android:visibility="gone">
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/ShadowText"
-                    android:textColor="?android:attr/textColorPrimaryInverse"/>
-            <TextView
-                    android:id="@+id/btn_leave"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:maxLines="4"
-                    android:singleLine="false"
-                    android:textColor="@color/table_text_selector" android:layout_marginLeft="5dp"/>
-        </TableRow>
-    </TableLayout>
-</LinearLayout>
+                <LinearLayout android:orientation="vertical" android:id="@+id/ll_title"
+                              android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <include layout="@layout/include_patterns_divideline"/>
+                    <RelativeLayout android:padding="12.0dip"
+                                    android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <TextView android:id="@+id/profile_title" android:text="活动名称"
+                                  style="@style/Profile_Item_Top"/>
+                        <TextView android:id="@+id/tv_title" android:text=""
+                                  android:layout_below="@id/profile_title"
+                                  style="@style/Profile_Item_Bottom"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout android:orientation="vertical" android:id="@+id/ll_desc"
+                              android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <include layout="@layout/include_patterns_divideline"/>
+                    <RelativeLayout android:padding="12.0dip"
+                                    android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <TextView android:id="@+id/profile_desc" android:text="活动描述"
+                                  style="@style/Profile_Item_Top"/>
+                        <TextView android:id="@+id/tv_desc" android:text=""
+                                  android:layout_below="@id/profile_desc"
+                                  style="@style/Profile_Item_Bottom"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+
+                <LinearLayout android:orientation="vertical" android:id="@+id/ll_address"
+                              android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <include layout="@layout/include_patterns_divideline"/>
+                    <RelativeLayout android:padding="12.0dip"
+                                    android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <TextView android:id="@+id/profile_address" android:text="地址"
+                                  style="@style/Profile_Item_Top"/>
+                        <TextView android:id="@+id/tv_address" android:text=""
+                                  android:layout_below="@+id/profile_address"
+                                  style="@style/Profile_Item_Bottom"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout android:orientation="vertical" android:id="@+id/ll_started_at"
+                              android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <include layout="@layout/include_patterns_divideline"/>
+                    <RelativeLayout android:padding="12.0dip"
+                                    android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <TextView android:id="@+id/profile_started_at" android:text="开始时间"
+                                  style="@style/Profile_Item_Top"/>
+                        <TextView android:id="@+id/tv_started_at" android:text=""
+                                  android:layout_below="@+id/profile_started_at"
+                                  style="@style/Profile_Item_Bottom"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout android:orientation="vertical" android:id="@+id/ll_finished_at"
+                              android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <include layout="@layout/include_patterns_divideline"/>
+                    <RelativeLayout android:padding="12.0dip"
+                                    android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <TextView android:id="@+id/profile_finished_at" android:text="结束时间"
+                                  style="@style/Profile_Item_Top"/>
+                        <TextView android:id="@+id/tv_finished_at" android:text=""
+                                  android:layout_below="@+id/profile_finished_at"
+                                  style="@style/Profile_Item_Bottom"/>
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent"
+                          android:layout_height="fill_parent"
+                    >
+                <TextView android:id="@+id/textview_introduction_title" android:text="@string/label_activity_user"
+                          style="@style/style_patterns_sectionBar"/>
+                <include layout="@layout/include_patterns_sectionline"/>
+
+                <LinearLayout android:orientation="vertical" android:id="@+id/ll_user"
+                              android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <include layout="@layout/include_patterns_divideline"/>
+                    <RelativeLayout android:padding="12.0dip"
+                                    android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <TextView android:id="@+id/tv_user" android:text=""
+                            style="@style/Patterns_Text_Left"/>
+                        <ImageView android:id="@+id/iv_user" android:text=""
+                            style="@style/Profile_Item_Right"/>
+                                />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent"
+                          android:layout_height="fill_parent"
+                    >
+                <TextView android:id="@+id/textview_introduction_title" android:text="@string/label_activity_users"
+                          style="@style/style_patterns_sectionBar"/>
+                <include layout="@layout/include_patterns_sectionline"/>
+
+                <LinearLayout android:orientation="vertical" android:id="@+id/ll_users"
+                              android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <include layout="@layout/include_patterns_divideline"/>
+                    <RelativeLayout android:padding="12.0dip"
+                                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                                    android:id="@+id/rl_users"
+                            >
+                        <!--<TextView android:id="@+id/tv_users"-->
+                                  <!--android:layout_width="match_parent"-->
+                                  <!--android:layout_height="wrap_content"-->
+                                <!--/>-->
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent"
+                          android:layout_height="fill_parent"
+                    >
+                <TextView android:id="@+id/textview_introduction_title" android:text="@string/label_activity_interested_users"
+                          style="@style/style_patterns_sectionBar"/>
+                <include layout="@layout/include_patterns_sectionline"/>
+
+                <LinearLayout android:orientation="vertical" android:id="@+id/ll_interested_users"
+                              android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <include layout="@layout/include_patterns_divideline"/>
+                    <RelativeLayout android:padding="12.0dip"
+                                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                                    android:id="@+id/rl_interested_users">
+                        <!--<TextView android:id="@+id/tv_interested_users"-->
+                                  <!--android:layout_width="match_parent"-->
+                                  <!--android:layout_height="wrap_content"-->
+                                <!--/>-->
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
