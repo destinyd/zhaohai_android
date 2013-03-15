@@ -101,18 +101,25 @@ public class PrettyDateFormat extends SimpleDateFormat {
             String replacement = "";
             while (true) {
                 if ("@".equals(group2)) {
-                    if (diffSecond < 60 && diffSecond >= 0) {
-                        replacement = diffSecond == 0 ? "1秒前" : diffSecond + "秒前";
-                    } else if (diffSecond < 3600) {
-                        replacement = diffSecond / 60 + "分钟前";
-                    } else if (diffSecond < 86400) {
-                        replacement = diffSecond / 3600 + "小时前";
-                    }else if (diffSecond > -60 && diffSecond < 0) {
-                        replacement = diffSecond == 0 ? "1秒后" : diffSecond + "秒后";
-                    } else if (diffSecond > -3600  && diffSecond <= -60) {
-                        replacement = diffSecond / 60 + "分钟后";
-                    } else if (diffSecond < 86400  && diffSecond <= -3600) {
-                        replacement = diffSecond / 3600 + "小时后";
+                    if(diffSecond >= 0)
+                    {
+                        if (diffSecond < 60) {
+                            replacement = diffSecond == 0 ? "1秒前" : diffSecond + "秒前";
+                        } else if (diffSecond < 3600) {
+                            replacement = diffSecond / 60 + "分钟前";
+                        } else if (diffSecond < 86400) {
+                            replacement = diffSecond / 3600 + "小时前";
+                        }
+                    }
+                    else
+                    {
+                        if (diffSecond > -60) {
+                            replacement = diffSecond == 0 ? "1秒后" : -diffSecond + "秒后";
+                        } else if (diffSecond > -3600  && diffSecond <= -60) {
+                            replacement = -diffSecond / 60 + "分钟后";
+                        } else if (diffSecond < 86400  && diffSecond <= -3600) {
+                            replacement = -diffSecond / 3600 + "小时后";
+                        }
                     }
                 } else {
                     if (diffDay == 0) {
