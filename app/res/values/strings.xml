@@ -94,5 +94,5 @@
     <string name="friend">friend</string>
     <string name="following">following</string>
     <string name="follower">follower</string>
-    <string name="message_follow_failure">关注失败</string>
+    <string name="message_follow_failure">Follow Failure</string>
 </resources>
