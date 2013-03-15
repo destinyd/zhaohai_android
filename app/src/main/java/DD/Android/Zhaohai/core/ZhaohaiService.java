@@ -43,7 +43,6 @@ public class ZhaohaiService {
      */
     private static final int TIMEOUT = 30 * 1000;
 
-
 //    private static class UsersWrapper {
 //
 //        private List<User> results;
@@ -480,6 +479,26 @@ public class ZhaohaiService {
             throw e.getCause();
         }
     }
+
+
+    public String follow(String user_id) throws IOException {
+        try {
+            if (apiKey == null)
+                return null;
+            String url = String.format(FORMAT_URL_USER_FOLLOW, user_id) + "?" + getTokenParam();
+            HttpRequest request = post(url)
+                    .header(HEADER_PARSE_REST_API_KEY, PARSE_REST_API_KEY)
+                    .header(HEADER_PARSE_APP_ID, PARSE_APP_ID);
+
+            if(request.ok())
+                return request.body();
+            return null;
+        } catch (HttpRequestException e) {
+            throw e.getCause();
+        }
+    }
+
+
 
 
     private String getTokenParam() {

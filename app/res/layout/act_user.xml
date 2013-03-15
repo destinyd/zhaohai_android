@@ -8,6 +8,30 @@
         <LinearLayout android:orientation="vertical" android:layout_width="fill_parent"
                       android:layout_height="fill_parent">
             <include layout="@layout/include_user_head"/>
+            <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+                          android:layout_marginLeft="@dimen/normal_padding_length"
+                          android:layout_marginRight="@dimen/normal_padding_length"
+                          android:layout_marginTop="@dimen/normal_padding_length"
+                          android:layout_marginBottom="@dimen/normal_padding_length"
+                          android:weightSum="2.0"
+                          android:layout_centerVertical="true"
+                    >
+                <Button android:id="@+id/btn_relationship" android:background="@drawable/button_blue"
+                        android:layout_width="fill_parent" android:layout_height="@dimen/huge_padding_length"
+                        android:layout_marginRight="@dimen/small_padding_length"
+                        android:text="@string/follow" android:drawableLeft="@drawable/img_addfriend"
+                        android:layout_weight="1.0" style="@style/loading_text_small"
+                        android:onClick="handleFollow"
+                        />
+                <Button android:id="@+id/btn_msg" android:background="@drawable/button_blue"
+                        android:layout_width="fill_parent" android:layout_height="@dimen/huge_padding_length"
+                        android:layout_marginLeft="@dimen/small_padding_length"
+                        android:text="@string/msg_send"
+                        android:drawableLeft="@drawable/img_sendmsg"
+                        android:enabled="false"
+                        android:layout_weight="1.0" style="@style/loading_text_small"/>
+            </LinearLayout>
+
             <LinearLayout android:orientation="vertical" android:layout_width="fill_parent"
                           android:layout_height="fill_parent"
                           style="@style/style_patterns"
@@ -22,7 +46,7 @@
 
                     <LinearLayout android:orientation="vertical" android:id="@+id/ll_status"
                                   android:layout_width="fill_parent" android:layout_height="wrap_content">
-                        <include layout="@layout/include_patterns_divideline" />
+                        <include layout="@layout/include_patterns_divideline"/>
                         <RelativeLayout android:padding="12.0dip"
                                         android:layout_width="fill_parent" android:layout_height="wrap_content">
                             <TextView android:id="@+id/profile_status" android:text="签名"
@@ -35,7 +59,7 @@
 
                     <LinearLayout android:orientation="vertical" android:id="@+id/ll_work"
                                   android:layout_width="fill_parent" android:layout_height="wrap_content">
-                        <include layout="@layout/include_patterns_divideline" />
+                        <include layout="@layout/include_patterns_divideline"/>
                         <RelativeLayout android:padding="12.0dip"
                                         android:layout_width="fill_parent" android:layout_height="wrap_content">
                             <TextView android:id="@+id/profile_work" android:text="工作"
@@ -48,7 +72,7 @@
 
                     <LinearLayout android:orientation="vertical" android:id="@+id/ll_school"
                                   android:layout_width="fill_parent" android:layout_height="wrap_content">
-                        <include layout="@layout/include_patterns_divideline" />
+                        <include layout="@layout/include_patterns_divideline"/>
                         <RelativeLayout android:padding="12.0dip"
                                         android:layout_width="fill_parent" android:layout_height="wrap_content">
                             <TextView android:id="@+id/profile_school" android:text="学校"
@@ -75,7 +99,7 @@
 
                     <LinearLayout android:orientation="vertical" android:id="@+id/ll_now"
                                   android:layout_width="fill_parent" android:layout_height="wrap_content">
-                        <include layout="@layout/include_patterns_divideline" />
+                        <include layout="@layout/include_patterns_divideline"/>
                         <RelativeLayout android:padding="12.0dip"
                                         android:layout_width="fill_parent" android:layout_height="wrap_content">
                             <TextView android:id="@+id/profile_now" android:text="现在地"
@@ -88,7 +112,7 @@
 
                     <LinearLayout android:orientation="vertical" android:id="@+id/ll_home"
                                   android:layout_width="fill_parent" android:layout_height="wrap_content">
-                        <include layout="@layout/include_patterns_divideline" />
+                        <include layout="@layout/include_patterns_divideline"/>
                         <RelativeLayout android:padding="12.0dip"
                                         android:layout_width="fill_parent" android:layout_height="wrap_content">
                             <TextView android:id="@+id/profile_home" android:text="家乡"
@@ -100,15 +124,15 @@
                     </LinearLayout>
 
                     <!--<LinearLayout android:orientation="vertical" android:id="@+id/layout_hangout"-->
-                                  <!--android:layout_width="fill_parent" android:layout_height="wrap_content">-->
-                        <!--<include layout="@layout/include_patterns_divideline"/>-->
-                        <!--<RelativeLayout android:id="@+id/test" style="@style/Style_Patterns_Content">-->
-                            <!--<TextView android:id="@+id/profile_home" android:text="Left Right test"-->
-                                      <!--style="@style/Patterns_Text_Left"/>-->
-                            <!--<TextView android:id="@+id/profile_tv_hangout" android:text="testtesttest222222222"-->
-                                      <!--android:layout_below="@+id/profile_intro_place"-->
-                                      <!--style="@style/Profile_Item_Right"/>-->
-                        <!--</RelativeLayout>-->
+                    <!--android:layout_width="fill_parent" android:layout_height="wrap_content">-->
+                    <!--<include layout="@layout/include_patterns_divideline"/>-->
+                    <!--<RelativeLayout android:id="@+id/test" style="@style/Style_Patterns_Content">-->
+                    <!--<TextView android:id="@+id/profile_home" android:text="Left Right test"-->
+                    <!--style="@style/Patterns_Text_Left"/>-->
+                    <!--<TextView android:id="@+id/profile_tv_hangout" android:text="testtesttest222222222"-->
+                    <!--android:layout_below="@+id/profile_intro_place"-->
+                    <!--style="@style/Profile_Item_Right"/>-->
+                    <!--</RelativeLayout>-->
                     <!--</LinearLayout>-->
                 </LinearLayout>
             </LinearLayout>

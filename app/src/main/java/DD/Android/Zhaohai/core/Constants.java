@@ -85,6 +85,8 @@ public class Constants {
         public static final String URL_FRIEND = API_BASE + "/users/friend.json";
         public static final String FORMAT_URL_FRIEND = API_BASE + "/users/friend.json?page=%d&";
 
+        public static final String FORMAT_URL_USER_FOLLOW = API_BASE + "/users/%s/follow.json";
+
         /**
          * List Checkin's URL
          */

@@ -65,7 +65,7 @@ public class AdaZhaohaiPager extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
         case 0:
-            return resources.getString(R.string.page_friends);
+            return resources.getString(R.string.page_friend);
         case 1:
             return resources.getString(R.string.page_users);
         case 2:

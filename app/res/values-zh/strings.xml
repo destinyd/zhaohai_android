@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-
+    <!--self-->
     <string name="app_name">找嗨</string>
     <string name="content_column">内容</string>
     <string name="page_referrers">从哪里来</string>
     <string name="refresh_action">刷新</string>
     <string name="logout_action">登出</string>
-    <string name="page_friends">好友</string>
+    <string name="page_friend">好友</string>
     <string name="page_users">用户</string>
     <string name="page_activities">活动</string>
     <string name="title_column">标题</string>
@@ -15,10 +15,10 @@
     <string name="user_column">用户</string>
     <string name="date_column">日期</string>
     <string name="error_loading_users">读取用户失败</string>
-    <string name="error_loading_friends">读取好友失败</string>
+    <string name="error_loading_friend">读取好友失败</string>
     <string name="error_loading_activities">读取活动失败</string>
     <string name="no_users">没有用户</string>
-    <string name="no_friends">没有好友</string>
+    <string name="no_friend">没有好友</string>
     <string name="avatar">头像</string>
     <string name="choose">选择</string>
 
@@ -80,9 +80,15 @@
     <string name="male">男</string>
     <string name="label_name">昵称</string>
     <string name="errors">错误信息</string>
-    <string name="join_activity">参加活动</string>
-    <string name="followers">粉丝</string>
     <string name="points_hold">组织</string>
     <string name="points_join">参加</string>
     <string name="points_interested">感兴趣</string>
+    <string name="follow">关注</string>
+    <string name="msg_send">发信息</string>
+
+    <!--relationship-->
+    <string name="friend">好友</string>
+    <string name="following">已关注</string>
+    <string name="follower">被关注</string>
+    <string name="message_follow_failure">关注失败</string>
 </resources>

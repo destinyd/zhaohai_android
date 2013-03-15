@@ -183,4 +183,8 @@
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_centerVertical">true</item>
     </style>
+    <style name="loading_text_small">
+        <item name="android:textSize">16.0dip</item>
+        <item name="android:textColor">#ffffffff</item>
+    </style>
 </resources>

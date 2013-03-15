@@ -26,7 +26,9 @@ public class User implements Serializable {
     protected Userinfo userinfo;
 
     protected Points points;
-    private String age;
+    protected String relationship;
+
+    private String age = null;
 
     public String get_id() {
         return _id;
@@ -112,6 +114,14 @@ public class User implements Serializable {
         this.points = points;
     }
 
+    public String getRelationship() {
+        return relationship;
+    }
+
+    public void setRelationship(String relationship) {
+        this.relationship = relationship;
+    }
+
     public String getPointsHold(){
         return String.valueOf(getPoints().getActivities());
     }
@@ -133,7 +143,9 @@ public class User implements Serializable {
     }
 
     public String getStrAge() {
-        return getAge(getUserinfo().getBirth());
+        if(age == null)
+            age = getAge(getUserinfo().getBirth());
+        return age;
     }
 
     private String getAge(Date date){

@@ -7,21 +7,16 @@ import DD.Android.Zhaohai.core.UserAvatarLoader;
 import DD.Android.Zhaohai.ui.Act.ActFriend;
 import DD.Android.Zhaohai.ui.Ada.AdaUsers;
 import DD.Android.Zhaohai.ui.ThrowableLoader;
-import android.accounts.AccountsException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.view.View;
-import android.widget.ListView;
 import com.costum.android.widget.LoadMoreListView;
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
-import com.github.kevinsawicki.wishlist.Toaster;
 import com.google.inject.Inject;
 
-import java.io.IOException;
 import java.util.List;
 
 import static DD.Android.Zhaohai.core.Constants.Extra.FRIEND;
@@ -35,7 +30,7 @@ public class FragFriend extends FragItemList<User> {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        setEmptyText(R.string.no_friends);
+        setEmptyText(R.string.no_friend);
     }
 
     @Override
@@ -103,7 +98,7 @@ public class FragFriend extends FragItemList<User> {
 
     @Override
     protected int getErrorMessage(Exception exception) {
-        return R.string.error_loading_friends;
+        return R.string.error_loading_friend;
     }
 
     @Override

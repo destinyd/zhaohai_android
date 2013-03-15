@@ -77,6 +77,8 @@ public class UserAvatarLoader {
 
     private final BitmapFactory.Options options;
 
+    private String type = "icon";
+
     /**
      * Create avatar helper
      *
@@ -107,7 +109,7 @@ public class UserAvatarLoader {
      * @return image
      */
     protected BitmapDrawable getImage(final User User) {
-        File avatarFile = new File(avatarDir, User._id);
+        File avatarFile = new File(avatarDir, User._id + type);
 
         if (!avatarFile.exists() || avatarFile.length() == 0)
             return null;
@@ -276,6 +278,7 @@ public class UserAvatarLoader {
     }
 
     private String getAvatarUrl(User user,String type) {
+        this.type = type;
         String avatarUrl = URL_BASE;
         if(type.equals("avatar")){
             avatarUrl += user.getAvatarUrl();

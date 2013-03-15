@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+    <!--jiepang-->
+    <string name="hyphen">-</string>
 
+    <!--self-->
     <string name="app_name">Find High</string>
     <string name="content_column">Content</string>
     <string name="page_referrers">Referrers</string>
     <string name="refresh_action">Refresh</string>
     <string name="logout_action">Logout</string>
-    <string name="page_friends">Friend</string>
+    <string name="page_friend">Friend</string>
     <string name="page_users">Users</string>
     <string name="page_activities">Activities</string>
     <string name="title_column">Title</string>
@@ -15,10 +18,10 @@
     <string name="user_column">User</string>
     <string name="date_column">Date</string>
     <string name="error_loading_users">Loading ABUsers failed</string>
-    <string name="error_loading_friends">Loading friends failed</string>
+    <string name="error_loading_friend">Loading friends failed</string>
     <string name="error_loading_activities">Loading activities failed</string>
     <string name="no_users">No Users</string>
-    <string name="no_friends">No Friends</string>
+    <string name="no_friend">No Friends</string>
     <string name="avatar">Avatar</string>
     <string name="choose">Choose</string>
 
@@ -81,11 +84,15 @@
     <string name="label_name">Nickname</string>
     <string name="errors">Errors</string>
 
-    <!--jiepang-->
-    <string name="hyphen">-</string>
-    <string name="join_activity">Join</string>
-    <string name="followers">Followers</string>
-    <string name="points_hold">组织</string>
-    <string name="points_join">参加</string>
-    <string name="points_interested">感兴趣</string>
+    <string name="points_hold">Hold</string>
+    <string name="points_join">Join</string>
+    <string name="points_interested">Interested</string>
+    <string name="follow">Follow</string>
+    <string name="msg_send">Message Send</string>
+
+    <!--relationship-->
+    <string name="friend">friend</string>
+    <string name="following">following</string>
+    <string name="follower">follower</string>
+    <string name="message_follow_failure">关注失败</string>
 </resources>
