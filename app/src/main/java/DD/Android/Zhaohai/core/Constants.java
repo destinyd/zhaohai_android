@@ -203,6 +203,8 @@ public class Constants {
             public static final int INVITE = 2;
             public static final int CLOSE = 3;
         }
+
+        public static int NOTIFICATION_ID = 1000;
     }
 
     public static class Delay {

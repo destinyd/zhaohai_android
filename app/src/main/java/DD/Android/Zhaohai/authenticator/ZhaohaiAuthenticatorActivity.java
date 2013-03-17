@@ -5,18 +5,15 @@ import DD.Android.Zhaohai.R.id;
 import DD.Android.Zhaohai.R.layout;
 import DD.Android.Zhaohai.R.string;
 import DD.Android.Zhaohai.core.Constants;
-import DD.Android.Zhaohai.service.MessageService;
 import DD.Android.Zhaohai.ui.Act.ActReg;
 import DD.Android.Zhaohai.ui.Ada.AdaTextWatcher;
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.accounts.AccountsException;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.*;
-import android.os.AsyncTask;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -37,11 +34,9 @@ import roboguice.util.Ln;
 import roboguice.util.RoboAsyncTask;
 import roboguice.util.Strings;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static DD.Android.Zhaohai.core.Constants.Extra.APIKEY;
 import static DD.Android.Zhaohai.core.Constants.Http.*;
 import static android.R.layout.simple_dropdown_item_1line;
 import static android.accounts.AccountManager.*;
@@ -379,6 +374,11 @@ public class ZhaohaiAuthenticatorActivity extends
     static public String getAuthToken(){
         return authToken;
     }
+
+    public static void setAuthToken(String authToken) {
+        ZhaohaiAuthenticatorActivity.authToken = authToken;
+    }
+
 
     /**
      * Handles onClick event on the Submit button. Sends username/password to

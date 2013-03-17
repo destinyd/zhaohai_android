@@ -5,6 +5,8 @@ import DD.Android.Zhaohai.ZhaohaiServiceProvider;
 import DD.Android.Zhaohai.core.ZNotification;
 import DD.Android.Zhaohai.ui.Ada.AdaNotifications;
 import android.accounts.AccountsException;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -16,6 +18,8 @@ import roboguice.inject.InjectView;
 
 import java.io.IOException;
 import java.util.List;
+
+import static DD.Android.Zhaohai.core.Constants.Other.NOTIFICATION_ID;
 
 public class ActNotifications extends ActZhaohai {
 
@@ -38,6 +42,8 @@ public class ActNotifications extends ActZhaohai {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         new GetNotifications().execute();
+        NotificationManager messageNotificatioManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        messageNotificatioManager.cancel(NOTIFICATION_ID);
     }
 
 

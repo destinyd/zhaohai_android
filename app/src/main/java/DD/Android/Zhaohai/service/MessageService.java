@@ -20,6 +20,7 @@ import java.io.IOException;
 
 import static DD.Android.Zhaohai.core.Constants.Extra.APIKEY;
 import static DD.Android.Zhaohai.core.Constants.Http.*;
+import static DD.Android.Zhaohai.core.Constants.Other.NOTIFICATION_ID;
 import static com.github.kevinsawicki.http.HttpRequest.get;
 
 public class MessageService extends RoboService {
@@ -39,7 +40,6 @@ public class MessageService extends RoboService {
     private PendingIntent messagePendingIntent = null;
 
     //通知栏消息
-    private int messageNotificationID = 1000;
     private Notification messageNotification = null;
     private NotificationManager messageNotificatioManager = null;
 
@@ -108,7 +108,7 @@ public class MessageService extends RoboService {
                         mnotification_status = notification_status;
                         //更新通知栏
                         messageNotification.setLatestEventInfo(MessageService.this, "您有" + String.valueOf(notification_status.getCount()) + "条未读消息", notification_status.getLast().getTitle() , messagePendingIntent);
-                        messageNotificatioManager.notify(messageNotificationID, messageNotification);
+                        messageNotificatioManager.notify(NOTIFICATION_ID, messageNotification);
                         //每次通知完，通知ID递增一下，避免消息覆盖掉
     //                         messageNotificationID++;
                     }

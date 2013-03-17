@@ -100,7 +100,10 @@ public class ZhaohaiService {
         if (apiKey == null)
             this.apiKey = DD.Android.Zhaohai.authenticator.ZhaohaiAuthenticatorActivity.getAuthToken();
         else
+        {
             this.apiKey = apiKey;
+            DD.Android.Zhaohai.authenticator.ZhaohaiAuthenticatorActivity.setAuthToken(apiKey);
+        }
     }
 
     /**

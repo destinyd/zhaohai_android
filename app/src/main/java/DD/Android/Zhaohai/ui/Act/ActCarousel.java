@@ -4,22 +4,14 @@ package DD.Android.Zhaohai.ui.Act;
 
 import DD.Android.Zhaohai.R;
 import DD.Android.Zhaohai.R.id;
-import DD.Android.Zhaohai.service.MessageService;
 import DD.Android.Zhaohai.ui.Ada.AdaZhaohaiPager;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v4.view.ViewPager;
 import com.actionbarsherlock.view.Window;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockFragmentActivity;
 import com.slidingmenu.lib.SlidingMenu;
 import com.viewpagerindicator.TitlePageIndicator;
 import roboguice.inject.InjectView;
-
-import static DD.Android.Zhaohai.core.Constants.Extra.APIKEY;
 
 /**
  * Activity to view the carousel and view pager indicator with fragments.
@@ -31,7 +23,8 @@ public class ActCarousel extends RoboSherlockFragmentActivity {
     @InjectView(id.vp_pages)
     private ViewPager pager;
 
-//    @Inject private ApiKeyProvider keyProvider;
+//    @Inject
+//    private ApiKeyProvider keyProvider;
     SlidingMenu menu;
 
     @Override
@@ -42,7 +35,6 @@ public class ActCarousel extends RoboSherlockFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_carousel);
 
-//        pager.setAdapter(new BootstrapPagerAdapter(getResources(), getSupportFragmentManager()));
         pager.setAdapter(new AdaZhaohaiPager(getResources(), getSupportFragmentManager()));
 
         indicator.setViewPager(pager);
@@ -51,31 +43,8 @@ public class ActCarousel extends RoboSherlockFragmentActivity {
         init_sliding_menu();
 
 
-        bind_message_service();
     }
 
-    @Override
-    protected void onDestroy() {
-        if(is_bind_message_service){
-            unbindService(serviceConnection);
-        }
-        super.onDestroy();    //To change body of overridden methods use File | Settings | File Templates.
-    }
-
-    boolean is_bind_message_service = false;
-
-    private void bind_message_service() {
-            try {
-//                String apiKey = keyProvider.getAuthKey();
-                String apiKey = DD.Android.Zhaohai.authenticator.ZhaohaiAuthenticatorActivity.getAuthToken();
-                Intent serviceIntent = new Intent(ActCarousel.this, MessageService.class).putExtra(APIKEY,apiKey);
-    //                        startService(serviceIntent);
-                bindService(serviceIntent,serviceConnection, Context.BIND_AUTO_CREATE);
-                is_bind_message_service = true;
-            } catch (Exception e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            }
-    }
 
     private void init_sliding_menu() {
         menu = new SlidingMenu(this);
@@ -111,30 +80,4 @@ public class ActCarousel extends RoboSherlockFragmentActivity {
 //            }
 //        });
     }
-//
-//    @Override
-//    protected void onDestroy() {
-//        try{
-//            if(messageService != null)
-//                unbindService(serviceConnection);
-//        }catch (Exception e){
-//
-//        }
-//        super.onDestroy();    //To change body of overridden methods use File | Settings | File Templates.
-//    }
-
-    //    private static final int HELLO_ID = 1;
-
-    MessageService messageService = null;
-    public ServiceConnection serviceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            messageService = ((MessageService.MessageBinder) iBinder).getService();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName) {
-            messageService = null;
-        }
-    };
 }
