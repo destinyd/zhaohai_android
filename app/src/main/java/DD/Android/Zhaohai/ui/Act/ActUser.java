@@ -146,9 +146,9 @@ public class ActUser extends ActZhaohai {
 //                btn_msg.setEnabled(true);
 //            }
         }
-        else{
-            followFailure();
-        }
+//        else{
+//            followFailure();
+//        }
     }
 
 
